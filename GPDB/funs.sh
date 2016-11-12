@@ -53,6 +53,22 @@ done
 	echo `date`" end clear cache" >> run.log
 }
 
+# 创建目录
+# rec_load 存放导入结果
+# rec_query 存放查询结果
+createDirFun(){
+	echo `date`" mkdir" >> run.log
+	echo -e "\033[32;49;1m [create dir] \033[39;49;0m"
+	if [ -d "./rec_load" ]; then
+    	rm -rf ./rec_load
+	fi
+	if [ -d "./rec_query" ]; then
+    	rm -rf ./rec_query
+	fi
+	mkdir ./rec_load
+	mkdir ./rec_query
+}
+
 # 创建表
 # 参数1：
 # 表名：galaxylj/photoobjall/photoprimarylj/StarLJ/neighbors
@@ -95,7 +111,7 @@ createTableFun(){
 truncateTableFun(){
 	echo `date`" start truncate tables" >> run.log
 	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
-	psql -d astronomy -c "truncate galaxylj;truncate neighbors;truncate photoobjall;truncate photoprimarylj;truncate starlj;" >> run.log
+	psql -d astronomy -c "truncate galaxylj; truncate neighbors; truncate photoobjall; truncate photoprimarylj; truncate starlj;" >> run.log
 	echo `date`" end truncate tables" >> run.log
 }
 
@@ -107,21 +123,6 @@ dropTableFun(){
     echo `date`" end drop tables" >> run.log
 }
 
-# 创建目录
-# rec_load 存放导入结果
-# rec_query 存放查询结果
-createDirFun(){
-	echo `date`" mkdir" >> run.log
-	echo -e "\033[32;49;1m [create dir] \033[39;49;0m"
-	if [ -d "./rec_load" ]; then
-    	rm -rf ./rec_load
-	fi
-	if [ -d "./rec_query" ]; then
-    	rm -rf ./rec_query
-	fi
-	mkdir ./rec_load
-	mkdir ./rec_query
-}
 
 # 删除旧的导入结果文件
 # 参数：
