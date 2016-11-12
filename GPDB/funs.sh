@@ -123,7 +123,6 @@ dropTableFun(){
     echo `date`" end drop tables" >> run.log
 }
 
-
 # 删除旧的导入结果文件
 # 参数：
 # 各节点的登陆用户名，默认为gpadmin
