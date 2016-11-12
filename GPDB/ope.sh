@@ -5,9 +5,9 @@ p --准备工作
 q --清空表
 d --删除表
 c jipeng1008 --清空各节点的缓存
-t galaxylj/photoobjall/photoprimarylj/StarLJ/neighbors [a]--创建表
+t galaxy/photoobjall/photoprimary/star/neighbors [a]--创建表
 l 10 --导入数据
-ll galaxylj 10 --导入某个表
+ll galaxy 10 --导入某个表
 s --查询表
 e --结尾工作
 doc
@@ -50,7 +50,7 @@ fi
 # 参数1：
 # 操作类型：t
 # 参数2：
-# 表名：galaxylj/photoobjall/photoprimarylj/StarLJ/neighbors
+# 表名：galaxy/photoobjall/photoprimary/star/neighbors
 # 参数3：
 # 表的类型：a/ac/ao/aoc/空(默认)
 if [ "$1" = "t" ]; then
@@ -70,7 +70,7 @@ fi
 # 参数1：
 # 操作类型：l
 # 参数2
-# 表名：galaxylj/photoobjall/photoprimarylj/starlj/neighbors
+# 表名：galaxy/photoobjall/photoprimary/star/neighbors
 # 参数3
 # 数据大小：10、20、50、100
 # 导入某个表
@@ -78,13 +78,13 @@ if [ "$1" = "ll" ]; then
 	if [ ! -d "./rec_load" ]; then
 		mkdir ./rec_load
 	fi  
-	if [ "$2" = "galaxylj" ]; then
+	if [ "$2" = "galaxy" ]; then
         loadGalaxyljFun $3
     elif [ "$2" = "photoobjall" ]; then
         loadPhotoobjallFun $3
-    elif [ "$2" = "photoprimarylj" ]; then
+    elif [ "$2" = "photoprimary" ]; then
         loadPhotoprimaryljFun $3
-    elif [ "$2" = "starlj" ]; then
+    elif [ "$2" = "star" ]; then
         loadStarljFun $3
     elif [ "$2" = "neighbors" ]; then
         loadneighborsFun $3
