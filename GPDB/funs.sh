@@ -1,7 +1,7 @@
 :<<doc
 辅助函数:
 createDirFun --创建存放结果的目录
-createTableFun galaxylj a --创建表
+createTableFun galaxy a --创建表
 mainFun a --执行导入和查询
 cleanCacheFun --清空缓存
 truncateTableFun --清空表
@@ -71,7 +71,7 @@ createDirFun(){
 
 # 创建表
 # 参数1：
-# 表名：galaxylj/photoobjall/photoprimarylj/StarLJ/neighbors
+# 表名：galaxy/photoobjall/photoprimary/star/neighbors
 # 参数2(可选)：
 # 表的类型：a/ac/ao/aoc/空(默认)
 createTableFun(){
@@ -107,11 +107,11 @@ createTableFun(){
 }
 
 # 清空表
-# galaxylj/neighbors/photoobjall/photoprimarylj/starlj为5个表
+# galaxy/neighbors/photoobjall/photoprimary/starlj为5个表
 truncateTableFun(){
 	echo `date`" start truncate tables" >> run.log
 	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
-	psql -d astronomy -c "truncate galaxylj; truncate neighbors; truncate photoobjall; truncate photoprimarylj; truncate starlj;" >> run.log
+	psql -d astronomy -c "truncate galaxy; truncate neighbors; truncate photoobjall; truncate photoprimary; truncate star;" >> run.log
 	echo `date`" end truncate tables" >> run.log
 }
 
@@ -119,7 +119,7 @@ truncateTableFun(){
 dropTableFun(){
 	echo `date`" start drop tables" >> run.log
     echo -e "\033[32;49;1m [drop tables] \033[39;49;0m"
-    psql -d astronomy -c "drop table galaxylj;drop table neighbors;drop table photoobjall;drop table photoprimarylj;drop table starlj;" >> run.log
+    psql -d astronomy -c "drop table galaxy;drop table neighbors;drop table photoobjall;drop table photoprimary;drop table star;" >> run.log
     echo `date`" end drop tables" >> run.log
 }
 
@@ -133,17 +133,17 @@ delLoadResFun(){
 	if [ -f "/tmp/monitor.txt" ]; then
     	rm /tmp/monitor.txt
 	fi
-	if [ -f "./rec_load/galaxylj.txt" ]; then
-    	rm ./rec_load/galaxylj.txt
+	if [ -f "./rec_load/galaxy.txt" ]; then
+    	rm ./rec_load/galaxy.txt
 	fi
 	if [ -f "./rec_load/photoobjall.txt" ]; then
     	rm ./rec_load/photoobjall.txt
 	fi
-	if [ -f "./rec_load/photoprimarylj.txt" ]; then
-    	rm ./rec_load/photoprimarylj.txt
+	if [ -f "./rec_load/photoprimary.txt" ]; then
+    	rm ./rec_load/photoprimary.txt
 	fi
-	if [ -f "./rec_load/starlj.txt" ]; then
-    	rm ./rec_load/starlj.txt
+	if [ -f "./rec_load/star.txt" ]; then
+    	rm ./rec_load/star.txt
 	fi
 	if [ -f "./rec_load/neighbors.txt" ]; then
     	rm ./rec_load/neighbors.txt
@@ -174,17 +174,17 @@ delQueryResFun(){
 	if [ -f "/tmp/monitor.txt" ]; then
     	rm /tmp/monitor.txt
 	fi
-	if [ -f "./rec_query/galaxylj.txt" ]; then
-    	rm ./rec_query/galaxylj.txt
+	if [ -f "./rec_query/galaxy.txt" ]; then
+    	rm ./rec_query/galaxy.txt
 	fi
 	if [ -f "./rec_query/photoobjall.txt" ]; then
     	rm ./rec_query/photoobjall.txt
 	fi
-	if [ -f "./rec_query/photoprimarylj.txt" ]; then
-	    rm ./rec_query/photoprimarylj.txt
+	if [ -f "./rec_query/photoprimary.txt" ]; then
+	    rm ./rec_query/photoprimary.txt
 	fi
-	if [ -f "./rec_query/starlj.txt" ]; then
-    	rm ./rec_query/starlj.txt
+	if [ -f "./rec_query/star.txt" ]; then
+    	rm ./rec_query/star.txt
 	fi
 
     if [ -n "${1}" ]; then
@@ -304,10 +304,10 @@ mainFun(){
 # 数据大小：10、20、50、100
 loadGalaxyljFun(){
 	sh ./monitor/load_monitor_start.sh
-	echo `date`" loading galaxylj" >> run.log
-	echo -e "\033[32;49;1m [loading galaxylj] \033[39;49;0m"
+	echo `date`" loading galaxy" >> run.log
+	echo -e "\033[32;49;1m [loading galaxy] \033[39;49;0m"
 	sleep 2
-	gpload -f /home/gpadmin/astronomy_data/"$1"G/galaxylj"$1"_comma.yaml > ./rec_load/galaxylj.txt
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/galaxy"$1"_comma.yaml > ./rec_load/galaxy.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
@@ -330,10 +330,10 @@ loadPhotoobjallFun(){
 # 数据大小：10、20、50、100
 loadPhotoprimaryljFun(){
 	sh ./monitor/load_monitor_start.sh
-	echo `date`" loading photoprimarylj" >> run.log
-	echo -e "\033[32;49;1m [loading photoprimarylj] \033[39;49;0m"
+	echo `date`" loading photoprimary" >> run.log
+	echo -e "\033[32;49;1m [loading photoprimary] \033[39;49;0m"
 	sleep 2
-	gpload -f /home/gpadmin/astronomy_data/"$1"G/photoprimarylj"$1"_comma.yaml > ./rec_load/photoprimarylj.txt
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/photoprimary"$1"_comma.yaml > ./rec_load/photoprimary.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
@@ -343,10 +343,10 @@ loadPhotoprimaryljFun(){
 # 数据大小：10、20、50、100
 loadStarljFun(){
 	sh ./monitor/load_monitor_start.sh
-	echo `date`" loading starlj" >> run.log
-	echo -e "\033[32;49;1m [loading starlj] \033[39;49;0m"
+	echo `date`" loading star" >> run.log
+	echo -e "\033[32;49;1m [loading star] \033[39;49;0m"
 	sleep 2
-	gpload -f /home/gpadmin/astronomy_data/"$1"G/starlj"$1"_comma.yaml > ./rec_load/starlj.txt
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/star"$1"_comma.yaml > ./rec_load/star.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
@@ -388,14 +388,14 @@ loadTable(){
 getTabeSizeFun(){
 	echo `date`" get table size" >> run.log
 	echo -e "\033[32;49;1m [get table size] \033[39;49;0m"
-	echo "galaxylj size" >> ./rec_load/table_size.txt
-	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('galaxylj'));" >> ./rec_load/table_size.txt
+	echo "galaxy size" >> ./rec_load/table_size.txt
+	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('galaxy'));" >> ./rec_load/table_size.txt
 	echo "photoobjall size" >> ./rec_load/table_size.txt
 	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('photoobjall'));" >> ./rec_load/table_size.txt
-	echo "photoprimarylj siez" >> ./rec_load/table_size.txt
-	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('photoprimarylj'));" >> ./rec_load/table_size.txt
-	echo "starlj size" >> ./rec_load/table_size.txt 
-	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('starlj'));" >> ./rec_load/table_size.txt
+	echo "photoprimary siez" >> ./rec_load/table_size.txt
+	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('photoprimary'));" >> ./rec_load/table_size.txt
+	echo "star size" >> ./rec_load/table_size.txt 
+	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('star'));" >> ./rec_load/table_size.txt
 	echo "neighbors size" >> ./rec_load/table_size.txt
 	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('neighbors'));" >> ./rec_load/table_size.txt
 }
@@ -403,11 +403,11 @@ getTabeSizeFun(){
 # Q1
 queryGalaxylj_1(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-1] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-1] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q1" >> run.log
-	echo "Q1" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-1.sql" >> ./rec_query/galaxylj.txt
+	echo "Q1" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-1.sql" >> ./rec_query/galaxy.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
@@ -415,11 +415,11 @@ queryGalaxylj_1(){
 # Q1-1
 queryGalaxylj_1_1(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-1_1] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-1_1] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q1-1" >> run.log
-	echo "Q1-1" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-1_1.sql" >> ./rec_query/galaxylj.txt
+	echo "Q1-1" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-1_1.sql" >> ./rec_query/galaxy.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
@@ -427,11 +427,11 @@ queryGalaxylj_1_1(){
 # Q2
 queryGalaxylj_2(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-2] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-2] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q2" >> run.log
-	echo "Q2" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-2.sql" >> ./rec_query/galaxylj.txt
+	echo "Q2" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-2.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -439,11 +439,11 @@ queryGalaxylj_2(){
 # Q2-1
 queryGalaxylj_2_1(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-2_1] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-2_1] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q2-1" >> run.log
-	echo "Q2-1" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-2_1.sql" >> ./rec_query/galaxylj.txt
+	echo "Q2-1" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-2_1.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -451,11 +451,11 @@ queryGalaxylj_2_1(){
 # Q3
 queryGalaxylj_3(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-3] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-3] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q3" >> run.log
-	echo "Q3" >> ./rec_query/galaxylj.txt	
-	psql -d astronomy -f "./sql/galaxylj-3.sql" >> ./rec_query/galaxylj.txt
+	echo "Q3" >> ./rec_query/galaxy.txt	
+	psql -d astronomy -f "./sql/galaxy-3.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -463,11 +463,11 @@ queryGalaxylj_3(){
 # Q4
 queryGalaxylj_4(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-4] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-4] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q4" >> run.log
-	echo "Q4" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-4.sql" >> ./rec_query/galaxylj.txt
+	echo "Q4" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-4.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -475,11 +475,11 @@ queryGalaxylj_4(){
 # Q5
 queryGalaxylj_5(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-5] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-5] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q5" >> run.log
-	echo "Q5" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-5.sql" >> ./rec_query/galaxylj.txt
+	echo "Q5" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-5.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -487,11 +487,11 @@ queryGalaxylj_5(){
 # Q5-1
 queryGalaxylj_5_1(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-5_1] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-5_1] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q5-1" >> run.log
-	echo "Q5-1" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-5_1.sql" >> ./rec_query/galaxylj.txt
+	echo "Q5-1" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-5_1.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -499,11 +499,11 @@ queryGalaxylj_5_1(){
 # Q5-2
 queryGalaxylj_5_2(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-5_2] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-5_2] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q5-2" >> run.log
-	echo "Q5-2" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-5_2.sql" >> ./rec_query/galaxylj.txt
+	echo "Q5-2" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-5_2.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -511,11 +511,11 @@ queryGalaxylj_5_2(){
 # Q5-3
 queryGalaxylj_5_3(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-5_3] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-5_3] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q5-3" >> run.log
-	echo "Q5-3" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-5_3.sql" >> ./rec_query/galaxylj.txt
+	echo "Q5-3" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-5_3.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -523,11 +523,11 @@ queryGalaxylj_5_3(){
 # Q5-4
 queryGalaxylj_5_4(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-5_4] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-5_4] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q5-4" >> run.log
-	echo "Q5-4" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-5_4.sql" >> ./rec_query/galaxylj.txt
+	echo "Q5-4" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-5_4.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -535,11 +535,11 @@ queryGalaxylj_5_4(){
 # Q5-5
 queryGalaxylj_5_5(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying galaxylj-5_5] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying galaxy-5_5] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q5-5" >> run.log
-	echo "Q5-5" >> ./rec_query/galaxylj.txt
-	psql -d astronomy -f "./sql/galaxylj-5_5.sql" >> ./rec_query/galaxylj.txt
+	echo "Q5-5" >> ./rec_query/galaxy.txt
+	psql -d astronomy -f "./sql/galaxy-5_5.sql" >> ./rec_query/galaxy.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -656,10 +656,10 @@ queryPhotoobjall_4_2(){
 queryPhotoprimarylj_1(){
 	sh ./monitor/monitor_start.sh
 	sleep 2
-	echo -e "\033[32;49;1m [querying photoprimarylj-1] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying photoprimary-1] \033[39;49;0m"
 	echo `date`" Q10" >> run.log
-	echo "Q10" >> ./rec_query/photoprimarylj.txt
-	psql -d astronomy -f "./sql/photoprimarylj-1.sql" >> ./rec_query/photoprimarylj.txt
+	echo "Q10" >> ./rec_query/photoprimary.txt
+	psql -d astronomy -f "./sql/photoprimary-1.sql" >> ./rec_query/photoprimary.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -667,11 +667,11 @@ queryPhotoprimarylj_1(){
 # Q11
 queryPhotoprimarylj_2(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoprimarylj-2] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying photoprimary-2] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q11" >> run.log
-	echo "Q11" >> ./rec_query/photoprimarylj.txt
-	psql -d astronomy -f "./sql/photoprimarylj-2.sql" >> ./rec_query/photoprimarylj.txt
+	echo "Q11" >> ./rec_query/photoprimary.txt
+	psql -d astronomy -f "./sql/photoprimary-2.sql" >> ./rec_query/photoprimary.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -679,11 +679,11 @@ queryPhotoprimarylj_2(){
 # Q11-1
 queryPhotoprimarylj_2_1(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoprimarylj-2_1] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying photoprimary-2_1] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q11-1" >> run.log
-	echo "Q11-1" >> ./rec_query/photoprimarylj.txt
-	psql -d astronomy -f "./sql/photoprimarylj-2_1.sql" >> ./rec_query/photoprimarylj.txt
+	echo "Q11-1" >> ./rec_query/photoprimary.txt
+	psql -d astronomy -f "./sql/photoprimary-2_1.sql" >> ./rec_query/photoprimary.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -691,11 +691,11 @@ queryPhotoprimarylj_2_1(){
 # Q11-2
 queryPhotoprimarylj_2_2(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoprimarylj-2_2] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying photoprimary-2_2] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q11-2" >> run.log
-	echo "Q11-2" >> ./rec_query/photoprimarylj.txt
-	psql -d astronomy -f "./sql/photoprimarylj-2_2.sql" >> ./rec_query/photoprimarylj.txt
+	echo "Q11-2" >> ./rec_query/photoprimary.txt
+	psql -d astronomy -f "./sql/photoprimary-2_2.sql" >> ./rec_query/photoprimary.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -703,11 +703,11 @@ queryPhotoprimarylj_2_2(){
 # Q12
 queryStarlj_1(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying starlj] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying star] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q12" >> run.log
-	echo "Q12" >> ./rec_query/starlj.txt
-	psql -d astronomy -f "./sql/starlj.sql" >> ./rec_query/starlj.txt
+	echo "Q12" >> ./rec_query/star.txt
+	psql -d astronomy -f "./sql/star.sql" >> ./rec_query/star.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -718,8 +718,8 @@ queryStarlj_1_1(){
 	echo -e "\033[32;49;1m [querying starlj_1] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q12-1" >> run.log
-	echo "Q12-1" >> ./rec_query/starlj.txt
-	psql -d astronomy -f "./sql/starlj_1.sql" >> ./rec_query/starlj.txt
+	echo "Q12-1" >> ./rec_query/star.txt
+	psql -d astronomy -f "./sql/starlj_1.sql" >> ./rec_query/star.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
