@@ -11,10 +11,10 @@ truncateTableFun
 dropTableFun
 
 # 普通表分别执行10次
-createTableFun galaxylj
+createTableFun galaxy
 createTableFun photoobjall 
-createTableFun photoprimarylj
-createTableFun StarLJ
+createTableFun photoprimary
+createTableFun Star
 createTableFun neighbors
 
 mainFun
@@ -23,10 +23,10 @@ truncateTableFun
 dropTableFun
 
 # appendonly表分别执行10次
-createTableFun galaxylj a
+createTableFun galaxy a
 createTableFun photoobjall a
-createTableFun photoprimarylj a
-createTableFun StarLJ a
+createTableFun photoprimary a
+createTableFun Star a
 createTableFun neighbors
 
 mainFun a
@@ -35,10 +35,10 @@ truncateTableFun
 dropTableFun
 
 # 压缩表分别执行10次
-createTableFun galaxylj ac
+createTableFun galaxy ac
 createTableFun photoobjall ac
-createTableFun photoprimarylj ac
-createTableFun StarLJ ac
+createTableFun photoprimary ac
+createTableFun Star ac
 createTableFun neighbors
 
 mainFun ac
@@ -47,10 +47,10 @@ truncateTableFun
 dropTableFun
 
 # 列存储表分别执行10次
-createTableFun galaxylj ao
+createTableFun galaxy ao
 createTableFun photoobjall ao 
-createTableFun photoprimarylj ao
-createTableFun StarLJ ao
+createTableFun photoprimary ao
+createTableFun Star ao
 createTableFun neighbors
 
 mainFun ao
@@ -59,10 +59,10 @@ truncateTableFun
 dropTableFun
 
 # 列存储压缩表分别执行10次
-createTableFun galaxylj aoc
+createTableFun galaxy aoc
 createTableFun photoobjall aoc
-createTableFun photoprimarylj aoc
-createTableFun StarLJ aoc
+createTableFun photoprimary aoc
+createTableFun Star aoc
 createTableFun neighbors
 
 mainFun aoc
