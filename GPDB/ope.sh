@@ -1,15 +1,24 @@
 :<<doc
 功能分解
 参数及对应操作：
-p --准备工作
-q --清空表
-d --删除表
-c jipeng1008 --清空各节点的缓存
-t galaxy/photoobjall/photoprimary/star/neighbors [a]--创建表
-l 10 --导入数据
-ll galaxy 10 --导入某个表
-s --查询表
-e --结尾工作
+p
+准备工作
+q
+清空表
+d
+删除表
+c jipeng1008
+清空各节点的缓存
+t galaxy/photoobjall/photoprimary/star/neighbors [a]
+创建表
+l 10 
+导入数据
+ll galaxy 10 
+导入某个表
+s 
+查询表
+e 
+结尾工作
 doc
 
 . ./funs.sh
