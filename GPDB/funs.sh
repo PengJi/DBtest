@@ -165,6 +165,8 @@ eof
 }
 
 # 删除旧的查询结果文件
+# 参数：
+# 各节点的登陆用户，默认为gpadmin
 delQueryResFun(){
 	echo `date`" deleting monitor files" >> run.log
 	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
