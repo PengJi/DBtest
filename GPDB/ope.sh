@@ -19,8 +19,8 @@ doc
 # 操作类型：p
 if [ "$1" = "p" ]; then
 	createDirFun
-	delLoadResFun
-	delQueryResFun
+	delLoadResFun gpdba
+	delQueryResFun gpdba
 fi
 
 # 清空表
