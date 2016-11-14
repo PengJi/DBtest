@@ -1,4 +1,4 @@
-CREATE TABLE PhotoPrimaryLJ(
+CREATE TABLE PhotoPrimary(
 	objID bigint NOT NULL,
 	skyVersion smallint NOT NULL,
 	run smallint NOT NULL,

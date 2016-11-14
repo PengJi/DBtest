@@ -3,4 +3,4 @@
 explain analyze SELECT 
 	P.objID 
 FROM 
-	neighbors AS N join PhotoPrimaryLJ AS P on P.objID =N.NeighborObjID and P.objID = N.objID;
+	neighbors AS N join PhotoPrimary AS P on P.objID =N.NeighborObjID and P.objID = N.objID;

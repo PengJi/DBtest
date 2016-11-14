@@ -1,4 +1,4 @@
-CREATE TABLE StarLJ(
+CREATE TABLE Star(
 	objID bigint NOT NULL,
 	skyVersion smallint NOT NULL,
 	run smallint NOT NULL,

@@ -3,6 +3,6 @@
 explain analyze SELECT 
 	run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec 
 FROM 
-	StarLJ 
+	Star
 WHERE 
 	( u - g > 2.0 or u> 22.3 ) and ( i < 19 );
