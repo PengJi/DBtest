@@ -3,6 +3,6 @@
 explain analyze SELECT 
 	count(*)
 FROM 
-	GalaxyLJ 
+	Galaxy 
 WHERE 
 	r < 22 and extinction_r > 0.175;

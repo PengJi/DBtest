@@ -1,4 +1,4 @@
-CREATE TABLE GalaxyLJ(
+CREATE TABLE Galaxy(
 	objID bigint NOT NULL,
 	skyVersion smallint NOT NULL,
 	run smallint NOT NULL,

@@ -2,7 +2,7 @@
 explain analyze SELECT 
 	g1.objID, g2.objID
 FROM 
-	GalaxyLJ AS g1 JOIN neighbors AS N ON g1.objID = N.objID JOIN GalaxyLJ AS g2 ON g2.objID = N.NeighborObjID 
+	Galaxy AS g1 JOIN neighbors AS N ON g1.objID = N.objID JOIN Galaxy AS g2 ON g2.objID = N.NeighborObjID 
 WHERE
 	g1.objID < g2.objID and N.neighborType = 3 and g1.petroRad_u > 0 and g2.petroRad_u > 0 and g1.petroRad_g > 0 and 
 	g2.petroRad_g > 0 and g1.petroRad_r > 0 and g2.petroRad_r > 0 and g1.petroRad_i > 0 and g2.petroRad_i > 0 and 

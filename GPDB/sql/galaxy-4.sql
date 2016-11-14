@@ -2,7 +2,7 @@
 explain analyze SELECT 
 	g,run,rerun,camcol,field,objID 
 FROM 
-	GalaxyLJ 
+	Galaxy 
 WHERE 
 	( (g <= 22) and (u - g >= -0.27) and 
 	(u - g < 0.71) and (g - r >= -0.24) and 
