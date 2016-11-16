@@ -88,13 +88,13 @@ if [ "$1" = "ll" ]; then
 		mkdir ./rec_load
 	fi  
 	if [ "$2" = "galaxy" ]; then
-        loadGalaxyljFun $3
+        loadGalaxyFun $3
     elif [ "$2" = "photoobjall" ]; then
         loadPhotoobjallFun $3
     elif [ "$2" = "photoprimary" ]; then
-        loadPhotoprimaryljFun $3
+        loadPhotoprimaryFun $3
     elif [ "$2" = "star" ]; then
-        loadStarljFun $3
+        loadStarFun $3
     elif [ "$2" = "neighbors" ]; then
         loadneighborsFun $3
     else
@@ -119,29 +119,29 @@ if [ "$1" = "sg"  ]; then
 		mkdir ./rec_query
 	fi
 	case $2 in
-		"Q1") queryGalaxylj_1 
+		"Q1") queryGalaxy_1 
 		;;
-		"Q1-1") queryGalaxylj_1_1
+		"Q1-1") queryGalaxy_1_1
 		;;
-		"Q2") queryGalaxylj_2
+		"Q2") queryGalaxy_2
 		;;
-		"Q2-1") queryGalaxylj_2_1
+		"Q2-1") queryGalaxy_2_1
 		;;
-		"Q3") queryGalaxylj_3
+		"Q3") queryGalaxy_3
 		;;
-		"Q4") queryGalaxylj_4
+		"Q4") queryGalaxy_4
 		;;
-		"Q5") queryGalaxylj_5
+		"Q5") queryGalaxy_5
 		;;
-		"Q5-1") queryGalaxylj_5_1
+		"Q5-1") queryGalaxy_5_1
 		;;
-		"Q5-2") queryGalaxylj_5_2
+		"Q5-2") queryGalaxy_5_2
 		;;
-		"Q5-3") queryGalaxylj_5_3
+		"Q5-3") queryGalaxy_5_3
 		;;
-		"Q5-4") queryGalaxylj_5_4
+		"Q5-4") queryGalaxy_5_4
 		;;
-		"Q5-5") queryGalaxylj_5_5
+		"Q5-5") queryGalaxy_5_5
 		;;
 		"Q6") queryPhotoobjall_1
 		;;
@@ -161,17 +161,17 @@ if [ "$1" = "sg"  ]; then
 		;;
 		"Q9-2") queryPhotoobjall_4_2
 		;;
-		"Q10") queryPhotoprimarylj_1
+		"Q10") queryPhotoprimary_1
 		;;
-		"Q11") queryPhotoprimarylj_2
+		"Q11") queryPhotoprimary_2
 		;;
-		"Q11-1") queryPhotoprimarylj_2_1
+		"Q11-1") queryPhotoprimary_2_1
 		;;
-		"Q11-2") queryPhotoprimarylj_2_2
+		"Q11-2") queryPhotoprimary_2_2
 		;;
-		"Q12") queryStarlj_1
+		"Q12") queryStar_1
 		;;
-		"Q12-1") queryStarlj_1_1
+		"Q12-1") queryStar_1_1
 		;;
 		*) echo -e "\033[31;49;1m [query not exists] \033[39;49;0m"
 		;;
