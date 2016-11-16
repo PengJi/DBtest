@@ -10,7 +10,7 @@ c jipeng1008
 清空缓存
 l 10 
 导入数据
-ll GalaxyLJ 10 
+ll Galaxy 10 
 导入某个表的数据
 s 
 查询表
@@ -74,30 +74,30 @@ fi
 # 参数1：
 # 操作类型：ll
 # 参数2：
-# 导入的表名称：GalxyLJ/PhotoObjAll/PhotoPrimaryLJ/StarLJ/neighbors
+# 导入的表名称：GalxyLJ/PhotoObjAll/PhotoPrimary/Star/neighbors
 # 参数3：
 # 导入的数据量：10/20/50/100
 if [ "$1" = "ll" ]; then
-	if [ "$2" = "GalaxyLJ" ]; then
+	if [ "$2" = "Galaxy" ]; then
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
-		loadGalaxyLJFun $3
+		loadGalaxyFun $3
 	elif [ "$2" = "PhotoObjAll" ]; then
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
 		loadPhotoObjAllFun $3
-	elif [ "$2" = "PhotoPrimaryLJ" ]; then
+	elif [ "$2" = "PhotoPrimary" ]; then
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
-		loadPhotoPrimaryLJFun $3
-	elif [ "$2" = "StarLJ" ]; then
+		loadPhotoPrimaryFun $3
+	elif [ "$2" = "Star" ]; then
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
-		loadStarLJFun $3
+		loadStarFun $3
 	elif [ "$2" = "neighbors" ]; then
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
@@ -118,29 +118,29 @@ if [ "$1" = "sg"  ]; then
         mkdir ./rec_query
     fi  
     case $2 in
-        "Q1") queryGalaxylj_1 
+        "Q1") queryGalaxy_1 
         ;;  
-        "Q1-1") queryGalaxylj_1_1
+        "Q1-1") queryGalaxy_1_1
         ;;  
-        "Q2") queryGalaxylj_2
+        "Q2") queryGalaxy_2
         ;;  
-        "Q2-1") queryGalaxylj_2_1
+        "Q2-1") queryGalaxy_2_1
         ;;  
-        "Q3") queryGalaxylj_3
+        "Q3") queryGalaxy_3
         ;;  
-        "Q4") queryGalaxylj_4
+        "Q4") queryGalaxy_4
         ;;  
-        "Q5") queryGalaxylj_5
+        "Q5") queryGalaxy_5
         ;;  
-        "Q5-1") queryGalaxylj_5_1
+        "Q5-1") queryGalaxy_5_1
         ;;  
-        "Q5-2") queryGalaxylj_5_2
+        "Q5-2") queryGalaxy_5_2
         ;;  
-        "Q5-3") queryGalaxylj_5_3
+        "Q5-3") queryGalaxy_5_3
         ;;  
-        "Q5-4") queryGalaxylj_5_4
+        "Q5-4") queryGalaxy_5_4
         ;;  
-        "Q5-5") queryGalaxylj_5_5
+        "Q5-5") queryGalaxy_5_5
         ;;  
         "Q6") queryPhotoobjall_1
         ;;  
@@ -160,13 +160,13 @@ if [ "$1" = "sg"  ]; then
         ;;
         "Q9-2") queryPhotoobjall_4_2
         ;;
-        "Q10") queryPhotoprimarylj_1
+        "Q10") queryPhotoprimary_1
         ;;
-        "Q11") queryPhotoprimarylj_2
+        "Q11") queryPhotoprimary_2
         ;;
-        "Q11-1") queryPhotoprimarylj_2_1
+        "Q11-1") queryPhotoprimary_2_1
         ;;
-        "Q11-2") queryPhotoprimarylj_2_2
+        "Q11-2") queryPhotoprimary_2_2
         ;;
         "Q12") queryStarlj_1
         ;;
