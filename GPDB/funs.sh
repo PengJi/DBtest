@@ -107,7 +107,7 @@ createTableFun(){
 }
 
 # 清空表
-# galaxy/neighbors/photoobjall/photoprimary/starlj为5个表
+# galaxy/neighbors/photoobjall/photoprimary/Star为5个表
 truncateTableFun(){
 	echo `date`" start truncate tables" >> run.log
 	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
@@ -298,10 +298,10 @@ mainFun(){
 	fi
 }
 
-# 导入galaxylj表
+# 导入galaxy表
 # 参数:
 # 数据大小：10、20、50、100
-loadGalaxyljFun(){
+loadGalaxyFun(){
 	sh ./monitor/load_monitor_start.sh
 	echo `date`" loading galaxy" >> run.log
 	echo -e "\033[32;49;1m [loading galaxy] \033[39;49;0m"
@@ -319,12 +319,12 @@ loadPhotoobjallFun(){
 	echo `date`" loading photoobjall" >> run.log
 	echo -e "\033[32;49;1m [loading photoobjall] \033[39;49;0m"
 	sleep 2
-	gpload -f /home/gpadmin/astronomy_data/"$1"G/photoobjall"$1"_comma.yaml > ./rec_load/photoobjall.txt
+	gpload -f ./load_yaml/"$1"G/photoobjall"$1"_comma.yaml > ./rec_load/photoobjall.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
 
-# 导入photoprimarylj表
+# 导入PhotoPrimary表
 # 参数:
 # 数据大小：10、20、50、100
 loadPhotoprimaryljFun(){
@@ -332,20 +332,20 @@ loadPhotoprimaryljFun(){
 	echo `date`" loading photoprimary" >> run.log
 	echo -e "\033[32;49;1m [loading photoprimary] \033[39;49;0m"
 	sleep 2
-	gpload -f /home/gpadmin/astronomy_data/"$1"G/photoprimary"$1"_comma.yaml > ./rec_load/photoprimary.txt
+	gpload -f ./load_yaml/"$1"G/photoprimary"$1"_comma.yaml > ./rec_load/photoprimary.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
 
-# 导入starlj表
+# 导入Star表
 # 参数:
 # 数据大小：10、20、50、100
-loadStarljFun(){
+loadStarFun(){
 	sh ./monitor/load_monitor_start.sh
 	echo `date`" loading star" >> run.log
 	echo -e "\033[32;49;1m [loading star] \033[39;49;0m"
 	sleep 2
-	gpload -f /home/gpadmin/astronomy_data/"$1"G/star"$1"_comma.yaml > ./rec_load/star.txt
+	gpload -f ./load_yaml/"$1"G/star"$1"_comma.yaml > ./rec_load/star.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
@@ -358,7 +358,7 @@ loadneighborsFun(){
 	echo `date`" loading neighbors" >> run.log
 	echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
 	sleep 2
-	gpload -f /home/gpadmin/astronomy_data/"$1"G/neighbors"$1"_comma.yaml > ./rec_load/neighbors.txt
+	gpload -f ./load_yaml/"$1"G/neighbors"$1"_comma.yaml > ./rec_load/neighbors.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
@@ -367,17 +367,17 @@ loadneighborsFun(){
 # 参数:
 # 数据大小：1、10、20、50、100
 loadTable(){
-    # 导入galaxylj
-	loadGalaxyljFun $1
+    # 导入galaxy
+	loadGalaxyFun $1
 
     # 导入photoobjall
 	loadPhotoobjallFun $1
 
-    # 导入photoprimarylj
+    # 导入PhotoPrimary
 	loadPhotoprimaryljFun $1
 
-    # 导入starlj
-	loadStarljFun $1
+    # 导入Star
+	loadStarFun $1
 
     # 导入neighbors
 	loadneighborsFun $1
@@ -400,7 +400,7 @@ getTabeSizeFun(){
 }
 
 # Q1
-queryGalaxylj_1(){
+queryGalaxy_1(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-1] \033[39;49;0m"
 	sleep 2
@@ -412,7 +412,7 @@ queryGalaxylj_1(){
 }
 
 # Q1-1
-queryGalaxylj_1_1(){
+queryGalaxy_1_1(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-1_1] \033[39;49;0m"
 	sleep 2
@@ -424,7 +424,7 @@ queryGalaxylj_1_1(){
 }
 
 # Q2
-queryGalaxylj_2(){
+queryGalaxy_2(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-2] \033[39;49;0m"
 	sleep 2
@@ -436,7 +436,7 @@ queryGalaxylj_2(){
 }
 
 # Q2-1
-queryGalaxylj_2_1(){
+queryGalaxy_2_1(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-2_1] \033[39;49;0m"
 	sleep 2
@@ -448,7 +448,7 @@ queryGalaxylj_2_1(){
 }
 
 # Q3
-queryGalaxylj_3(){
+queryGalaxy_3(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-3] \033[39;49;0m"
 	sleep 2
@@ -460,7 +460,7 @@ queryGalaxylj_3(){
 }
 
 # Q4
-queryGalaxylj_4(){
+queryGalaxy_4(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-4] \033[39;49;0m"
 	sleep 2
@@ -472,7 +472,7 @@ queryGalaxylj_4(){
 }
 
 # Q5
-queryGalaxylj_5(){
+queryGalaxy_5(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-5] \033[39;49;0m"
 	sleep 2
@@ -484,7 +484,7 @@ queryGalaxylj_5(){
 }
 
 # Q5-1
-queryGalaxylj_5_1(){
+queryGalaxy_5_1(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-5_1] \033[39;49;0m"
 	sleep 2
@@ -496,7 +496,7 @@ queryGalaxylj_5_1(){
 }
 
 # Q5-2
-queryGalaxylj_5_2(){
+queryGalaxy_5_2(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-5_2] \033[39;49;0m"
 	sleep 2
@@ -508,7 +508,7 @@ queryGalaxylj_5_2(){
 }
 
 # Q5-3
-queryGalaxylj_5_3(){
+queryGalaxy_5_3(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-5_3] \033[39;49;0m"
 	sleep 2
@@ -520,7 +520,7 @@ queryGalaxylj_5_3(){
 }
 
 # Q5-4
-queryGalaxylj_5_4(){
+queryGalaxy_5_4(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-5_4] \033[39;49;0m"
 	sleep 2
@@ -532,7 +532,7 @@ queryGalaxylj_5_4(){
 }
 
 # Q5-5
-queryGalaxylj_5_5(){
+queryGalaxy_5_5(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxy-5_5] \033[39;49;0m"
 	sleep 2
@@ -700,7 +700,7 @@ queryPhotoprimarylj_2_2(){
 }
 
 # Q12
-queryStarlj_1(){
+queryStar_1(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying star] \033[39;49;0m"
 	sleep 2
@@ -712,13 +712,13 @@ queryStarlj_1(){
 }
 
 # Q12-1
-queryStarlj_1_1(){
+queryStar_1_1(){
 	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying starlj_1] \033[39;49;0m"
+	echo -e "\033[32;49;1m [querying Star_1] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q12-1" >> run.log
 	echo "Q12-1" >> ./rec_query/star.txt
-	psql -d astronomy -f "./sql/starlj_1.sql" >> ./rec_query/star.txt
+	psql -d astronomy -f "./sql/Star_1.sql" >> ./rec_query/star.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
 }
@@ -726,7 +726,7 @@ queryStarlj_1_1(){
 # 查询表
 queryTableFun(){
 	cleanCacheFun 
-	queryGalaxylj_1
+	queryGalaxy_1
 
 	cleanCacheFun
 	queryPhotoobjall_1
@@ -735,10 +735,10 @@ queryTableFun(){
 	queryPhotoprimarylj_1
 
 	cleanCacheFun
-	queryStarlj_1
+	queryStar_1
 
 	cleanCacheFun
-	queryGalaxylj_2
+	queryGalaxy_2
 
 	cleanCacheFun
 	queryPhotoobjall_2
@@ -747,40 +747,40 @@ queryTableFun(){
 	queryPhotoprimarylj_2
 
 	cleanCacheFun
-	queryGalaxylj_3
+	queryGalaxy_3
 
 	cleanCacheFun
 	queryPhotoobjall_3
 
 	cleanCacheFun
-	queryGalaxylj_4
+	queryGalaxy_4
 
 	cleanCacheFun
 	queryPhotoobjall_4
 
 	cleanCacheFun
-	queryGalaxylj_5
+	queryGalaxy_5
 
 	cleanCacheFun
-	queryGalaxylj_1_1
+	queryGalaxy_1_1
 
 	cleanCacheFun
-	queryGalaxylj_2_1
+	queryGalaxy_2_1
 
 	cleanCacheFun
-	queryGalaxylj_5_1
+	queryGalaxy_5_1
 
 	cleanCacheFun
-	queryGalaxylj_5_2
+	queryGalaxy_5_2
 
 	cleanCacheFun
-	queryGalaxylj_5_3
+	queryGalaxy_5_3
 
 	cleanCacheFun
-	queryGalaxylj_5_4
+	queryGalaxy_5_4
 
 	cleanCacheFun
-	queryGalaxylj_5_5
+	queryGalaxy_5_5
 
 	cleanCacheFun
 	queryPhotoobjall_1_1
@@ -804,7 +804,7 @@ queryTableFun(){
 	queryPhotoprimarylj_2_2
 
 	cleanCacheFun
-	queryStarlj_1_1
+	queryStar_1_1
 }
 
 # 汇总结果
