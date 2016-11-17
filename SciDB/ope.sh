@@ -168,9 +168,9 @@ if [ "$1" = "sg"  ]; then
         ;;
         "Q11-2") queryPhotoprimary_2_2
         ;;
-        "Q12") queryStarlj_1
+        "Q12") queryStar_1
         ;;
-        "Q12-1") queryStarlj_1_1
+        "Q12-1") queryStar_1_1
         ;;
         *) echo -e "\033[31;49;1m [query not exists] \033[39;49;0m"
         ;;
