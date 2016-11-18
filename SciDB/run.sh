@@ -1,9 +1,6 @@
 :<<doc
 程序入口文件
-运行之前需要安装:sudo yum install expect -y
-需要各节点root的密码
-todo
-自动删除结果文件
+需要设置各节点root的密码
 doc
 
 . ./funs.sh
