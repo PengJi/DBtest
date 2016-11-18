@@ -1,6 +1,6 @@
 :<<doc
 需要修改的参数：
-表名:    astronomy
+表名:     astronomy
 主节点名: JPDB1
 从节点名: worker1/worker2/worker3/worker4/worker5/worker6
 doc
