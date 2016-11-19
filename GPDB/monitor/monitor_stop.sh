@@ -1,4 +1,6 @@
-# stop collectl
+:<<doc
+停止collectl监视器
+doc
 
 if [ -n "${1}" ]; then
     user="$1"

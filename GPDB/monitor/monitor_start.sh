@@ -1,4 +1,5 @@
 :<<doc
+启动collectl监视器
 创建monitor*文件
 doc
 
