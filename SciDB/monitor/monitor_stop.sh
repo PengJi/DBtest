@@ -1,4 +1,7 @@
-# stop collectl
+:<<doc
+停止collectl监视器
+doc
+
 echo -e "\033[31;49;1m [JPDB1 stop] \033[39;49;0m"
 pgrep collectl | xargs kill -9  
 
