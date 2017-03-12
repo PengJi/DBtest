@@ -8,44 +8,21 @@ import random
 import subprocess  # 执行shell命令
 
 from shell_color import str_style
-import tran
+from tran import TranClass
 
 '''
 测试多租户
 '''
+# 测试函数
 def func(msg):
 	print "msg:", msg
 	time.sleep(2)
 	print "end"
 
-def writer_proc(q):
-    try:
-        q.put(1, block = False)
-    except:
-        pass
-
-def reader_proc(q):
-    try:
-        print q.get(block = False)
-    except:
-        pass
-
-# queue写数据进程
-def write_proc(q):
-    for value in ['A', 'B', 'C']:
-        print 'Put %s to queue...' % value
-        q.put(value)
-        time.sleep(random.random())
-
-# queue读数据进程
-def read_proc(q):
-    while True:
-        value = q.get(True)
-        print 'Get %s from queue.' % value
-
 database = 'testDB'
 host = '192.168.100.78'
 
+# 租户进程
 def tenant1():
     user = 'tenant1'
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql'
@@ -53,12 +30,12 @@ def tenant1():
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
     start = time.time()
     print "start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    print shell_color.str_style('query start', fore = 'green')
+    print str_style('query start', fore = 'green')
 
 	# query sql
-    p1 = Tranclass(user,database,host,strsql1)
-    p2 = Tranclass(user,database,host,strsql2)
-    p3 = Tranclass(user,database,host,strsql3)
+    p1 = TranClass(user,database,host,strsql1)
+    p2 = TranClass(user,database,host,strsql2)
+    p3 = TranClass(user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()
@@ -70,111 +47,41 @@ def tenant1():
     end = time.time()   
     print "end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'Task runs %0.2f seconds.' %(end - start)
-    return res
 
+# 租户进程
 def tenant2():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1_1.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant2'
 
+# 租户进程
 def tenant3():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant3'
 
+# 租户进程
 def tenant4():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2_1.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant4'
 
+# 租户进程
 def tenant5():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant5'
 
+# 租户进程
 def tenant6():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant6'
 
+# 租户进程
 def tenant7():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant7'
 
+# 租户进程
 def tenant8():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_1.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant8'
 
+# 租户进程
 def tenant9():
-    start = time.time()
-    print str_style('query start', fore = 'green')
-	# query sql
-    res = subprocess.check_output(["psql","-U","gpadmin","-d","testDB","-f","/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql"])
-    print res
-    print str_style("query completed", fore = 'green')
-    end = time.time()    
-    print 'Task runs %0.2f seconds.' %(end - start)
-    return res
+    print 'tenant9'
 
 if __name__ == "__main__":
     pool = multiprocessing.Pool(processes = 5)
-    q = multiprocessing.Queue()
-
-    pw = multiprocessing.Process(target=write_proc, args=(q,))
-    pr = multiprocessing.Process(target=read_proc, args=(q,))
-
-    # 启动子进程pw，写入:
-    pw.start()
-    # 启动子进程pr，读取:
-    pr.start()
-    # 等待pw结束:
-    pw.join()
-    # pr进程里是死循环，无法等待其结束，只能强行终止:
-    pr.terminate()
 
     # 测试pool
     for i in xrange(5):
@@ -198,4 +105,4 @@ if __name__ == "__main__":
     pool.join()
     
     print str_style("Sub-process(es) done.", fore = "red")
-
+    
