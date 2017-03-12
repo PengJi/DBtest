@@ -43,15 +43,22 @@ def read_proc(q):
         value = q.get(True)
         print 'Get %s from queue.' % value
 
+database = 'testDB'
+host = '192.168.100.78'
+
 def tenant1():
+    user = 'tenant1'
+    strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql'
+    strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
+    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
     start = time.time()
     print "start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print shell_color.str_style('query start', fore = 'green')
 
 	# query sql
-    p1 = Tranclass('gpadmin','testDB','/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql')
-    p2 = Tranclass('gpadmin','testDB','/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql')
-    p3 = Tranclass('gpadmin','testDB','/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql')
+    p1 = Tranclass(user,database,host,strsql1)
+    p2 = Tranclass(user,database,host,strsql2)
+    p3 = Tranclass(user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()

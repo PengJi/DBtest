@@ -6,20 +6,27 @@ import time
 import subprocess
 
 class TranClass(threading.Thread):
-    def __init__(self, user, database, strsql):
+    def __init__(self, user, database,host, strsql):
         threading.Thread.__init__(self)
         self.user = user
         self.database = database
+        self.host = host
         self.strsql = strsql
 
     def run(self):
-        res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-f",self.strsql])
+        res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-h",self.host,"-f",self.strsql])
         print res
 
 def test_fun():
-    p1 = TranClass('gpadmin','testDB','/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql')
-    p2 = TranClass('gpadmin','testDB','/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql')
-    p3 = TranClass('gpadmin','testDB','/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql')
+    user = 'gpadmin'
+    database = 'testDB'
+    host = '192.168.100.78'
+    strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql'
+    strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
+    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
+    p1 = TranClass(user,database,host,strsql1)
+    p2 = TranClass(user,database,host,strsql2)
+    p3 = TranClass(user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()
