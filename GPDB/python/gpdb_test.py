@@ -5,7 +5,7 @@ import threading
 import os
 import time
 import random
-import subprocess  # 执行shell命令
+import subprocess  
 
 from shell_color import str_style
 from tran import TranClass
@@ -27,7 +27,8 @@ def tenant1():
     user = 'tenant1'
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql'
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
-    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
+    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1_1.sql'
+
     start = time.time()
     print "start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print str_style('query start', fore = 'green')
@@ -51,18 +52,114 @@ def tenant1():
 # 租户进程
 def tenant2():
     print 'tenant2'
+    user = 'tenant2'
+    strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
+    strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2_1.sql'
+    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'
+
+    start = time.time()
+    print "start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print str_style('query start', fore = 'green')
+
+	# query sql
+    p1 = TranClass(user,database,host,strsql1)
+    p2 = TranClass(user,database,host,strsql2)
+    p3 = TranClass(user,database,host,strsql3)
+    p1.start()
+    p2.start()
+    p3.start()
+    p1.join()
+    p2.join()
+    p3.join()
+
+    print str_style("query completed", fore = 'green')
+    end = time.time()   
+    print "end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print 'Task runs %0.2f seconds.' %(end - start)
 
 # 租户进程
 def tenant3():
     print 'tenant3'
+    user = 'tenant3'
+    strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
+    strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'
+    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
+
+    start = time.time()
+    print "start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print str_style('query start', fore = 'green')
+
+	# query sql
+    p1 = TranClass(user,database,host,strsql1)
+    p2 = TranClass(user,database,host,strsql2)
+    p3 = TranClass(user,database,host,strsql3)
+    p1.start()
+    p2.start()
+    p3.start()
+    p1.join()
+    p2.join()
+    p3.join()
+
+    print str_style("query completed", fore = 'green')
+    end = time.time()   
+    print "end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print 'Task runs %0.2f seconds.' %(end - start)
 
 # 租户进程
 def tenant4():
     print 'tenant4'
+    user = 'tenant4'
+    strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
+    strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_1.sql'
+    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
+
+    start = time.time()
+    print "start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print str_style('query start', fore = 'green')
+
+	# query sql
+    p1 = TranClass(user,database,host,strsql1)
+    p2 = TranClass(user,database,host,strsql2)
+    p3 = TranClass(user,database,host,strsql3)
+    p1.start()
+    p2.start()
+    p3.start()
+    p1.join()
+    p2.join()
+    p3.join()
+
+    print str_style("query completed", fore = 'green')
+    end = time.time()   
+    print "end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print 'Task runs %0.2f seconds.' %(end - start)
 
 # 租户进程
 def tenant5():
     print 'tenant5'
+    user = 'tenant1'
+    strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
+    strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
+    strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
+
+    start = time.time()
+    print "start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print str_style('query start', fore = 'green')
+
+	# query sql
+    p1 = TranClass(user,database,host,strsql1)
+    p2 = TranClass(user,database,host,strsql2)
+    p3 = TranClass(user,database,host,strsql3)
+    p1.start()
+    p2.start()
+    p3.start()
+    p1.join()
+    p2.join()
+    p3.join()
+
+    print str_style("query completed", fore = 'green')
+    end = time.time()   
+    print "end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print 'Task runs %0.2f seconds.' %(end - start)
 
 # 租户进程
 def tenant6():
