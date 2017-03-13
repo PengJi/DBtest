@@ -136,7 +136,7 @@ def tenant4():
 # 租户进程
 def tenant5():
     print 'tenant5'
-    user = 'tenant1'
+    user = 'tenant5'
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
