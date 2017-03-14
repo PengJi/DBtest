@@ -1,6 +1,7 @@
 #coding: utf-8
 
 import subprocess
+import os
 from tran import *
 
 # 执行shell root命令
@@ -78,6 +79,18 @@ def create_schema(start,end):
     for k in xrange(0,len(threads)):
         threads[k].join()
     print str_style("creating schema complete",fore="green")
+
+# 删除目录下所有文件
+def delete_file_folder(src):
+    if os.path.isfile(src):
+        try:
+            os.remove(src)
+        except:
+            pass
+    elif os.path.isdir(src):
+        for item in os.listdir(src):
+            itemsrc=os.path.join(src,item)
+            delete_file_folder(itemsrc)
 
 #   格式：\033[显示方式;前景色;背景色m
 #   说明:

@@ -206,8 +206,11 @@ if __name__ == "__main__":
     print str_style('clear caches', fore = 'green')
     #sshclient('sync; echo 1 > /proc/sys/vm/drop_caches')
 
+    # 删除目录下文件
+    delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
+
     '''
-    # 测试pool
+    # 测试pool(带参数)
     for i in xrange(5):
         msg = "hello %d" %(i)
         pool.apply_async(func, (msg, ))  # 向pool中添加进程
@@ -225,8 +228,12 @@ if __name__ == "__main__":
     print str_style("main process eecution", fore = "yellow")
     start = time.time()
 
-    for i in xrange(1,6):
-        pool.apply_async(globals().get('tenant'+str(i)),())
+    for i in xrange(1,20):
+        #ran = random.randint(1,i) % 6
+        #if ran == 0:
+        #    ran = 2
+        ran = i % 6
+        pool.apply_async(globals().get('tenant'+str(ran)),())
 
     # 关闭pool，使其不再接受新的任务
     pool.close()
