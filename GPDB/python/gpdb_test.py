@@ -6,8 +6,7 @@ import Queue
 import os
 import time
 import random
-import subprocess  
-import paramiko
+import subprocess
 
 from tran import TranClass
 from funs import *
@@ -205,7 +204,7 @@ def main(num):
 
     # 清空缓存
     print str_style('clear caches', fore = 'green')
-    #sshclient('sync; echo 1 > /proc/sys/vm/drop_caches')
+    sshclient('sync; echo 1 > /proc/sys/vm/drop_caches')
 
     # 删除目录下文件
     delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
@@ -244,4 +243,4 @@ def main(num):
     print str_style("Sub-process(es) done.", fore = "yellow")
 
 if __name__ == "__main__":
-    main(20)
+    main(30)

@@ -2,6 +2,7 @@
 
 import subprocess
 import os
+import paramiko
 from tran import *
 
 # 执行shell root命令
