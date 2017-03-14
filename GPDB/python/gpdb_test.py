@@ -11,6 +11,7 @@ import paramiko
 
 from shell_color import str_style
 from tran import TranClass
+from funs import *
 
 '''
 测试多租户
@@ -21,26 +22,8 @@ def func(msg):
 	time.sleep(2)
 	print "end"
 
-# 执行root命令
-def sshclient(strcomd):
-    hostname='192.168.100.78'
-    username='root'
-    password='jipeng1008'
-
-    # paramiko.util.log_to_file('paramiko.log')  
-    s = paramiko.SSHClient()
-
-    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    s.connect(hostname = hostname,username=username, password=password)
-    stdin, stdout, stderr = s.exec_command(strcomd)
-    print stdout.read()
-    s.close()
-
 database = 'testDB'
 host = '192.168.100.78'
-
-def tenant0():
-    print 'tenant0'
 
 # 租户进程
 def tenant1():
@@ -51,7 +34,7 @@ def tenant1():
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1_1.sql'
 
-    print "tenant1 start time is: ", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant1 start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print str_style('tenant1 query start', fore = 'green')
     start = time.time()
 
@@ -68,7 +51,7 @@ def tenant1():
 
     end = time.time()   
     print str_style("tenant1 query completed", fore = 'green')
-    print "tenant1 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant1 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant1 task runs %0.2f seconds.' %(end - start)
 
     fo = open("res_process/tenant1.txt","a")
@@ -85,7 +68,7 @@ def tenant2():
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2_1.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'
 
-    print "tenant2 start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant2 start time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print str_style('tenant2 query start', fore = 'green')
     start = time.time()
 
@@ -102,7 +85,7 @@ def tenant2():
 
     end = time.time()   
     print str_style("tenant2 query completed", fore = 'green')
-    print "tenant2 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant2 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant2 task runs %0.2f seconds.' %(end - start)
 
     fo = open("res_process/tenant2.txt","a")
@@ -119,7 +102,7 @@ def tenant3():
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
 
-    print "tenant3 start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant3 start time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print str_style('tenant3 query start', fore = 'green')
     start = time.time()
 
@@ -136,7 +119,7 @@ def tenant3():
 
     end = time.time()   
     print str_style("tenant3 query completed", fore = 'green')
-    print "tenant3 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant3 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant3 task runs %0.2f seconds.' %(end - start)
 
     fo = open("res_process/tenant3.txt","a")
@@ -153,7 +136,7 @@ def tenant4():
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_1.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
 
-    print "tenant4 start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant4 start time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print str_style('tenant4 query start', fore = 'green')
     start = time.time()
 
@@ -170,7 +153,7 @@ def tenant4():
 
     end = time.time()   
     print str_style("tenant4 query completed", fore = 'green')
-    print "tenant4 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant4 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant4 task runs %0.2f seconds.' %(end - start)
 
     fo = open("res_process/tenant4.txt","a")
@@ -187,7 +170,7 @@ def tenant5():
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
 
-    print "tenant5 start time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant5 start time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print str_style('tenant5 query start', fore = 'green')
     start = time.time()
 
@@ -204,7 +187,7 @@ def tenant5():
 
     end = time.time()   
     print str_style("tenant5 query completed", fore = 'green')
-    print "tenant5 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    print "tenant5 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant5 task runs %0.2f seconds.' %(end - start)
 
     fo = open("res_process/tenant5.txt","a")
@@ -226,10 +209,19 @@ if __name__ == "__main__":
         pool.apply_async(func, (msg, ))  # 向pool中添加进程
     '''
 
+    # 创建role
+    #create_role(1,100)
+
+	# 创建schema
+	#create_schema(1,100)
+
+	# 创建queue
+    #create_queue(1,100)
+
     print str_style("main process eecution", fore = "yellow")
     start = time.time()
 
-    for i in xrange(6):
+    for i in xrange(1,6):
         pool.apply_async(globals().get('tenant'+str(i)),())
 
     # 关闭pool，使其不再接受新的任务
