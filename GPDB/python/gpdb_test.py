@@ -9,7 +9,6 @@ import random
 import subprocess  
 import paramiko
 
-from shell_color import str_style
 from tran import TranClass
 from funs import *
 
