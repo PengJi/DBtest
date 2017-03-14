@@ -19,7 +19,21 @@ class TranClass(threading.Thread):
         #print res
         self.res_queue.put(res)
 
-def test_fun():
+# 创建角色
+class RoleClass(threading.Thread):
+    def __init__(self, user, database, host, tenant_name, strsql):
+        threading.Thread.__init__(self)
+        self.user = user
+        self.database = database
+        self.host = host
+        self.tenant_name = tenant_name
+        self.strsql = strsql
+        
+    def run(self):
+        res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-h",self.host,'--variable=role_name='+self.tenant_name,"-f",self.strsql])
+        print res;
+
+def test_tran():
     q = Queue.Queue()
     user = 'gpadmin'
     database = 'testDB'
@@ -39,5 +53,28 @@ def test_fun():
     while not q.empty():
         print q.get()
 
+# 测试角色
+def test_role():
+    user = 'gpadmin'
+    database = 'testDB'
+    host = '192.168.100.78'
+    strsql = '/home/gpadmin/DBtest/GPDB/python/queries/create_role.sql'
+    role = 'tenant'
+    threads = []
+    
+    for i in xrange(10,20):
+        print 'test1'
+        role = 'tenant' + str(i) 
+        threads.append(RoleClass(user, database, host, role, strsql))
+    
+    for j in xrange(0,len(threads)):
+        print 'test2'
+        threads[j].start()
+    
+    for k in xrange(0,len(threads)):
+        print 'test3'
+        threads[k].join()
+
 if __name__ == '__main__':
-    test_fun()
+    #test_tran()
+    test_role()
