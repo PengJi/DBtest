@@ -71,7 +71,7 @@ def tenant1():
     print "tenant1 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant1 task runs %0.2f seconds.' %(end - start)
 
-    fo = open("res_process/tenant1.txt","w+")
+    fo = open("res_process/tenant1.txt","a")
     while not queue.empty():
         fo.write(queue.get())
     fo.close()
@@ -105,7 +105,7 @@ def tenant2():
     print "tenant2 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant2 task runs %0.2f seconds.' %(end - start)
 
-    fo = open("res_process/tenant2.txt","w+")
+    fo = open("res_process/tenant2.txt","a")
     while not queue.empty():
         fo.write(queue.get())
     fo.close()
@@ -139,7 +139,7 @@ def tenant3():
     print "tenant3 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant3 task runs %0.2f seconds.' %(end - start)
 
-    fo = open("res_process/tenant3.txt","w+")
+    fo = open("res_process/tenant3.txt","a")
     while not queue.empty():
         fo.write(queue.get())
     fo.close()
@@ -173,7 +173,7 @@ def tenant4():
     print "tenant4 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant4 task runs %0.2f seconds.' %(end - start)
 
-    fo = open("res_process/tenant4.txt","w+")
+    fo = open("res_process/tenant4.txt","a")
     while not queue.empty():
         fo.write(queue.get())
     fo.close()
@@ -207,13 +207,13 @@ def tenant5():
     print "tenant5 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant5 task runs %0.2f seconds.' %(end - start)
 
-    fo = open("res_process/tenant5.txt","w+")
+    fo = open("res_process/tenant5.txt","a")
     while not queue.empty():
         fo.write(queue.get())
     fo.close()
 
 if __name__ == "__main__":
-    pool = multiprocessing.Pool(processes = 5)
+    pool = multiprocessing.Pool(processes = 100)
 
     # 清空缓存
     print str_style('clear caches', fore = 'green')
@@ -229,7 +229,7 @@ if __name__ == "__main__":
     print str_style("main process eecution", fore = "yellow")
     start = time.time()
 
-    for i in xrange(5):
+    for i in xrange(6):
         pool.apply_async(globals().get('tenant'+str(i)),())
 
     # 关闭pool，使其不再接受新的任务
