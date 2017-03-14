@@ -51,7 +51,8 @@ def tenant1():
     end = time.time()   
     print str_style("tenant1 query completed", fore = 'green')
     print "tenant1 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    print 'tenant1 task runs %0.2f seconds.' %(end - start)
+    str = 'tenant1 task runs %0.2f seconds.' %(end - start)
+    print str_style(str,fore='red')
 
     fo = open("res_process/tenant1.txt","a")
     while not queue.empty():
@@ -85,7 +86,8 @@ def tenant2():
     end = time.time()   
     print str_style("tenant2 query completed", fore = 'green')
     print "tenant2 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    print 'tenant2 task runs %0.2f seconds.' %(end - start)
+    str = 'tenant2 task runs %0.2f seconds.' %(end - start)
+    print str_style(str,fore='red')
 
     fo = open("res_process/tenant2.txt","a")
     while not queue.empty():
@@ -119,7 +121,8 @@ def tenant3():
     end = time.time()   
     print str_style("tenant3 query completed", fore = 'green')
     print "tenant3 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    print 'tenant3 task runs %0.2f seconds.' %(end - start)
+    str = 'tenant3 task runs %0.2f seconds.' %(end - start)
+    print str_style(str,fore='red')
 
     fo = open("res_process/tenant3.txt","a")
     while not queue.empty():
@@ -153,7 +156,8 @@ def tenant4():
     end = time.time()   
     print str_style("tenant4 query completed", fore = 'green')
     print "tenant4 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    print 'tenant4 task runs %0.2f seconds.' %(end - start)
+    str = 'tenant4 task runs %0.2f seconds.' %(end - start)
+    print str_style(str,fore='red')
 
     fo = open("res_process/tenant4.txt","a")
     while not queue.empty():
@@ -187,7 +191,8 @@ def tenant5():
     end = time.time()   
     print str_style("tenant5 query completed", fore = 'green')
     print "tenant5 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    print 'tenant5 task runs %0.2f seconds.' %(end - start)
+    str = 'tenant5 task runs %0.2f seconds.' %(end - start)
+    print str_style(str,fore='red')
 
     fo = open("res_process/tenant5.txt","a")
     while not queue.empty():
@@ -228,6 +233,7 @@ if __name__ == "__main__":
     # 主进程阻塞，等待子进程的退出 
     pool.join()
     end = time.time()
-    print 'process run %0.2f seconds.' %(end - start)
+    str = 'process run %0.2f seconds.' %(end - start)
+    print str_style(str,fore='red')
     print str_style("Sub-process(es) done.", fore = "yellow")
 

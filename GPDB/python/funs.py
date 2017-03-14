@@ -189,6 +189,7 @@ def test_color( ):
 
 if __name__ == '__main__':
     print "funs main"
+    test_color()
     #create_role(20,100)
     #create_queue(6,100)
     #create_schema(20,100)
