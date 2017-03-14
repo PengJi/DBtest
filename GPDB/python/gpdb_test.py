@@ -2,6 +2,7 @@
 
 import multiprocessing
 import threading
+import Queue
 import os
 import time
 import random
@@ -38,10 +39,14 @@ def sshclient(strcomd):
 database = 'testDB'
 host = '192.168.100.78'
 
+def tenant0():
+    print 'tenant0'
+
 # 租户进程
 def tenant1():
     print 'tenant1'
     user = 'tenant1'
+    queue = Queue.Queue()
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql'
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1_1.sql'
@@ -51,9 +56,9 @@ def tenant1():
     start = time.time()
 
 	# query sql
-    p1 = TranClass(user,database,host,strsql1)
-    p2 = TranClass(user,database,host,strsql2)
-    p3 = TranClass(user,database,host,strsql3)
+    p1 = TranClass(queue, user,database,host,strsql1)
+    p2 = TranClass(queue, user,database,host,strsql2)
+    p3 = TranClass(queue, user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()
@@ -66,10 +71,16 @@ def tenant1():
     print "tenant1 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant1 task runs %0.2f seconds.' %(end - start)
 
+    fo = open("res_process/tenant1.txt","w+")
+    while not queue.empty():
+        fo.write(queue.get())
+    fo.close()
+
 # 租户进程
 def tenant2():
     print 'tenant2'
     user = 'tenant2'
+    queue = Queue.Queue()
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2_1.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'
@@ -79,9 +90,9 @@ def tenant2():
     start = time.time()
 
 	# query sql
-    p1 = TranClass(user,database,host,strsql1)
-    p2 = TranClass(user,database,host,strsql2)
-    p3 = TranClass(user,database,host,strsql3)
+    p1 = TranClass(queue, user,database,host,strsql1)
+    p2 = TranClass(queue, user,database,host,strsql2)
+    p3 = TranClass(queue, user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()
@@ -94,10 +105,16 @@ def tenant2():
     print "tenant2 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant2 task runs %0.2f seconds.' %(end - start)
 
+    fo = open("res_process/tenant2.txt","w+")
+    while not queue.empty():
+        fo.write(queue.get())
+    fo.close()
+
 # 租户进程
 def tenant3():
     print 'tenant3'
     user = 'tenant3'
+    queue = Queue.Queue()
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
@@ -107,9 +124,9 @@ def tenant3():
     start = time.time()
 
 	# query sql
-    p1 = TranClass(user,database,host,strsql1)
-    p2 = TranClass(user,database,host,strsql2)
-    p3 = TranClass(user,database,host,strsql3)
+    p1 = TranClass(queue, user,database,host,strsql1)
+    p2 = TranClass(queue, user,database,host,strsql2)
+    p3 = TranClass(queue, user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()
@@ -122,10 +139,16 @@ def tenant3():
     print "tenant3 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant3 task runs %0.2f seconds.' %(end - start)
 
+    fo = open("res_process/tenant3.txt","w+")
+    while not queue.empty():
+        fo.write(queue.get())
+    fo.close()
+
 # 租户进程
 def tenant4():
     print 'tenant4'
     user = 'tenant4'
+    queue = Queue.Queue()
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_1.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
@@ -135,9 +158,9 @@ def tenant4():
     start = time.time()
 
 	# query sql
-    p1 = TranClass(user,database,host,strsql1)
-    p2 = TranClass(user,database,host,strsql2)
-    p3 = TranClass(user,database,host,strsql3)
+    p1 = TranClass(queue, user,database,host,strsql1)
+    p2 = TranClass(queue, user,database,host,strsql2)
+    p3 = TranClass(queue, user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()
@@ -150,10 +173,16 @@ def tenant4():
     print "tenant4 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant4 task runs %0.2f seconds.' %(end - start)
 
+    fo = open("res_process/tenant4.txt","w+")
+    while not queue.empty():
+        fo.write(queue.get())
+    fo.close()
+
 # 租户进程
 def tenant5():
     print 'tenant5'
     user = 'tenant5'
+    queue = Queue.Queue()
     strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
     strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
     strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
@@ -163,9 +192,9 @@ def tenant5():
     start = time.time()
 
 	# query sql
-    p1 = TranClass(user,database,host,strsql1)
-    p2 = TranClass(user,database,host,strsql2)
-    p3 = TranClass(user,database,host,strsql3)
+    p1 = TranClass(queue, user,database,host,strsql1)
+    p2 = TranClass(queue, user,database,host,strsql2)
+    p3 = TranClass(queue, user,database,host,strsql3)
     p1.start()
     p2.start()
     p3.start()
@@ -178,21 +207,10 @@ def tenant5():
     print "tenant5 end time is: ",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     print 'tenant5 task runs %0.2f seconds.' %(end - start)
 
-# 租户进程
-def tenant6():
-    print 'tenant6'
-
-# 租户进程
-def tenant7():
-    print 'tenant7'
-
-# 租户进程
-def tenant8():
-    print 'tenant8'
-
-# 租户进程
-def tenant9():
-    print 'tenant9'
+    fo = open("res_process/tenant5.txt","w+")
+    while not queue.empty():
+        fo.write(queue.get())
+    fo.close()
 
 if __name__ == "__main__":
     pool = multiprocessing.Pool(processes = 5)
@@ -210,15 +228,9 @@ if __name__ == "__main__":
 
     print str_style("main process eecution", fore = "yellow")
     start = time.time()
-    pool.apply_async(tenant1, ())
-    pool.apply_async(tenant2, ())
-    pool.apply_async(tenant3, ())
-    pool.apply_async(tenant4, ())
-    pool.apply_async(tenant5, ())
-    pool.apply_async(tenant6, ())
-    pool.apply_async(tenant7, ())
-    pool.apply_async(tenant8, ())
-    pool.apply_async(tenant9, ())
+
+    for i in xrange(5):
+        pool.apply_async(globals().get('tenant'+str(i)),())
 
     # 关闭pool，使其不再接受新的任务
     pool.close()
@@ -226,6 +238,5 @@ if __name__ == "__main__":
     pool.join()
     end = time.time()
     print 'process run %0.2f seconds.' %(end - start)
-
     print str_style("Sub-process(es) done.", fore = "yellow")
-    
+
