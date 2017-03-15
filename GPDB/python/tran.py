@@ -5,6 +5,9 @@ import Queue
 import time
 import subprocess
 
+'''
+线程类
+'''
 # 执行sql文件线程
 class TranClass(threading.Thread):
     def __init__(self, queue, user, database,host, strsql):
