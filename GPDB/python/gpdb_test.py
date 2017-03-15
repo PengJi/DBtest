@@ -37,9 +37,9 @@ def tenant1():
     start = time.time()
 
 	# query sql
-    p1 = TranClass(queue, user,database,host,strsql1)
-    p2 = TranClass(queue, user,database,host,strsql2)
-    p3 = TranClass(queue, user,database,host,strsql3)
+    p1 = TranClass(queue, user, database, host, strsql1)
+    p2 = TranClass(queue, user, database, host, strsql2)
+    p3 = TranClass(queue, user, database, host, strsql3)
     p1.start()
     p2.start()
     p3.start()
@@ -52,6 +52,7 @@ def tenant1():
     print "tenant1 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     str_run = 'tenant1 task runs %0.2f seconds.' %(end - start)
     print str_style(str_run,fore='red')
+    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
 
     fo = open("res_process/tenant1.txt","a")
     while not queue.empty():
@@ -87,6 +88,7 @@ def tenant2():
     print "tenant2 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     str_run = 'tenant2 task runs %0.2f seconds.' %(end - start)
     print str_style(str_run,fore='red')
+    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
 
     fo = open("res_process/tenant2.txt","a")
     while not queue.empty():
@@ -122,6 +124,7 @@ def tenant3():
     print "tenant3 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     str_run = 'tenant3 task runs %0.2f seconds.' %(end - start)
     print str_style(str_run,fore='red')
+    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
 
     fo = open("res_process/tenant3.txt","a")
     while not queue.empty():
@@ -157,6 +160,7 @@ def tenant4():
     print "tenant4 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     str_run = 'tenant4 task runs %0.2f seconds.' %(end - start)
     print str_style(str_run,fore='red')
+    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
 
     fo = open("res_process/tenant4.txt","a")
     while not queue.empty():
@@ -192,6 +196,7 @@ def tenant5():
     print "tenant5 end time is:",time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     str_run = 'tenant5 task runs %0.2f seconds.' %(end - start)
     print str_style(str_run,fore='red')
+    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
 
     fo = open("res_process/tenant5.txt","a")
     while not queue.empty():
@@ -240,7 +245,19 @@ def main(num):
     end = time.time()
     str_run = 'process run %0.2f seconds.' %(end - start)
     print str_style(str_run,fore='red')
+    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
     print str_style("Sub-process(es) done.", fore = "yellow")
 
 if __name__ == "__main__":
-    main(30)
+    str_sep = '======================================================================'
+    for i in xrange(10):
+        subprocess.check_output(['echo ' + '10 processes' + ' >> run.log'],shell=True)
+        main(10)
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo ' + '20 processes' + ' >> run.log'],shell=True)
+        main(20)
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo ' + '50 processes' + ' >> run.log'],shell=True)
+        main(50)
