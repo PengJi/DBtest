@@ -249,15 +249,18 @@ def main(num):
     print str_style("Sub-process(es) done.", fore = "yellow")
 
 if __name__ == "__main__":
-    str_sep = '======================================================================'
+    str_sep = '=================================='
+    subprocess.check_output(['echo ' + '10 processes' + ' >> run.log'],shell=True)
     for i in xrange(10):
-        subprocess.check_output(['echo ' + '10 processes' + ' >> run.log'],shell=True)
+        subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(10)
     subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '20 processes' + ' >> run.log'],shell=True)
     for i in xrange(10):
-        subprocess.check_output(['echo ' + '20 processes' + ' >> run.log'],shell=True)
+        subprocess.check_output(['echo 20 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(20)
     subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '50 processes' + ' >> run.log'],shell=True)
     for i in xrange(10):
-        subprocess.check_output(['echo ' + '50 processes' + ' >> run.log'],shell=True)
+        subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(50)
