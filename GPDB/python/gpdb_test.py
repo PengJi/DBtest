@@ -11,7 +11,9 @@ import subprocess
 from tran import TranClass
 from funs import *
 
-def main(num):
+# num  线程的个数
+# size 数据的大小，1、10、20、50、100
+def main(num,size):
     pool = multiprocessing.Pool(processes = 100)
 
     # 清空缓存
@@ -25,25 +27,25 @@ def main(num):
         ran = i % 5
         ran = ran +1
         if ran == 1:
-            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1.sql'
-            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-1_1.sql'
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-1.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-1_1.sql'
         elif ran == 2:
-            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2.sql'
-            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-2_1.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'        
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'        
         elif ran == 3:
-            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3.sql'
-            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-3_1.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'              
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'              
         elif ran == 4:
-            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
-            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_1.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'
         elif ran == 5:
-            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4.sql'
-            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_1.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-4_2.sql'
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'
         pool.apply_async(tenant,args=("tenant"+str(ran),strsql1,strsql2,strsql3))
 
     pool.close()
@@ -71,16 +73,17 @@ if __name__ == "__main__":
     subprocess.check_output(['echo ' + '10 processes' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
-        main(10)
-'''
+        main(10,1)
+
     subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
     subprocess.check_output(['echo ' + '20 processes' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 20 of process ' + str(i) + ' time >> run.log'],shell=True)
-        main(20)
+        main(20,1)
+
     subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
     subprocess.check_output(['echo ' + '50 processes' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
-        main(50)
-'''
+        main(50,1)
+
