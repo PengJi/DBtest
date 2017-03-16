@@ -18,7 +18,7 @@ def main(num,size):
 
     # 清空缓存
     print str_style('clear caches', fore = 'green')
-    sshclient('sync; echo 1 > /proc/sys/vm/drop_caches')
+    clear_cache()
 
     print str_style("main process eecution", fore = "yellow")
     start = time.time()

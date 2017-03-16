@@ -6,19 +6,31 @@ import paramiko
 from tran import *
 
 # 执行shell root命令
-def sshclient(strcomd):
-    hostname='192.168.100.78'
-    username='root'
-    password='jipeng1008'
+def sshclient(host,user,passwd,strcomd):
 
     # paramiko.util.log_to_file('paramiko.log')  
     s = paramiko.SSHClient()
 
     s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    s.connect(hostname = hostname,username=username, password=password)
+    s.connect(hostname = host,username=user, password=passwd)
     stdin, stdout, stderr = s.exec_command(strcomd)
     print stdout.read()
     s.close()
+
+# 清空缓存
+def clear_cache():
+    host = 'JPDB2'
+    user = 'root'
+    passwd = 'jipeng1008'
+    strcmd = 'sync; echo 1 > /proc/sys/vm/drop_caches'
+    print str_style('clear caches', fore = 'green')
+    sshclient(host,user,passwd,strcmd)
+    sshclient('node1',user,passwd,strcmd)
+    sshclient('node2',user,passwd,strcmd)
+    sshclient('node3',user,passwd,strcmd)
+    sshclient('node4',user,passwd,strcmd)
+    sshclient('node5',user,passwd,strcmd)
+    sshclient('node6',user,passwd,strcmd)
 
 # 创建role
 def create_role(start,end):
@@ -464,3 +476,4 @@ if __name__ == '__main__':
     #create_role(20,100)
     #create_queue(6,100)
     #create_schema(20,100)
+    clear_cache()
