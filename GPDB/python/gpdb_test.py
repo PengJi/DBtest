@@ -70,19 +70,19 @@ if __name__ == "__main__":
     # 删除目录下文件
     delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
 
-    subprocess.check_output(['echo ' + '10 processes' + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '10 processes 1G data' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(10,1)
 
     subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
-    subprocess.check_output(['echo ' + '20 processes' + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '20 processes 1G data' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 20 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(20,1)
 
     subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
-    subprocess.check_output(['echo ' + '50 processes' + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '50 processes 1G data' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(50,1)
