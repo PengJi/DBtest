@@ -17,14 +17,13 @@ def sshclient(host,user,passwd,strcomd):
     print stdout.read()
     s.close()
 
-# 清空缓存
+# 清空集群中所有节点的缓存
 def clear_cache():
-    host = 'JPDB2'
     user = 'root'
     passwd = 'jipeng1008'
     strcmd = 'sync; echo 1 > /proc/sys/vm/drop_caches'
     print str_style('clear caches', fore = 'green')
-    sshclient(host,user,passwd,strcmd)
+    sshclient('JPDB2',user,passwd,strcmd)
     sshclient('node1',user,passwd,strcmd)
     sshclient('node2',user,passwd,strcmd)
     sshclient('node3',user,passwd,strcmd)
