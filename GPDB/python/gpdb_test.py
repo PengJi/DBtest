@@ -20,7 +20,7 @@ def main(num,size):
     print str_style('clear caches', fore = 'green')
     clear_cache()
 
-    print str_style("main process eecution", fore = "yellow")
+    print str_style("main function execute", fore = "yellow")
     start = time.time()
 
     for i in xrange(0,num):
@@ -54,7 +54,7 @@ def main(num,size):
     str_run = 'process run %0.2f seconds.' %(end - start)
     print str_style(str_run,fore='red')
     subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
-    print str_style("Sub-process(es) done.", fore = "yellow")
+    print str_style("main function complete", fore = "yellow")
 
 if __name__ == "__main__":
     # 创建role
