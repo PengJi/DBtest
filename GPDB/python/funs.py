@@ -31,6 +31,20 @@ def clear_cache():
     sshclient('node5',user,passwd,strcmd)
     sshclient('node6',user,passwd,strcmd)
 
+# 执行脚本
+def source_sh():
+    user = 'root'
+    passwd = 'jipeng1008'
+    strcmd = 'source /home/gpadmin/command.sh'
+    print str_style('clear caches', fore = 'green')
+    sshclient('JPDB2',user,passwd,strcmd)
+    sshclient('node1',user,passwd,strcmd)
+    sshclient('node2',user,passwd,strcmd)
+    sshclient('node3',user,passwd,strcmd)
+    sshclient('node4',user,passwd,strcmd)
+    sshclient('node5',user,passwd,strcmd)
+    sshclient('node6',user,passwd,strcmd)
+
 # 创建role
 def create_role(start,end):
     user = 'gpadmin'
@@ -471,8 +485,9 @@ def main_old(num):
 
 if __name__ == '__main__':
     print "funs main"
-    test_color()
+    #test_color()
     #create_role(20,100)
     #create_queue(6,100)
     #create_schema(20,100)
-    clear_cache()
+    #clear_cache()
+    source_sh()

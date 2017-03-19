@@ -17,7 +17,6 @@ def main(num,size):
     pool = multiprocessing.Pool(processes = 100)
 
     # 清空缓存
-    print str_style('clear caches', fore = 'green')
     clear_cache()
 
     print str_style("main function execute", fore = "yellow")
