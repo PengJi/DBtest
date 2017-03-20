@@ -7,10 +7,10 @@ from tran import *
 
 # 执行shell root命令
 def sshclient(host,user,passwd,strcomd):
-
+    str_host = host
+    print str_style(str_host, fore = 'green')
     # paramiko.util.log_to_file('paramiko.log')  
     s = paramiko.SSHClient()
-
     s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     s.connect(hostname = host,username=user, password=passwd)
     stdin, stdout, stderr = s.exec_command(strcomd)

@@ -14,7 +14,7 @@ from funs import *
 # num  线程的个数
 # size 数据的大小，1、10、20、50、100
 def main(num,size):
-    pool = multiprocessing.Pool(processes = 100)
+    pool = multiprocessing.Pool(processes = 30)
 
     # 清空缓存
     clear_cache()
@@ -41,10 +41,12 @@ def main(num,size):
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
             strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'
+
         elif ran == 5:
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
             strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'
+
         pool.apply_async(tenant,args=("tenant"+str(ran),strsql1,strsql2,strsql3))
 
     pool.close()
@@ -85,4 +87,55 @@ if __name__ == "__main__":
     for i in xrange(10):
         subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(50,1)
+
+    subprocess.check_output(['echo ' + '10 processes 10G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(10,10)
+
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '20 processes 10G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 20 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(20,10)
+
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '50 processes 10G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(50,10)
+
+    subprocess.check_output(['echo ' + '10 processes 20G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(10,20)
+
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '20 processes 20G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 20 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(20,20)
+
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '50 processes 20G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(50,20)
+
+    subprocess.check_output(['echo ' + '10 processes 50G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(10,50)
+
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '20 processes 50G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 20 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(20,50)
+
+    subprocess.check_output(['echo ' + str_sep + ' >> run.log'],shell=True)
+    subprocess.check_output(['echo ' + '50 processes 50G data' + ' >> run.log'],shell=True)
+    for i in xrange(10):
+        subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
+        main(50,50)
 
