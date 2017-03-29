@@ -71,6 +71,7 @@ if __name__ == "__main__":
     # 删除目录下文件
     delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
 
+    # 测试1G数据
     subprocess.check_output(['echo ' + '10 processes 1G data' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
@@ -88,6 +89,7 @@ if __name__ == "__main__":
         subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(50,1)
 
+    # 测试10G数据
     subprocess.check_output(['echo ' + '10 processes 10G data' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
@@ -105,6 +107,7 @@ if __name__ == "__main__":
         subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(50,10)
 
+    # 测试20G数据
     subprocess.check_output(['echo ' + '10 processes 20G data' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
@@ -122,6 +125,7 @@ if __name__ == "__main__":
         subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(50,20)
 
+    # 测试50G数据
     subprocess.check_output(['echo ' + '10 processes 50G data' + ' >> run.log'],shell=True)
     for i in xrange(10):
         subprocess.check_output(['echo 10 of process ' + str(i) + ' time >> run.log'],shell=True)
@@ -138,4 +142,3 @@ if __name__ == "__main__":
     for i in xrange(10):
         subprocess.check_output(['echo 50 of process ' + str(i) + ' time >> run.log'],shell=True)
         main(50,50)
-

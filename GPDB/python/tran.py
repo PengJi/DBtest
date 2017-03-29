@@ -21,6 +21,7 @@ class TranClass(threading.Thread):
     def run(self):
         res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-h",self.host,"-f",self.strsql])
         #print res
+        self.res_queue.put(self.strsql)
         self.res_queue.put(res)
 
 # 批量创建角色线程
