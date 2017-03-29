@@ -436,8 +436,8 @@ def tenant5():
         fo.write(queue.get())
     fo.close()
 
-
 # 主函数
+# num 启动的进程数
 def main_old(num):
     pool = multiprocessing.Pool(processes = 100)
 
