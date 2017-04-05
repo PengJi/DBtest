@@ -8,7 +8,7 @@ and dec < 0
 and g+rho between 23 and 25;
 */
 
-create or replace function fget_objID()
+create or replace function fQ2()
 returns bigint
 as $$
 declare rho float;
