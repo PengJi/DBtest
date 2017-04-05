@@ -8,26 +8,28 @@ and dec < 0
 and g+rho between 23 and 25;
 */
 
+\w /tmp/test.txt
+
 create or replace function fQ2()
-returns bigint
+returns setof text
 as $$
 declare rho float;
 declare str text;
 begin
 	-- select -5*log(R)-2.5*log (PI()) into rho from Galaxy;
+	perform '\o /tmp/test.txt';
 	for rho in execute
 		'select -5*log(R)-2.5*log (PI()) from Galaxy;'
 	loop
 		raise notice '%', rho;
-		explain analyze select objID
+		-- execute 'select now()';
+		return query explain analyze select objID
 		from Galaxy
 		where ra between 170 and 190
 		and dec < 0
-		and g+rho between 23 and 25 into str;
-		raise notice '%',str;
+		and g+rho between 23 and 25;
 	end loop;
-	return 1;
 end;
 $$ language plpgsql;
 
-select fget_objID();
+select fQ2();
