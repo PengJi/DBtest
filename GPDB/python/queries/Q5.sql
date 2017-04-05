@@ -1,5 +1,6 @@
 -- Find all galaxies with a deVaucouleours profile (r¼ falloff of intensity on disk) and the photometric colors consistent with an elliptical galaxy.
 
+/*
 declare binned    	bigint;			 	-- initialized “binned” literal
 set     binned = 	dbo.fPhotoFlags('BINNED1') +	-- avoids SQL2K optimizer problem
    			dbo.fPhotoFlags('BINNED2') +
@@ -37,4 +38,46 @@ where	lDev_r > 1.1 * lExp_r	-- red DeVaucouleurs fit likelihood greater than dis
                          (0.45 - 4*( G.g - G.r)))  		-- 0.45 - deRed_gr/0.25
              and ((G.g - G.r) > ( 1.35 + 0.25 *(G.r - G.i)))          
        )    );
+*/
 
+declare binned bigint;			 	
+binned := fPhotoFlags('BINNED1') +	
+   			 fPhotoFlags('BINNED2') +
+   			 fPhotoFlags('BINNED4') ;
+declare blended bigint;			 	
+blended := fPhotoFlags('BLENDED');  
+declare noDeBlend bigint;			 
+noDeBlend := fPhotoFlags('NODEBLEND'); 
+declare child bigint;			 
+child := fPhotoFlags('CHILD');  
+declare edge bigint;	
+edge := fPhotoFlags('EDGE');  
+declare saturated bigint;		
+saturated := fPhotoFlags('SATURATED');
+	select objID
+	from Galaxy as G 		
+	where lDev_r > 1.1 * lExp_r 
+	and lExp_r > 0
+	and (G.flags & binned) > 0  
+	and (G.flags & ( blended + noDeBlend + child)) != blended
+	and (G.flags & (edge + saturated)) = 0  
+	and (G.petroMag_i > 17.5)
+	and (G.petroMag_r > 15.5 OR G.petroR50_r > 2)
+	and (G.petroMag_r < 30 and G.g < 30 and G.r < 30 and G.i < 30)
+	and ((G.petroMag_r-G.reddening_r) < 19.2)
+	and ((((G.petroMag_r - G.reddening_r) < (13.1 + (7/3)*(G.g - G.r) + 4 *(G.r - G.i) -4 * 0.18 ))   
+	and (( G.r - G.i - (G.g - G.r)/4 - 0.18) BETWEEN -0.2 AND  0.2 ))
+	or ((( G.petroMag_r - G.reddening_r) < 19.5 )	
+	and (( G.r - G.i -(G.g - G.r)/4 -.18) > (0.45 - 4*( G.g - G.r))) 
+	and ((G.g - G.r) > ( 1.35 + 0.25 *(G.r - G.i)))));
+
+/*
+functions:
+fPhotoFlags
+
+tables:
+DataConstants
+
+views:
+PhotoFlags
+*/
