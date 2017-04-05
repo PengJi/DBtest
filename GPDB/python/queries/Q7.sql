@@ -1,5 +1,6 @@
 -- Provide a list of star-like objects that are 1% rare.
 
+explain analyze
 select	cast(round((u-g),0) as int) as UG, 
 	cast(round((g-r),0) as int) as GR, 
 	cast(round((r-i),0) as int) as RI, 

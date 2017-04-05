@@ -2,6 +2,7 @@
 
 --- First find the grided galaxy count (with the color cut)
 --- In local tangent plane, ra/cos(dec) is a “linear” degree.
+
 declare LeftShift16 bigint;		-- used to convert 20-deep htmIds to 6-deep IDs
 set     LeftShift16 = power(2,28);
 select cast((ra/cos(cast(dec*30 as int)/30.0))*30 as int)/30.0 as raCosDec, 
