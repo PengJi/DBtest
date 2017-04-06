@@ -11,7 +11,7 @@ CREATE VIEW PhotoPrimary
 --/T multitude of secondary objects for each primary (i.e. reobservations). 
 ----------------------------------------------------------------------
 AS
-SELECT * FROM PhotoObjAll WITH(NOLOCK)
+SELECT * FROM PhotoObjAll 
     WHERE mode=1;
 
 --
@@ -36,7 +36,7 @@ CREATE VIEW PhotoObj
 --/T It selects PhotoObj with mode=1 or 2.
 ----------------------------------------------------------------------
 AS
-SELECT * FROM PhotoObjAll WITH(NOLOCK)
+SELECT * FROM PhotoObjAll 
 	WHERE mode in (1,2);
 
 --
