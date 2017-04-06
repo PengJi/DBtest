@@ -6,7 +6,6 @@ where r < 22
 and reddening_r> 0.175;
 */
 
--- 输出结果到文件
 \o /tmp/Q3.txt
 
 create or replace function fQ3()

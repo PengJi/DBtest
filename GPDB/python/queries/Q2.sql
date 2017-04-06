@@ -8,7 +8,6 @@ and dec < 0
 and g+rho between 23 and 25;
 */
 
--- 输出结果到文件
 \o /tmp/Q2.txt
 
 create or replace function fQ2()
