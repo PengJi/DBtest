@@ -159,4 +159,29 @@ RETURN query SELECT cast(value as bigint)
 END;
 $$ language plpgsql;
 
+--
+create or replace function fPhotoType(name varchar(40))
+-------------------------------------------------------------------------------
+--/H Returns the PhotoType value, indexed by name (Galaxy, Star,...)
+-------------------------------------------------------------------------------
+--/T the PhotoType names can be found with 
+--/T <br>       Select * from PhotoType 
+--/T <br>
+--/T Sample call to fPhotoType.
+--/T <samp> 
+--/T <br> select top 10 *  
+--/T <br> from photoObj
+--/T <br> where type =  dbo.fPhotoType('Star')
+--/T </samp> 
+--/T <br> see also fPhotoTypeN
+-------------------------------------------------------------
+returns setof int
+AS $$
+BEGIN
+RETURN query SELECT value
+	FROM PhotoType
+	WHERE name = UPPER(name);
+END;
+$$ language plpgsql;
+
 
