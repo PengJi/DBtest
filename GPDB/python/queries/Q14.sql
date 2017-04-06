@@ -1,5 +1,6 @@
 -- Find stars with multiple measurements that have magnitude variations >0.1.
 
+/*
 declare star int;			    	-- initialized “star” literal
 set     star = dbo.fPhotoType('Star'); 	-- avoids SQL2K optimizer problem
 select s1.objID as ObjID1, s2.objID as ObjID2 -- select object IDs of star and its pair
@@ -28,4 +29,54 @@ where s1.objID = N.objID			-- insist the stars are neighbors
         or abs(S1.i-S2.i) > .1 + (abs(S1.Err_i) + abs(S2.Err_i)) 
         or abs(S1.z-S2.z) > .1 + (abs(S1.Err_z) + abs(S2.Err_z)) 
 	);
+*/
 
+create or replace function fQ14()
+returns setof 
+as $$
+declare star int;		
+begin
+star := fPhotoType('Star'); 	
+return query explain analyze 
+select s1.objID as ObjID1, s2.objID as ObjID2
+from   star      as   s1,
+       photoObj  as   s2,
+       neighbors as   N
+where s1.objID = N.objID		
+  and s2.objID = N.neighborObjID	
+  and distanceMins < 0.5/60			
+  and s1.run != s2.run				
+  and s2.type = star				
+  and  s1.u between 1 and 27			
+  and  s1.g between 1 and 27
+  and  s1.r between 1 and 27
+  and  s1.i between 1 and 27
+  and  s1.z between 1 and 27
+  and  s2.u between 1 and 27			
+  and  s2.g between 1 and 27
+  and  s2.r between 1 and 27
+  and  s2.i between 1 and 27
+  and  s2.z between 1 and 27
+  and (    	                       
+           abs(S1.u-S2.u) > .1 + (abs(S1.Err_u) + abs(S2.Err_u))  	
+        or abs(S1.g-S2.g) > .1 + (abs(S1.Err_g) + abs(S2.Err_g)) 	
+        or abs(S1.r-S2.r) > .1 + (abs(S1.Err_r) + abs(S2.Err_r)) 
+        or abs(S1.i-S2.i) > .1 + (abs(S1.Err_i) + abs(S2.Err_i)) 
+        or abs(S1.z-S2.z) > .1 + (abs(S1.Err_z) + abs(S2.Err_z)) 
+	);
+end;
+$$ language plpgsql;
+
+/*
+tables:
+DataConstants
+neighbors
+
+views:
+PhotoType
+star
+photoObj
+
+functions:
+
+*/
