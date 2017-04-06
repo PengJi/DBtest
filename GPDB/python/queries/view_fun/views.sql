@@ -64,3 +64,16 @@ SELECT name,
 	description
     FROM DataConstants
     WHERE field='PhotoType' AND name != '';
+
+--
+CREATE VIEW SpecObj 
+---------------------------------------------------------------
+--/H A view of Spectro objects that just has the clean spectra.
+--
+--/T The view excludes QA and Sky and duplicates. Use this as the main
+--/T way to access the spectro objects.
+---------------------------------------------------------------
+AS
+SELECT * 
+    FROM specObjAll
+    WHERE sciencePrimary = 1;
