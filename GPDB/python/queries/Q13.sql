@@ -16,7 +16,7 @@ count(*) as pop		-- return center point and count for display
 \o /tmp/Q13.sql
 
 create or replace function fQ13()
-returns table(a float,b float,c float,d bigint)
+returns setof text
 as $$
 	declare RightShift12 bigint;
 begin

@@ -19,8 +19,15 @@ group by  cast((ra/cos(cast(dec*30 as int)/30.0))*30 as int)/30.0,
           cast(dec*30 as int)/30.0;
 */
 
+\o /tmp/Q12.txt
+
+create or replace function fQ12()
+returns setof text
+as $$
 declare LeftShift16 bigint;	
+begin
 LeftShift16 := power(2,28);
+return query explain analyze 
 select cast((ra/cos(cast(dec*30 as int)/30.0))*30 as int)/30.0 as raCosDec, 
        cast(dec*30 as int)/30.0                                as dec, 
        count(*)                                                as pop
@@ -33,6 +40,10 @@ where  htmID between T.HTMIDstart*LeftShift16 and T. HTMIDend*LeftShift16
   and  r < 21.5
 group by  cast((ra/cos(cast(dec*30 as int)/30.0))*30 as int)/30.0, 
           cast(dec*30 as int)/30.0;
+end;
+$$ language plpgsql;
+
+select fQ12();
 
 /*
 tables:

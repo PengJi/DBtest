@@ -40,21 +40,27 @@ where	lDev_r > 1.1 * lExp_r	-- red DeVaucouleurs fit likelihood greater than dis
        )    );
 */
 
+\o /tmp/Q5.txt
+
+create or replace function fQ5()
+returns setof text
+as $$
 declare binned bigint;			 	
+declare blended bigint;			 	
+declare noDeBlend bigint;			 
+declare child bigint;			 
+declare edge bigint;	
+declare saturated bigint;		
+begin
 binned := fPhotoFlags('BINNED1') +	
    			 fPhotoFlags('BINNED2') +
    			 fPhotoFlags('BINNED4') ;
-declare blended bigint;			 	
 blended := fPhotoFlags('BLENDED');  
-declare noDeBlend bigint;			 
 noDeBlend := fPhotoFlags('NODEBLEND'); 
-declare child bigint;			 
 child := fPhotoFlags('CHILD');  
-declare edge bigint;	
 edge := fPhotoFlags('EDGE');  
-declare saturated bigint;		
 saturated := fPhotoFlags('SATURATED');
-	select objID
+	return query explain analyze select objID
 	from Galaxy as G 		
 	where lDev_r > 1.1 * lExp_r 
 	and lExp_r > 0
@@ -70,6 +76,10 @@ saturated := fPhotoFlags('SATURATED');
 	or ((( G.petroMag_r - G.reddening_r) < 19.5 )	
 	and (( G.r - G.i -(G.g - G.r)/4 -.18) > (0.45 - 4*( G.g - G.r))) 
 	and ((G.g - G.r) > ( 1.35 + 0.25 *(G.r - G.i)))));
+end;
+$$ language plpgsql;
+
+select fQ5();
 
 /*
 functions:

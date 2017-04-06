@@ -31,12 +31,14 @@ where s1.objID = N.objID			-- insist the stars are neighbors
 	);
 */
 
+\o /tmp/Q14.txt
+
 create or replace function fQ14()
-returns setof 
+returns setof text
 as $$
-declare star int;		
+declare star1 int;		
 begin
-star := fPhotoType('Star'); 	
+star1 := fPhotoType('Star'); 	
 return query explain analyze 
 select s1.objID as ObjID1, s2.objID as ObjID2
 from   star      as   s1,
@@ -46,7 +48,7 @@ where s1.objID = N.objID
   and s2.objID = N.neighborObjID	
   and distanceMins < 0.5/60			
   and s1.run != s2.run				
-  and s2.type = star				
+  and s2.type = star1				
   and  s1.u between 1 and 27			
   and  s1.g between 1 and 27
   and  s1.r between 1 and 27
@@ -66,6 +68,8 @@ where s1.objID = N.objID
 	);
 end;
 $$ language plpgsql;
+
+select fQ14();
 
 /*
 tables:

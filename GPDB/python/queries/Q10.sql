@@ -13,7 +13,13 @@ select G.ObjID 			-- return qualifying galaxies
    and L.ew > 40;			-- H alpha is at least 40 angstroms wide.
 */
 
-select G.ObjID 
+\o /tmp/Q10.txt
+
+create or replace function fQ10()
+returns setof text
+as $$
+begin
+return query explain analyze select G.ObjID 
  from Galaxy as G,
 	SpecObj as S, 
  	SpecLine as L,
@@ -23,6 +29,10 @@ select G.ObjID
 	and L.LineId = LN.value	
 	and LN.name = 'Ha_6565'   
 	and L.ew > 40;
+end;
+$$ language plpgsql;
+
+select fQ10();
 
 /*
 tables:

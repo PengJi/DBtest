@@ -25,7 +25,13 @@ where S.SpecObjID = L1.SpecObjID 	-- for this object
 );
 */
 
-select distinct G.ObjID 	
+\o /tmp/Q11.txt
+
+create or replace function fQ11()
+returns setof text
+as $$
+begin
+return query explain analyze select distinct G.ObjID 	
 from Galaxy as G, 	
 	SpecObj as S, 
  	SpecLine as L, 	
@@ -47,6 +53,10 @@ where S.SpecObjID = L1.SpecObjID
   and L1.LineID = LN1.value	
   and LN1.Name != 'UNKNOWN'		
 );
+end;
+$$ language plpgsql;
+
+select fQ11();
 
 /*
 tables:
