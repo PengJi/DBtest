@@ -19,12 +19,12 @@ $$ language plpgsql;
 select fQ1();
 
 /*
-table:
+tables:
 DataConstants
 
-view:
+views:
 
-function: 
+functions: 
 fPhotoFlags
 fGetNearbyObjEq
 fGetNearbyObjXYZ
