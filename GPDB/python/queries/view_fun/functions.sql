@@ -63,18 +63,16 @@ create or replace function fGetNearbyObjEq (ra float, dec float, r float)
 --/T </samp> 
 --/T <br> see also fGetNearestObjEq, fGetNearbyObjXYZ, fGetNearestObjXYZ
 -------------------------------------------------------------
-as $$
-begin
   RETURNS setof 
-  AS BEGIN
+as $$
 	DECLARE d2r float, nx float,ny float,nz float 
-	set d2r = PI()/180.0
+begin
+	d2r := PI()/180.0;
 	if (r<0) RETURN
-			set nx  = COS(dec*d2r)*COS(ra*d2r)
-	set ny  = COS(dec*d2r)*SIN(ra*d2r)
-	set nz  = SIN(dec*d2r)
-	INSERT proxtab	
-	return query SELECT * FROM fGetNearbyObjXYZ(nx,ny,nz,r) 
+	nx := COS(dec*d2r)*COS(ra*d2r);
+	ny := COS(dec*d2r)*SIN(ra*d2r);
+	nz := SIN(dec*d2r);	
+	return query SELECT * FROM fGetNearbyObjXYZ(nx,ny,nz,r); 
 end;
 $$ language plpgsql;
 
@@ -104,18 +102,17 @@ create or replace function fGetNearbyObjXYZ(nx float, ny float, nz float, r floa
 --/T <br>see also fGetNearbyObjEq, fGetNearestObjXYZ, fGetNearestObjXYZ
 -------------------------------------------------------------
 as $$
-BEGIN
         DECLARE htmTemp TABLE (
                 HtmIdStart bigint,
                 HtmIdEnd bigint
         );
+	DECLARE lim float;
+BEGIN
+	INSERT into htmTemp SELECT * FROM fHtmCoverCircleXyz(nx,ny,nz,r)
+	SET lim := POWER(2*SIN(RADIANS(r/120)),2);
 
-        INSERT into htmTemp SELECT * FROM fHtmCoverCircleXyz(nx,ny,nz,r)
-        DECLARE lim float;
-        SET lim := POWER(2*SIN(RADIANS(r/120)),2);
-
-        IF (r<0) RETURN
-        INSERT into proxtab SELECT 
+	IF (r<0) RETURN
+	INSERT into proxtab SELECT 
             objID, 
             run,
             camcol,
@@ -127,7 +124,6 @@ BEGIN
             cz,
             htmID,
             2*DEGREES(ASIN(sqrt(power(nx-cx,2)+power(ny-cy,2)+power(nz-cz,2))/2))*60 
-            
             FROM htmTemp H  join PhotoPrimary P
                      ON  (P.HtmID BETWEEN H.HtmIDstart AND H.HtmIDend )
            AND power(nx-cx,2)+power(ny-cy,2)+power(nz-cz,2) < lim
@@ -150,12 +146,12 @@ CREATE FUNCTION fPhotoFlags(name varchar(40))
 --/T </samp> 
 --/T <br> see also fPhotoDescription
 -------------------------------------------------------------
-RETURNS setof 
+RETURNS setof bigint
 AS $$
 BEGIN
 RETURN query SELECT cast(value as bigint)
 	FROM PhotoFlags
-	WHERE name = UPPER(name)
+	WHERE name = UPPER(name);
 END;
 $$ language plpgsql;
 
@@ -184,4 +180,31 @@ RETURN query SELECT value
 END;
 $$ language plpgsql;
 
+-- 
+create or replace function fGetUrlExpId(objId bigint)
+--------------------------------------------
+--/H Returns the URL for an Photo objID.
+---------------------------------------------
+--/T  <br> returns http://localhost/en/tools/explore/obj.asp?id=2255029915222048
+--/T  <br> where localhost is filled in from SiteConstants.WebServerURL.
+--/T  <br> sample:<br><samp> select dbo.fGetUrlExpId(2255029915222048) </samp>
+--/T  <br> see also fGetUrlNavEq, fGetUrlNavId, fGetUrlExpEq
+--------------------------------------------
+returns varchar(256)
+as $$
+	declare WebServerURL varchar(500);
+	declare ra float;
+	declare dec float;
+begin
+	ra := 0;
+	dec := 0;
+	WebServerURL := 'http://localhost/';
+
+	select cast(value as varchar(500)) into WebServerURL
+		from SiteConstants where name ='WebServerURL'; 
+	select ra, ra into dec,dec
+		from PhotoObjAll where objID = objId;
+	return WebServerURL || 'tools/explore/obj.asp?id=' || cast(objId as varchar(32));
+end;
+$$ language plpgsql;
 
