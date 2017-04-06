@@ -1,5 +1,5 @@
 CREATE TABLE PhotoObjAll(
-	objID bigint NOT NULL,
+	objID bigint primary key NOT NULL,
 	skyVersion smallint NOT NULL,
 	run smallint NOT NULL,
 	rerun smallint NOT NULL,
