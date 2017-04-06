@@ -24,13 +24,12 @@ END
 */
 
 create or replace function fPhotoFlags(name varchar(40)) 
-returns bigint
+returns setof bigint
 as $$
 begin
-RETURN ( SELECT cast(value as bigint)
+	return query SELECT cast(value as bigint)
 	FROM PhotoFlags
-	WHERE name = name
-	);
+	WHERE name = name;
 end;
 $$ LANGUAGE plpgsql;
 
@@ -133,6 +132,30 @@ BEGIN
                      ON  (P.HtmID BETWEEN H.HtmIDstart AND H.HtmIDend )
            AND power(nx-cx,2)+power(ny-cy,2)+power(nz-cz,2) < lim
         ORDER BY power(nx-cx,2)+power(ny-cy,2)+power(nz-cz,2)  ASC
+END;
+$$ language plpgsql;
+
+--
+CREATE FUNCTION fPhotoFlags(name varchar(40))
+-------------------------------------------------------------
+--/H Returns the PhotoFlags value corresponding to a name
+-------------------------------------------------------------
+--/T the photoFlags can be shown with Select * from PhotoFlags 
+--/T <br>
+--/T Sample call to find photo objects with saturated pixels is
+--/T <samp> 
+--/T <br> select top 10 * 
+--/T <br> from photoObj 
+--/T <br> where flags & dbo.fPhotoFlags('SATURATED') > 0 
+--/T </samp> 
+--/T <br> see also fPhotoDescription
+-------------------------------------------------------------
+RETURNS setof 
+AS $$
+BEGIN
+RETURN query SELECT cast(value as bigint)
+	FROM PhotoFlags
+	WHERE name = UPPER(name)
 END;
 $$ language plpgsql;
 
