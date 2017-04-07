@@ -10,14 +10,14 @@ GPLOAD:
       - 192.168.100.78
      PORT: 8081
      FILE:
-      - /home/gpadmin/astronomy_data/10G/PhotoObjAll10_comma.csv
+      - /home/gpadmin/astronomy_data/10G/SpecObjAll_10.csv
   - FORMAT: text
   - DELIMITER: ','
   - ERROR_LIMIT: 25
   - LOG_ERRORS: true
  OUTPUT:
-  - TABLE: photoobjall10
+  - TABLE: specobjall10
   - MODE: insert
  SQL:
-  - BEFORE: "insert into runtime values('photoobjall10_start',now(),NULL)"
-  - AFTER: "insert into runtime values('photoobjall10_end',NULL,now())"
+  - BEFORE: "insert into runtime values('specobjall10_start',now(),NULL)"
+  - AFTER: "insert into runtime values('specobjall10_end',NULL,now())"
