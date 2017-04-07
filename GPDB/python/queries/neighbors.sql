@@ -1,5 +1,5 @@
 CREATE TABLE neighbors(
-    objID bigint primary key NOT NULL,
+    objID bigint NOT NULL,
     NeighborObjID bigint NOT NULL,
     distance real NULL,
     type smallint NOT NULL,
