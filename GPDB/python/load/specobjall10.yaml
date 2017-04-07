@@ -15,6 +15,7 @@ GPLOAD:
   - DELIMITER: ','
   - ERROR_LIMIT: 25
   - LOG_ERRORS: true
+  - MAX_LINE_LENGTH: 655350 
  OUTPUT:
   - TABLE: specobjall10
   - MODE: insert
