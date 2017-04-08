@@ -241,7 +241,7 @@ begin
 	str := substring(var,3);	
 	-- return query select x || str::bigint;
 	-- return query SELECT CAST(('x' || str) AS bigint);
-	return query SELECT CAST(CAST(('x' || CAST($1 AS text)) AS bit(64)) AS bigint);
+	return query SELECT CAST(CAST(('x' || CAST(str AS text)) AS bit(64)) AS bigint);
 end;
 $$ language plpgsql;
 
