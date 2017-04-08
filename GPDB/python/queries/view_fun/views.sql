@@ -112,7 +112,8 @@ CREATE VIEW SpecClass
 ------------------------------------------
 AS
 SELECT name, 
-	cast(value as int) as value, 
+	--cast(value as int) as value, 
+	hex_to_dec(cast(value as varchar)) as value,
 	description
     FROM DataConstants
     WHERE field='SpecClass';
