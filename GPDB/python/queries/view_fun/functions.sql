@@ -23,13 +23,16 @@ RETURN ( SELECT cast(value as bigint)
 END
 */
 
-create or replace function fPhotoFlags(name varchar(40)) 
-returns setof bigint
+create or replace function fPhotoFlags(name1 varchar(40)) 
+returns bigint
 as $$
+declare res bigint;
 begin
-	return query SELECT cast(value as bigint)
+	SELECT
+	hex_to_dec(cast(value as varchar)) into res
 	FROM PhotoFlags
-	WHERE name = name;
+	WHERE name = upper(name1);
+	return res;
 end;
 $$ LANGUAGE plpgsql;
 
@@ -171,7 +174,7 @@ create or replace function fPhotoType(name varchar(40))
 --/T </samp> 
 --/T <br> see also fPhotoTypeN
 -------------------------------------------------------------
-returns setof int
+returns setof bigint
 AS $$
 BEGIN
 RETURN query SELECT value
