@@ -77,3 +77,16 @@ AS
 SELECT * 
     FROM specObjAll
     WHERE sciencePrimary = 1;
+
+--
+CREATE VIEW PhotoFlags
+------------------------------------------
+--/H Contains the PhotoFlags flag values from DataConstants as binary(8)
+------------------------------------------
+AS
+SELECT 
+	name, 
+	value, 
+	description
+    FROM DataConstants
+    WHERE field='PhotoFlags' AND name != '';
