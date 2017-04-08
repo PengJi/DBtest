@@ -29,3 +29,12 @@ end;
 $$ language plpgsql;
 
 select fQ2();
+
+/*
+tables:
+
+views:
+
+functions:
+
+*/
