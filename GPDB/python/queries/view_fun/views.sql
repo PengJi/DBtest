@@ -79,6 +79,20 @@ SELECT *
     WHERE sciencePrimary = 1;
 
 --
+CREATE VIEW SpecLine 
+---------------------------------------------------------------
+--/H A view of SpecLines objects that have been measured
+--
+--/T The view excludes those SpecLine objects which have category=1,
+--/T thus they have not been measured. This is the view you should
+--/T use to access the SpecLine data.
+---------------------------------------------------------------
+AS
+SELECT * 
+    FROM specLineAll 
+    WHERE category=2;
+
+--
 CREATE VIEW PhotoFlags
 ------------------------------------------
 --/H Contains the PhotoFlags flag values from DataConstants as binary(8)
@@ -102,3 +116,15 @@ SELECT name,
 	description
     FROM DataConstants
     WHERE field='SpecClass';
+
+--
+CREATE VIEW PhotoType
+------------------------------------------
+--/H Contains the PhotoType enumerated values from DataConstants as int
+------------------------------------------
+AS
+SELECT name, 
+	cast(value as int) as value, 
+	description
+    FROM DataConstants
+    WHERE field='PhotoType';
