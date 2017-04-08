@@ -9,7 +9,7 @@ from   star      as   s1,			-- the primary star
        neighbors as   N			-- the neighbor record
 where s1.objID = N.objID			-- insist the stars are neighbors
   and s2.objID = N.neighborObjID		-- using precomputed neighbors table
-  and distanceMins < 0.5/60			-- distance is ½ arc second or less
+  and distanceMins < 0.5/60			-- distance is ½ arc second or less 删除
   and s1.run != s2.run				-- observations are two different runs
   and s2.type = star				-- s2 is indeed a star
   and  s1.u between 1 and 27			-- S1 magnitudes are reasonable
@@ -46,7 +46,6 @@ from   star      as   s1,
        neighbors as   N
 where s1.objID = N.objID		
   and s2.objID = N.neighborObjID	
-  and distanceMins < 0.5/60			
   and s1.run != s2.run				
   and s2.type = star1				
   and  s1.u between 1 and 27			

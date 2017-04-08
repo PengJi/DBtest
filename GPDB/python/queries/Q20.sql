@@ -36,17 +36,17 @@ where  G.objID = N.objID		-- connect G and U via the neighbors table
    and  G.petroMag_i > 17.5
    and (G.petroMag_r > 15.5 or G.petroR50_r > 2)
    and (G.g >0 and G.r >0 and G.i >0)
-   and ( (   ((G.petroMag_r-G.reddening_r)   < 19.2)
-         and ((G.petroMag_r - G.reddening_r) 
+   and ( (   ((G.petroMag_r-G.reddening_r)   < 19.2)  -- 删除
+         and ((G.petroMag_r - G.reddening_r)   -- 删除
  				< (12.38 + (7/3)*( G.g-  G.r ) + 4 *( G.r - G.i ) ) ) 
          and ((abs( G.r - G.i - (G.g - G.r )/4 - 0.18 )) < 0.2)
-         and ((G.petroMag_r - G.reddening_r + 
+         and ((G.petroMag_r - G.reddening_r +  -- 删除
  				2.5*Log10(2*pi()*G.petroR50_r* G.petroR50_r )) < 24.2  ) 
          )
-       or (  ((G.petroMag_r - G.reddening_r)       < 19.5                       ) 
+       or (  ((G.petroMag_r - G.reddening_r)       < 19.5                       )   -- 删除
           and ((G.r - G.i - (G.g - G.r)/4 - 0.18 ) > (0.45 - 4*( G.g- G.r ) )    )
           and ((G.g - G.r ) > ( 1.35 + 0.25 *( G.r - G.i ) )                     )
-          and ((G.petroMag_r - G.reddening_r  + 
+          and ((G.petroMag_r - G.reddening_r  +   -- 删除
  				2.5*Log10(2*pi()*G.petroR50_r* G.petroR50_r )) < 23.3  ) 
         ) )  
 group by G.objID;
@@ -92,19 +92,9 @@ where  G.objID = N.objID		-- connect G and U via the neighbors table
    and  G.petroMag_i > 17.5
    and (G.petroMag_r > 15.5 or G.petroR50_r > 2)
    and (G.g >0 and G.r >0 and G.i >0)
-   and ( ( ((G.petroMag_r-G.reddening_r)   < 19.2)
-         and ((G.petroMag_r - G.reddening_r) 
- 				< (12.38 + (7/3)*( G.g-  G.r ) + 4 *( G.r - G.i ) ) ) 
-         and ((abs( G.r - G.i - (G.g - G.r )/4 - 0.18 )) < 0.2)
-         and ((G.petroMag_r - G.reddening_r + 
- 				2.5*Log10(2*pi()*G.petroR50_r* G.petroR50_r )) < 24.2  ) 
-         )
-       or (  ((G.petroMag_r - G.reddening_r)       < 19.5                       ) 
+   and ((abs( G.r - G.i - (G.g - G.r )/4 - 0.18 )) < 0.2)
           and ((G.r - G.i - (G.g - G.r)/4 - 0.18 ) > (0.45 - 4*( G.g- G.r ) )    )
           and ((G.g - G.r ) > ( 1.35 + 0.25 *( G.r - G.i ) )                     )
-          and ((G.petroMag_r - G.reddening_r  + 
- 				2.5*Log10(2*pi()*G.petroR50_r* G.petroR50_r )) < 23.3  ) 
-        ) )  
 group by G.objID;
 end;
 $$ language plpgsql;

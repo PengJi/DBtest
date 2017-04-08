@@ -8,8 +8,8 @@ from	Star       S1,				-- S1 is the white dwarf
    	Star       S2				-- S2 is the second star
   where S1.objID = N. objID 			-- S1 and S2 are neighbors-within 30 arc sec
     and S2.objID = N.NeighborObjID  
-    and N.NeighborObjType = star	 	-- and S2 is a star
-    and N.DistanceMins < .05			-- the 3 arcsecond test
+    and N.NeighborObjType = star	 	-- and S2 is a star 修改字段名
+    and N.DistanceMins < .05			-- the 3 arcsecond test 修改字段名
     and (S1.u - S1.g) < 0.4   		-- and S1 meets Paul Szkody’s color cut for
     and (S1.g - S1.r) < 0.7 			-- white dwarfs.
     and (S1.r - S1.i) > 0.4 
@@ -30,8 +30,8 @@ from Star S1,
    	Star S2	
   where S1.objID = N. objID 		
     and S2.objID = N.NeighborObjID  
-    and N.NeighborObjType = star1	
-	and N.DistanceMins < .05			
+    and N.NeighborType = star1	
+	and N.Distance < .05			
     and (S1.u - S1.g) < 0.4  
 	and (S1.g - S1.r) < 0.7
 	and (S1.r - S1.i) > 0.4 
