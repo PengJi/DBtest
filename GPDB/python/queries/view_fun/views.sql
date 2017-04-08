@@ -90,3 +90,15 @@ SELECT
 	description
     FROM DataConstants
     WHERE field='PhotoFlags' AND name != '';
+
+--
+CREATE VIEW SpecClass
+------------------------------------------
+--/H Contains the SpecClass enumerated values from DataConstants as int
+------------------------------------------
+AS
+SELECT name, 
+	cast(value as int) as value, 
+	description
+    FROM DataConstants
+    WHERE field='SpecClass';
