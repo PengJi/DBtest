@@ -124,7 +124,7 @@ CREATE VIEW PhotoType
 ------------------------------------------
 AS
 SELECT name, 
-	substring(cast(value as varchar),3) as value, 
+	hex_to_dec(cast(value as varchar)) as value,
 	description
     FROM DataConstants
     WHERE field='PhotoType';
