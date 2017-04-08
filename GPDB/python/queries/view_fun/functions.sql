@@ -132,7 +132,7 @@ END;
 $$ language plpgsql;
 
 --
-CREATE FUNCTION fPhotoFlags(name varchar(40))
+CREATE or replace FUNCTION fPhotoFlags(name varchar(40))
 -------------------------------------------------------------
 --/H Returns the PhotoFlags value corresponding to a name
 -------------------------------------------------------------
@@ -146,10 +146,10 @@ CREATE FUNCTION fPhotoFlags(name varchar(40))
 --/T </samp> 
 --/T <br> see also fPhotoDescription
 -------------------------------------------------------------
-RETURNS setof bigint
+RETURNS setof bytea
 AS $$
 BEGIN
-RETURN query SELECT cast(value as bigint)
+RETURN query SELECT value
 	FROM PhotoFlags
 	WHERE name = UPPER(name);
 END;
@@ -176,6 +176,31 @@ AS $$
 BEGIN
 RETURN query SELECT value
 	FROM PhotoType
+	WHERE name = UPPER(name);
+END;
+$$ language plpgsql;
+
+--
+CREATE or replace FUNCTION fSpecClass(name varchar(40))
+-------------------------------------------------------------------------------
+--/H Returns the SpecClass value, indexed by name
+-------------------------------------------------------------------------------
+--/T the  SpecClass values can be found with 
+--/T <br>       Select * from SpecClass 
+--/T <br>
+--/T Sample call to fSpecClass.
+--/T <samp> 
+--/T <br> select top 10  *
+--/T <br> from SpecObj
+--/T <br> where specClass = dbo.fSpecClass('QSO')
+--/T </samp> 
+--/T <br> see also fSpecClassN
+-------------------------------------------------------------
+RETURNS setof bytea
+AS $$
+BEGIN
+RETURN query SELECT value 
+	FROM SpecClass
 	WHERE name = UPPER(name);
 END;
 $$ language plpgsql;
