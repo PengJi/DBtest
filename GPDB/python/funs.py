@@ -118,7 +118,7 @@ def delete_file_folder(src):
             itemsrc=os.path.join(src,item)
             delete_file_folder(itemsrc)
 
-def tenant(tenant_name,strsql1,strsql2,strsql3):
+def tenant(tenant_name,strsql1,strsql2,strsql3,fc='f'):
     user = tenant_name
     database = 'testDB'
     host = '192.168.100.78'
@@ -128,9 +128,14 @@ def tenant(tenant_name,strsql1,strsql2,strsql3):
     start = time.time()
 
     # query sql
-    p1 = TranClass(queue, user, database, host, strsql1)
-    p2 = TranClass(queue, user, database, host, strsql2)
-    p3 = TranClass(queue, user, database, host, strsql3)
+    if fc == 'c':
+        p1 = TranClassComd(queue, user, database, host, strsql1)
+        p2 = TranClassComd(queue, user, database, host, strsql2)
+        p3 = TranClassComd(queue, user, database, host, strsql3)
+    else:
+        p1 = TranClass(queue, user, database, host, strsql1)
+        p2 = TranClass(queue, user, database, host, strsql2)
+        p3 = TranClass(queue, user, database, host, strsql3)
     p1.start()
     p2.start()
     p3.start()
