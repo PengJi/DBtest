@@ -146,26 +146,25 @@ def test_queries(num,size):
         ran = i % 5
         ran = ran +1
         if ran == 1:
-            strsql1 = "select fQ2();"
-            strsql2 = "select fQ3();"
-            strsql3 = "select fQ15();"
+            strsql1 = "select fQ2" + "_" + str(size) + "()"
+            strsql2 = "select fQ3" + "_" + str(size) + "()"
+            strsql3 = "select fQ15" + "_" + str(size) + "()"
         elif ran == 2:
-            strsql1 = "select fQ5();"
-            strsql2 = "select fQ20();"
-            strsql3 = "select fQ7();"     
+            strsql1 = "select fQ5" + "_" + str(size) + "()"
+            strsql2 = "select fQ20" + "_" + str(size) + "()"
+            strsql3 = "select fQ7" + "_" + str(size) + "()"
         elif ran == 3:
-            strsql1 = "select fQ13();"
-            strsql2 = "select fQ14();"
-            strsql3 = "select fQ3();"             
+            strsql1 = "select fQ13" + "_" + str(size) + "()"
+            strsql2 = "select fQ14" + "_" + str(size) + "()"
+            strsql3 = "select fQ3" + "_" + str(size) + "()"
         elif ran == 4:
-            strsql1 = "select fQ16();"
-            strsql2 = "select fQ17();"
-            strsql3 = "select fQ4();"
-
+            strsql1 = "select fQ16"+ "_" + str(size) + "()"
+            strsql2 = "select fQ17" + "_" + str(size) + "()"
+            strsql3 = "select fQ4" + "_" + str(size) + "()"
         elif ran == 5:
-            strsql1 = "select fQ20();"
-            strsql2 = "select fQ14();"
-            strsql3 = "select fQ5();"
+            strsql1 = "select fQ20" + "_" + str(size) + "()"
+            strsql2 = "select fQ14" + "_" + str(size) + "()"
+            strsql3 = "select fQ5" + "_" + str(size) + "()"
 
         pool.apply_async(tenant,args=("tenant"+str(ran),strsql1,strsql2,strsql3,'c'))
 
@@ -191,4 +190,4 @@ if __name__ == "__main__":
     # 删除目录下文件
     delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
 
-    test_queries(10,10)
+    test_queries(50,10)
