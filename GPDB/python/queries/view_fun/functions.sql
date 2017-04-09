@@ -162,6 +162,7 @@ RETURN query SELECT value
 END;
 $$ language plpgsql;
 
+/*
 --
 CREATE or replace FUNCTION fSpecClass(name varchar(40))
 -------------------------------------------------------------------------------
@@ -180,14 +181,14 @@ CREATE or replace FUNCTION fSpecClass(name varchar(40))
 -------------------------------------------------------------
 RETURNS setof bigint
 AS $$
-declare res bigint; 
 BEGIN
-	SELECT hex_to_dec(cast(value as varchar)) into bigint
+	SELECT hex_to_dec(cast(value as varchar)) as value
 	FROM SpecClass
 	WHERE name = UPPER(name);
 	return res;
 END;
 $$ language plpgsql;
+*/
 
 -- 
 create or replace function fGetUrlExpId(objId bigint)
