@@ -54,18 +54,6 @@ SELECT *
     WHERE type = 6;
 
 --
-CREATE or replace VIEW PhotoType
-------------------------------------------
---/H Contains the PhotoType enumerated values from DataConstants as int
-------------------------------------------
-AS
-SELECT name, 
-	cast(value as int) as value, 
-	description
-    FROM DataConstants
-    WHERE field='PhotoType' AND name != '';
-
---
 CREATE or replace VIEW SpecObj 
 ---------------------------------------------------------------
 --/H A view of Spectro objects that just has the clean spectra.
@@ -78,6 +66,7 @@ SELECT *
     FROM specObjAll
     WHERE sciencePrimary = 1;
 
+/*
 --
 CREATE or replace VIEW SpecLine 
 ---------------------------------------------------------------
@@ -91,6 +80,7 @@ AS
 SELECT * 
     FROM specLineAll 
     WHERE category=2;
+*/
 
 --
 CREATE or replace VIEW PhotoFlags
