@@ -1,5 +1,5 @@
 --
-CREATE VIEW PhotoPrimary 
+CREATE or replace VIEW PhotoPrimary 
 ----------------------------------------------------------------------
 --/H These objects are the primary survey objects. 
 --
@@ -15,7 +15,7 @@ SELECT * FROM PhotoObjAll
     WHERE mode=1;
 
 --
-CREATE VIEW Galaxy
+CREATE or replace VIEW Galaxy
 ---------------------------------------------------------------
 --/H The objects classified as galaxies from PhotoPrimary.
 --
@@ -29,7 +29,7 @@ SELECT *
     WHERE type = 3;
 
 --
-CREATE VIEW PhotoObj
+CREATE or replace VIEW PhotoObj
 ----------------------------------------------------------------------
 --/H All primary and secondary objects in the PhotoObjAll table, which contains all the attributes of each photometric (image) object. 
 --
@@ -40,7 +40,7 @@ SELECT * FROM PhotoObjAll
 	WHERE mode in (1,2);
 
 --
-CREATE VIEW Star
+CREATE or replace VIEW Star
 --------------------------------------------------------------
 --/H The objects classified as stars from PhotoPrimary
 --
@@ -54,7 +54,7 @@ SELECT *
     WHERE type = 6;
 
 --
-CREATE VIEW PhotoType
+CREATE or replace VIEW PhotoType
 ------------------------------------------
 --/H Contains the PhotoType enumerated values from DataConstants as int
 ------------------------------------------
@@ -66,7 +66,7 @@ SELECT name,
     WHERE field='PhotoType' AND name != '';
 
 --
-CREATE VIEW SpecObj 
+CREATE or replace VIEW SpecObj 
 ---------------------------------------------------------------
 --/H A view of Spectro objects that just has the clean spectra.
 --
@@ -79,7 +79,7 @@ SELECT *
     WHERE sciencePrimary = 1;
 
 --
-CREATE VIEW SpecLine 
+CREATE or replace VIEW SpecLine 
 ---------------------------------------------------------------
 --/H A view of SpecLines objects that have been measured
 --
@@ -93,7 +93,7 @@ SELECT *
     WHERE category=2;
 
 --
-CREATE VIEW PhotoFlags
+CREATE or replace VIEW PhotoFlags
 ------------------------------------------
 --/H Contains the PhotoFlags flag values from DataConstants as binary(8)
 ------------------------------------------
@@ -106,7 +106,7 @@ SELECT
     WHERE field='PhotoFlags' AND name != '';
 
 --
-CREATE VIEW SpecClass
+CREATE or replace VIEW SpecClass
 ------------------------------------------
 --/H Contains the SpecClass enumerated values from DataConstants as int
 ------------------------------------------
@@ -119,7 +119,7 @@ SELECT name,
     WHERE field='SpecClass';
 
 --
-CREATE VIEW PhotoType
+CREATE or replace VIEW PhotoType
 ------------------------------------------
 --/H Contains the PhotoType enumerated values from DataConstants as int
 ------------------------------------------
