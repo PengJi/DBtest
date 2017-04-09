@@ -24,6 +24,22 @@ class TranClass(threading.Thread):
         self.res_queue.put(self.strsql)
         self.res_queue.put(res)
 
+# 执行sql文件线程
+class TranClassComd(threading.Thread):
+    def __init__(self, queue, user, database,host, strsql):
+        threading.Thread.__init__(self)
+        self.user = user
+        self.database = database
+        self.host = host
+        self.strsql = strsql
+        self.res_queue = queue
+
+    def run(self):
+        res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-h",self.host,"-c",self.strsql])
+        #print res
+        self.res_queue.put(self.strsql)
+        self.res_queue.put(res)
+
 # 批量创建角色线程
 class RoleClass(threading.Thread):
     def __init__(self, user, database, host, tenant_name, strsql):
