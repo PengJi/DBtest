@@ -178,12 +178,14 @@ CREATE or replace FUNCTION fSpecClass(name varchar(40))
 --/T </samp> 
 --/T <br> see also fSpecClassN
 -------------------------------------------------------------
-RETURNS setof bytea
+RETURNS setof bigint
 AS $$
+declare res bigint; 
 BEGIN
-RETURN query SELECT value 
+	SELECT hex_to_dec(cast(value as varchar)) into bigint
 	FROM SpecClass
 	WHERE name = UPPER(name);
+	return res;
 END;
 $$ language plpgsql;
 
