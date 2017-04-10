@@ -237,7 +237,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q2'
+	raise notice '%', 'Q2';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -256,7 +256,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q2_10'
+	raise notice '%', 'Q2_10';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -275,7 +275,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q2_20'
+	raise notice '%', 'Q2_20';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -294,7 +294,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q2_50'
+	raise notice '%', 'Q2_50';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -313,7 +313,7 @@ create or replace function fQ3()
 returns setof text
 as $$
 begin
-	raise notice '%', 'Q3'
+	raise notice '%', 'Q3';
 	return query explain analyze select objID
     	from Galaxy
     	where r < 22 and dered_r> 0.175;
@@ -324,7 +324,7 @@ create or replace function fQ3_10()
 returns setof text
 as $$
 begin
-	raise notice '%', 'Q3_10'
+	raise notice '%', 'Q3_10';
     return query explain analyze select objID
         from Galaxy_10
         where r < 22 and dered_r> 0.175;
@@ -335,7 +335,7 @@ create or replace function fQ3_20()
 returns setof text
 as $$
 begin
-	raise notice '%', 'Q3_20'
+	raise notice '%', 'Q3_20';
     return query explain analyze select objID
         from Galaxy_20
         where r < 22 and dered_r> 0.175;
@@ -346,7 +346,7 @@ create or replace function fQ3_50()
 returns setof text
 as $$
 begin
-	raise notice '%', 'Q3_50'
+	raise notice '%', 'Q3_50';
     return query explain analyze select objID
         from Galaxy_50
         where r < 22 and dered_r> 0.175;
@@ -359,7 +359,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q4'
+	raise notice '%', 'Q4';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -377,7 +377,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q4_10'
+	raise notice '%', 'Q4_10';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -395,7 +395,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q4_20'
+	raise notice '%', 'Q4_20';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -413,7 +413,7 @@ returns setof text
 as $$
 declare rho float;
 begin
-	raise notice '%', 'Q4_50'
+	raise notice '%', 'Q4_50';
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -437,6 +437,7 @@ declare child bigint;
 declare edge bigint;
 declare saturated bigint;
 begin
+raise notice '%', 'Q5';
 binned := fPhotoFlags('BINNED1') +
              fPhotoFlags('BINNED2') +
              fPhotoFlags('BINNED4') ;
@@ -469,6 +470,7 @@ declare child bigint;
 declare edge bigint;
 declare saturated bigint;
 begin
+raise notice '%', 'Q5_10';
 binned := fPhotoFlags('BINNED1') +
              fPhotoFlags('BINNED2') +
              fPhotoFlags('BINNED4') ;
@@ -501,6 +503,7 @@ declare child bigint;
 declare edge bigint;
 declare saturated bigint;
 begin
+raise notice '%', 'Q5_20';
 binned := fPhotoFlags('BINNED1') +
              fPhotoFlags('BINNED2') +
              fPhotoFlags('BINNED4') ;
@@ -533,6 +536,7 @@ declare child bigint;
 declare edge bigint;
 declare saturated bigint;
 begin
+raise notice '%', 'Q5_50';
 binned := fPhotoFlags('BINNED1') +
              fPhotoFlags('BINNED2') +
              fPhotoFlags('BINNED4') ;
@@ -561,6 +565,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q6';
     return query explain analyze
     select G.ObjID, G.u, G.g, G.r, G.i, G.z
     from galaxy G, star S
@@ -575,6 +580,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q6_10';
     return query explain analyze
     select G.ObjID, G.u, G.g, G.r, G.i, G.z
     from galaxy_10 G, star_10 S
@@ -589,6 +595,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q6_20';
     return query explain analyze
     select G.ObjID, G.u, G.g, G.r, G.i, G.z
     from galaxy_20 G, star_20 S
@@ -602,6 +609,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q6_50';
     return query explain analyze
     select G.ObjID, G.u, G.g, G.r, G.i, G.z
     from galaxy_50 G, star_50 S
@@ -616,6 +624,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q7';
 	return query explain analyze 
 	select  cast(round(u-g) as int) as UG,     
     	cast(round(g-r) as int) as GR,     
@@ -635,6 +644,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q7_10';
 	return query explain analyze
     select  cast(round(u-g) as int) as UG,
 		cast(round(g-r) as int) as GR,
@@ -654,6 +664,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q7_20';
     return query explain analyze
     select  cast(round(u-g) as int) as UG,
         cast(round(g-r) as int) as GR,
@@ -673,6 +684,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q7_50';
     return query explain analyze
     select  cast(round(u-g) as int) as UG,
         cast(round(g-r) as int) as GR,
@@ -693,13 +705,14 @@ returns setof text
 as $$
         declare RightShift12 bigint;
 begin
-        RightShift12 := power(2,24);
-        return query explain analyze 
-        select (htmID /RightShift12) as htm_8, avg(ra) as ra, 
-        avg(dec) as dec, count(*) as pop
-        from Galaxy
-        where (0.7*u - 0.5*g - 0.2*i) < 1.25 and  r < 21.75
-        group by (htmID /RightShift12);
+	raise notice '%', 'Q13';
+    RightShift12 := power(2,24);
+    return query explain analyze 
+    select (htmID /RightShift12) as htm_8, avg(ra) as ra, 
+	    avg(dec) as dec, count(*) as pop
+    from Galaxy
+    where (0.7*u - 0.5*g - 0.2*i) < 1.25 and  r < 21.75
+    group by (htmID /RightShift12);
 end;
 $$ language plpgsql;
 
@@ -708,6 +721,7 @@ returns setof text
 as $$
         declare RightShift12 bigint;
 begin
+	raise notice '%', 'Q13_10';
 	RightShift12 := power(2,24);
 	return query explain analyze
 	select (htmID /RightShift12) as htm_8, avg(ra) as ra,
@@ -723,6 +737,7 @@ returns setof text
 as $$
         declare RightShift12 bigint;
 begin   
+	raise notice '%', 'Q13_20';
     RightShift12 := power(2,24);
     return query explain analyze
     select (htmID /RightShift12) as htm_8, avg(ra) as ra,
@@ -738,6 +753,7 @@ returns setof text
 as $$
         declare RightShift12 bigint;
 begin   
+	raise notice '%', 'Q13_50';
     RightShift12 := power(2,24);
     return query explain analyze
     select (htmID /RightShift12) as htm_8, avg(ra) as ra,
@@ -754,6 +770,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+raise notice '%', 'Q14';
 star1 := fPhotoType('Star'); 
 return query explain analyze 
 select s1.objID as ObjID1, s2.objID as ObjID2
@@ -789,6 +806,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+raise notice '%', 'Q14_10';
 star1 := fPhotoType('Star');
 return query explain analyze
 select s1.objID as ObjID1, s2.objID as ObjID2
@@ -824,6 +842,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+raise notice '%', 'Q14_20';
 star1 := fPhotoType('Star');
 return query explain analyze
 select s1.objID as ObjID1, s2.objID as ObjID2
@@ -859,6 +878,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+raise notice '%', 'Q14_50';
 star1 := fPhotoType('Star');
 return query explain analyze
 select s1.objID as ObjID1, s2.objID as ObjID2
@@ -894,6 +914,7 @@ create or replace function fQ15()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q15';
 return query explain analyze select objID, 
         sqrt( power(rowv,2) + power(colv, 2) ) as velocity,
         fGetUrlExpId(objID) as Url
@@ -907,6 +928,7 @@ create or replace function fQ15_10()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q15_10';
 return query explain analyze select objID,
         sqrt( power(rowv,2) + power(colv, 2) ) as velocity,
         fGetUrlExpId(objID) as Url
@@ -920,6 +942,7 @@ create or replace function fQ15_20()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q15_20';
 return query explain analyze select objID,
         sqrt( power(rowv,2) + power(colv, 2) ) as velocity,
         fGetUrlExpId(objID) as Url
@@ -933,6 +956,7 @@ create or replace function fQ15_50()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q15_50';
 return query explain analyze select objID,
         sqrt( power(rowv,2) + power(colv, 2) ) as velocity,
         fGetUrlExpId(objID) as Url
@@ -947,6 +971,7 @@ create or replace function fQ16()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q16';
 return query explain analyze select count(*) as total,
 sum( case when (type=3) then 1 else 0 end) as Galaxies,
 sum( case when (type=6) then 1 else 0 end) as Stars,
@@ -964,6 +989,7 @@ create or replace function fQ16_10()
 returns setof text
 as $$
 begin
+	raise notice '%', 'Q16_10';
 	return query explain analyze select count(*) as total,
 		sum( case when (type=3) then 1 else 0 end) as Galaxies,
 		sum( case when (type=6) then 1 else 0 end) as Stars,
@@ -981,6 +1007,7 @@ create or replace function fQ16_20()
 returns setof text
 as $$
 begin
+	raise notice '%', 'Q16_20';
     return query explain analyze select count(*) as total,
         sum( case when (type=3) then 1 else 0 end) as Galaxies,
         sum( case when (type=6) then 1 else 0 end) as Stars,
@@ -998,6 +1025,7 @@ create or replace function fQ16_50()
 returns setof text
 as $$
 begin
+	raise notice '%', 'Q16_50';
     return query explain analyze select count(*) as total,
         sum( case when (type=3) then 1 else 0 end) as Galaxies,
         sum( case when (type=6) then 1 else 0 end) as Stars,
@@ -1017,6 +1045,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+raise notice '%', 'Q17';
 star1 := fPhotoType('Star'); 
 return query explain analyze 
 select s1.objID as s1, s2.objID as s2 
@@ -1039,6 +1068,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+	raise notice '%', 'Q17_10';
 	star1 := fPhotoType('Star'); 
 	return query explain analyze 
 	select s1.objID as s1, s2.objID as s2
@@ -1061,6 +1091,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+	raise notice '%', 'Q17_20';
 	star1 := fPhotoType('Star');
 	return query explain analyze
 	select s1.objID as s1, s2.objID as s2
@@ -1083,6 +1114,7 @@ returns setof text
 as $$
 declare star1 int;
 begin
+	raise notice '%', 'Q17_50';
     star1 := fPhotoType('Star');
     return query explain analyze
     select s1.objID as s1, s2.objID as s2
@@ -1105,6 +1137,7 @@ create or replace function fQ18()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q18';
 return query explain analyze 
 select distinct P.ObjID 
 From photoPrimary P,
@@ -1124,6 +1157,7 @@ create or replace function fQ18_10()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q18_10';
 return query explain analyze
 select distinct P.ObjID
 From photoPrimary_10 P,
@@ -1143,6 +1177,7 @@ create or replace function fQ18_20()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q18_20';
 return query explain analyze
 select distinct P.ObjID
 From photoPrimary_20 P,
@@ -1162,6 +1197,7 @@ create or replace function fQ18_50()
 returns setof text
 as $$
 begin
+raise notice '%', 'Q18_50';
 return query explain analyze
 select distinct P.ObjID
 From photoPrimary_50 P,
@@ -1188,6 +1224,7 @@ declare child           bigint;                         -- initialized “child�
 declare edge            bigint;                         -- initialized “edge” lit-eral
 declare saturated       bigint;                         -- initialized “saturated” literal
 begin
+raise notice '%', 'Q20';
 binned := fPhotoFlags('BINNED1') +      -- avoids SQL2K optimizer problem
                 fPhotoFlags('BINNED2') +
                 fPhotoFlags('BINNED4') ;
@@ -1233,6 +1270,7 @@ declare child           bigint;                         -- initialized “child�
 declare edge            bigint;                         -- initialized “edge” lit-eral
 declare saturated       bigint;                         -- initialized “saturated” literal
 begin
+raise notice '%', 'Q20_10';
 binned := fPhotoFlags('BINNED1') +      -- avoids SQL2K optimizer problem
                 fPhotoFlags('BINNED2') +
                 fPhotoFlags('BINNED4') ;
@@ -1278,6 +1316,7 @@ declare child           bigint;                         -- initialized “child�
 declare edge            bigint;                         -- initialized “edge” lit-eral
 declare saturated       bigint;                         -- initialized “saturated” literal
 begin
+raise notice '%', 'Q20_20';
 binned := fPhotoFlags('BINNED1') +      -- avoids SQL2K optimizer problem
                 fPhotoFlags('BINNED2') +
                 fPhotoFlags('BINNED4') ;
@@ -1323,6 +1362,7 @@ declare child           bigint;                         -- initialized “child�
 declare edge            bigint;                         -- initialized “edge” lit-eral
 declare saturated       bigint;                         -- initialized “saturated” literal
 begin
+raise notice '%', 'Q20_50';
 binned := fPhotoFlags('BINNED1') +      -- avoids SQL2K optimizer problem
                 fPhotoFlags('BINNED2') +
                 fPhotoFlags('BINNED4') ;
