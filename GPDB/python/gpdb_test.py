@@ -32,16 +32,15 @@ def test_photoobjall(num,size):
         elif ran == 2:
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2_1.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'        
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'
         elif ran == 3:
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'              
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'             
         elif ran == 4:
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
             strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'
-
         elif ran == 5:
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
@@ -135,7 +134,7 @@ def run_photoobjall():
 # size 数据的大小，1、10、20、50、100
 def test_queries(num,size):
     # 允许同时运行的进程个数
-    pool = multiprocessing.Pool(processes = 50)
+    pool = multiprocessing.Pool(processes = 30)
 
     # 清空缓存
     clear_cache()
@@ -144,7 +143,7 @@ def test_queries(num,size):
     start = time.time()
 
     for i in xrange(0,num):
-        ran = i % 5
+        ran = i % 10
         ran = ran +1
         if ran == 1:
             strsql1 = "select fQ2" + "_" + str(size) + "()"
@@ -166,8 +165,31 @@ def test_queries(num,size):
             strsql1 = "select fQ20" + "_" + str(size) + "()"
             strsql2 = "select fQ14" + "_" + str(size) + "()"
             strsql3 = "select fQ5" + "_" + str(size) + "()"
+        elif ran == 6:
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-1.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-1_1.sql'
+        elif ran == 7:
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-2_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'
+        elif ran == 8:
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'
+        elif ran == 9:
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'             
+        elif ran == 10:
+            strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
+            strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'
 
-        pool.apply_async(tenant,args=("tenant"+str(ran),strsql1,strsql2,strsql3,'c'))
+        if ran <= 5:
+            pool.apply_async(tenant,args=("tenant"+str(ran),strsql1,strsql2,strsql3,'c'))
+        else: 
+            pool.apply_async(tenant,args=("tenant"+str(ran),strsql1,strsql2,strsql3,'f'))
 
     pool.close()
     pool.join()
@@ -189,12 +211,10 @@ if __name__ == "__main__":
 
     str_sep = '=================================='
     # 删除目录下文件
-    #delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
+    delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
 
-    # 50个进程(租户)
+    # 100个进程(租户)
     test_queries(100,10)
     test_queries(100,20)
     test_queries(100,50)
 
-    #test_queries(100,10)
-    
