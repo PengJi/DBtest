@@ -3,7 +3,7 @@
 explain analyze Select 
 	G.objID, G.u, G.g, G.r, G.i, G.z 
 from 
-	(SELECT * FROM ( SELECT * FROM PhotoObjAll100 WHERE mode=1) as p WHERE type = 3) as G join
-	(SELECT * FROM ( SELECT * FROM PhotoObjAll100 WHERE mode=1) as h) as S on G.parentID = S.parentID
+	(SELECT * FROM ( SELECT * FROM PhotoObjAll_100 WHERE mode=1) as p WHERE type = 3) as G join
+	(SELECT * FROM ( SELECT * FROM PhotoObjAll_100 WHERE mode=1) as h) as S on G.parentID = S.parentID
 where 
 	G.parentID > 0;

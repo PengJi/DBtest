@@ -3,6 +3,6 @@
 explain analyze select 
 	count(*)
 from 
-	PhotoObjAll10 
+	PhotoObjAll_10 
 where 
 	(r - extinction_r) < 22 and mode =1 and type =3;

@@ -2,6 +2,6 @@
 explain analyze select 
 	objID 
 from 
-	PhotoObjAll50 
+	PhotoObjAll_50 
 where 
 	(r - extinction_r) < 22 and mode =1 and type =3;

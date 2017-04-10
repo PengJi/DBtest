@@ -237,6 +237,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q2'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -255,6 +256,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q2_10'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -273,6 +275,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q2_20'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -291,6 +294,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q2_50'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -309,6 +313,7 @@ create or replace function fQ3()
 returns setof text
 as $$
 begin
+	raise notice '%', 'Q3'
 	return query explain analyze select objID
     	from Galaxy
     	where r < 22 and dered_r> 0.175;
@@ -319,6 +324,7 @@ create or replace function fQ3_10()
 returns setof text
 as $$
 begin
+	raise notice '%', 'Q3_10'
     return query explain analyze select objID
         from Galaxy_10
         where r < 22 and dered_r> 0.175;
@@ -329,6 +335,7 @@ create or replace function fQ3_20()
 returns setof text
 as $$
 begin
+	raise notice '%', 'Q3_20'
     return query explain analyze select objID
         from Galaxy_20
         where r < 22 and dered_r> 0.175;
@@ -339,6 +346,7 @@ create or replace function fQ3_50()
 returns setof text
 as $$
 begin
+	raise notice '%', 'Q3_50'
     return query explain analyze select objID
         from Galaxy_50
         where r < 22 and dered_r> 0.175;
@@ -351,6 +359,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q4'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -368,6 +377,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q4_10'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -385,6 +395,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q4_20'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop
@@ -402,6 +413,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q4_50'
     for rho in execute
         'select -5*log(R)-2.5*log(PI()) from Galaxy;'
     loop

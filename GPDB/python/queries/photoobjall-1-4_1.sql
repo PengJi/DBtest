@@ -3,6 +3,6 @@
 explain analyze Select 
 	G.objID, G.u, G.g, G.r, G.i, G.z 
 from 
-	PhotoObjAll1 as G join Star as S on G.parentID = S.parentID
+	PhotoObjAll_1 as G join Star_1 as S on G.parentID = S.parentID
 where 
 	G.parentID > 0;

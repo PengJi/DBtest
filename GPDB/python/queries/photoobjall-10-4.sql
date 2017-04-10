@@ -2,6 +2,6 @@
 explain analyze Select 
 	G.objID, G.u, G.g, G.r, G.i, G.z 
 from 
-	PhotoObjAll10 as G, Star as S 
+	PhotoObjAll_10 as G, Star_10 as S 
 where 
 	G.parentID > 0 and G.parentID = S.parentID;
