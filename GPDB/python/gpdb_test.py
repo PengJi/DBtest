@@ -180,7 +180,7 @@ def test_queries(num,size):
         elif ran == 9:
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-3_1.sql'
-            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql'             
+            strsql3 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_2.sql' 
         elif ran == 10:
             strsql1 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4.sql'
             strsql2 = '/home/gpadmin/DBtest/GPDB/python/queries/photoobjall-'+str(size)+'-4_1.sql'
@@ -218,3 +218,6 @@ if __name__ == "__main__":
     test_queries(100,20)
     test_queries(100,50)
 
+    test_queries(200,10)
+    test_queries(200,20)
+    test_queries(200,50)
