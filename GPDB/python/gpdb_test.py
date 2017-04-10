@@ -134,7 +134,8 @@ def run_photoobjall():
 # num  线程的个数
 # size 数据的大小，1、10、20、50、100
 def test_queries(num,size):
-    pool = multiprocessing.Pool(processes = 30)
+    # 允许同时运行的进程个数
+    pool = multiprocessing.Pool(processes = 50)
 
     # 清空缓存
     clear_cache()
@@ -188,6 +189,12 @@ if __name__ == "__main__":
 
     str_sep = '=================================='
     # 删除目录下文件
-    delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
+    #delete_file_folder('/home/gpadmin/DBtest/GPDB/python/res_process')
 
-    test_queries(50,10)
+    # 50个进程(租户)
+    test_queries(100,10)
+    test_queries(100,20)
+    test_queries(100,50)
+
+    #test_queries(100,10)
+    
