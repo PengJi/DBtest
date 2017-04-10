@@ -11,9 +11,9 @@ and reddening_r> 0.175;
 create or replace function fQ3()
 returns setof text
 as $$
-declare rho float;
 begin
-return query explain analyze select objID
+	raise notice '%', 'Q3';
+	return query explain analyze select objID
 	from Galaxy
 	where r < 22
 	and dered_r> 0.175;

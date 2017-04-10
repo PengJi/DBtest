@@ -15,6 +15,7 @@ returns setof text
 as $$
 declare rho float;
 begin
+	raise notice '%', 'Q2'
 	for rho in execute
 		'select -5*log(R)-2.5*log(PI()) from Galaxy;'
 	loop
