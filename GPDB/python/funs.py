@@ -155,6 +155,7 @@ def tenant(tenant_name,strsql1,strsql2,strsql3,fc='f'):
         fo.write(queue.get())
     fo.close()
 
+# 变换shell颜色
 #   格式：\033[显示方式;前景色;背景色m
 #   说明:
 #
