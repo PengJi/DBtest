@@ -24,20 +24,20 @@ class TranClass(threading.Thread):
         self.res_queue.put(self.strsql)
         self.res_queue.put(res)
 
-# 执行sql文件线程
+# 执行sql命令线程
 class TranClassComd(threading.Thread):
-    def __init__(self, queue, user, database,host, strsql):
+    def __init__(self, queue, user, database,host, str_query):
         threading.Thread.__init__(self)
         self.user = user
         self.database = database
         self.host = host
-        self.strsql = strsql
+        self.str_query = str_query
         self.res_queue = queue
 
     def run(self):
-        res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-h",self.host,"-c",self.strsql])
+        res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-h",self.host,"-c",self.str_query])
         #print res
-        self.res_queue.put(self.strsql)
+        self.res_queue.put(self.str_query)
         self.res_queue.put(res)
 
 # 批量创建角色线程
@@ -67,7 +67,7 @@ class QueueClass(threading.Thread):
     def run(self):
         res = subprocess.check_output(["psql","-U",self.user,"-d",self.database,"-h",self.host,'--variable=queue_name='+self.queue_name,"-f",self.strsql])
 
-# 创建资源队列线程
+# 创建schema线程
 class SchemaClass(threading.Thread):
     def __init__(self, user, database, host, schema, strsql):
         threading.Thread.__init__(self)
