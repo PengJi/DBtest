@@ -86,7 +86,7 @@ def create_queue(start,end):
         threads[k].join()
     print str_style("create queue complete",fore="green")
 
-# 创建shema
+# 创建shema: schema<start> - schema<end>
 def create_schema(start,end):
     user = 'gpadmin'
     database = 'testDB'
