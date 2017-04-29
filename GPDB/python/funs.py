@@ -45,7 +45,7 @@ def source_sh():
     sshclient('node5',user,passwd,strcmd)
     sshclient('node6',user,passwd,strcmd)
 
-# 创建role
+# 创建role: tenant<start> - tenant<end>
 def create_role(start,end):
     user = 'gpadmin'
     database = 'testDB'
@@ -66,7 +66,7 @@ def create_role(start,end):
         threads[k].join()
     print str_style("create role complete",fore="green")
 
-# 创建queue
+# 创建queue: myqueue<start> - myqueue<end>
 def create_queue(start,end):
     user = 'gpadmin'
     database = 'testDB'
