@@ -221,3 +221,8 @@ if __name__ == "__main__":
     test_queries(200,10)
     test_queries(200,20)
     test_queries(200,50)
+
+    test_queries(500,10)
+    test_queries(500,20)
+    test_queries(500,50)
+
