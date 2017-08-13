@@ -10,16 +10,16 @@ GPLOAD:
       - 192.168.100.78
      PORT: 8081
      FILE:
-      - /home/gpdba/tpcds_data/csv/customer.csv
+      - /home/gpdba/tpcds_data/csv/store.csv
   - FORMAT: text
   - DELIMITER: '|'
   - NULL_AS: ''
-  - ERROR_LIMIT: 100
+  - ERROR_LIMIT: 25
   - LOG_ERRORS: true
  PRELOAD:
   - REUSE_TABLES: true
  OUTPUT:
-  - TABLE: customer
+  - TABLE: store
   - MODE: insert
  PRELOAD:
   - TRUNCATE: true
