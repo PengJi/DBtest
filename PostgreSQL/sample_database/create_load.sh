@@ -1,8 +1,17 @@
 database="testDB"
 file_path="/home/postgres/packages/employees_db"
 
+#预处理文件
+sed -i 's/`departments`/departments/g' load_departments.dump
+sed -i 's/`dept_emp`/dept_emp/g' load_dept_emp.dump
+sed -i 's/`dept_manager`/dept_manager/g' load_dept_manager.dump
+sed -i 's/`employees`/employees/g' load_employees.dump
+sed -i 's/`salaries`/salaries/g' load_salaries.dump
+sed -i 's/`titles`/titles/g' load_titles.dump
+
+#创建表并导入数据
 echo -e "\033[32;49;1m [create table] \033[39;49;0m"
-psql -d ${database} -f ${file_path}/employees.sql
+psql -d ${database} -f employees.sql
 
 echo -e "\033[32;49;1m [load_departments] \033[39;49;0m"
 psql -d ${database} -f ${file_path}/load_departments.dump
