@@ -10,13 +10,16 @@ GPLOAD:
       - 192.168.100.78
      PORT: 8081
      FILE:
-      - /home/gpdba/tpcds_data/call_center.dat
+      - /home/gpdba/DBtest/GPDB/tpcds/item.csv
   - FORMAT: text
   - DELIMITER: '|'
+  - NULL_AS: ''
   - ERROR_LIMIT: 25
   - LOG_ERRORS: true
  PRELOAD:
   - REUSE_TABLES: true
  OUTPUT:
-  - TABLE: call_center
+  - TABLE: item
   - MODE: insert
+ PRELOAD:
+  - TRUNCATE: true

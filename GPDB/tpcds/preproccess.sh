@@ -1,7 +1,8 @@
 # 去掉每行末尾的 | 
-data_path="/home/gpdba/tpcds_data/testdata"
+source_path="/home/gpdba/tpcds_data/testdata"
+des_path="/home/gpdba/tpcds_data/csv"
 for i in `ls /home/gpdba/tpcds_data/testdata`
 do
-	sed 's/|$//' $data_path/$i > ${i/dat/csv}
-   	echo $data_path/$i
+	sed 's/|$//' $source_path/$i > $des_path/${i/dat/csv}
+   	echo $source_path/$i
 done;

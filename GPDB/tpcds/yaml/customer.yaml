@@ -10,13 +10,16 @@ GPLOAD:
       - 192.168.100.78
      PORT: 8081
      FILE:
-      - /home/gpdba/tpcds_data/customer_demographics.dat
+      - /home/gpdba/tpcds_data/customer1.dat
   - FORMAT: text
   - DELIMITER: '|'
-  - ERROR_LIMIT: 25
+  - NULL_AS: ''
+  - ERROR_LIMIT: 100
   - LOG_ERRORS: true
  PRELOAD:
   - REUSE_TABLES: true
  OUTPUT:
-  - TABLE: customer_demographics
+  - TABLE: customer
   - MODE: insert
+ PRELOAD:
+  - TRUNCATE: true
