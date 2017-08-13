@@ -10,7 +10,6 @@ sed -i '/||/d' customer.dat
 # 查看文件编码
 :set fileencoding
 
-
 # 去掉第一行
 sed -i "1d" xxx.csv-f 
 
