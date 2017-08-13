@@ -1,0 +1,22 @@
+VERSION: 1.0.0.1
+DATABASE: testDB
+USER: gpdba
+HOST: 192.168.100.78
+PORT: 5432
+GPLOAD:
+ INPUT:
+  - SOURCE:
+     LOCAL_HOSTNAME:
+      - 192.168.100.78
+     PORT: 8081
+     FILE:
+      - /home/gpdba/tpcds_data/customer1.dat
+  - FORMAT: text
+  - DELIMITER: '|'
+  - ERROR_LIMIT: 100
+  - LOG_ERRORS: true
+ PRELOAD:
+  - REUSE_TABLES: true
+ OUTPUT:
+  - TABLE: customer
+  - MODE: insert
