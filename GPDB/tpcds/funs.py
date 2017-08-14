@@ -19,7 +19,7 @@ host = '192.168.100.78'
 # 查询映射
 query_dict = {
 1:17, 2:25, 3:26, 4:32, 5:33,
-6:61, 7:62, 8:65, 9:71, 10:1
+6:61, 7:62, 8:65, 9:71, 10:20
 }
 
 # 执行shell root命令
@@ -52,18 +52,29 @@ def mpl2():
     print str_style("mpl2",fore="green")
     queue = Queue.Queue()
 
-    origin_mpl_2 = lhs(2,10)
+	# 生成LHS
+    #origin_mpl_2 = lhs(2,10)
+    origin_mpl_2 = array([[0.3 , 0.5],
+                    [0.9 , 0.7],
+                    [0.4 , 0.10],
+                    [0.8 , 0.1],
+                    [0.2 , 0.8],
+                    [0.1 , 0.4],
+                    [0.7 , 0.2],
+                    [0.10 , 0.6],
+                    [0.5 , 0.9],
+                    [0.6 , 0.3]])
     mpl_2 = ceil(origin_mpl_2*10)
     print mpl_2
-    print int(mpl_2[0][0])
+    #'''
     for r in range(10):
         print mpl_2[r]
-        # 两个元素不等
+        # 两个并行查询不等
         if mpl_2[r][0] == mpl_2[r][1]:
             continue
         for c in range(2):
-            print int(mpl_2[r][c])
-            print query_dict[int(mpl_2[r][c])]
+            #print int(mpl_2[r][c])
+            #print query_dict[int(mpl_2[r][c])]
             query_file = "query"+str(query_dict[int(mpl_2[r][c])])+".sql"
             query_file = "/home/gpdba/DBtest/tpcds/"+query_file
             print query_file
@@ -72,7 +83,7 @@ def mpl2():
             p1.start()
             p1.join()
         #break
-    
+    #'''
     
 def mpl3():
     print str_style("mpl3",fore="green")
