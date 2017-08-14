@@ -25,3 +25,6 @@ sed 's/  */,/g' test> test1
 
 # 删除每行最后的逗号
 sed 's/,.$//' txt > test
+
+# 修改权限
+echo "host    all all 0.0.0.0/0   trust" >> /home/gpdba/gpdata/master/gpseg-1/pg_hba.conf
