@@ -51,24 +51,27 @@ def clear_cache():
 
 def mpl2():
     print str_style("mpl2",fore="green")
-    q = Queue.Queue()
+    #q = multiprocessing.Queue()
 
 	# 生成LHS
     #origin_mpl_2 = lhs(2,10)
     origin_mpl_2 = array([[0.3 , 0.5],
                     [0.9 , 0.7],
-                    [0.4 , 0.10],
+                    [0.4 , 1.0],
                     [0.8 , 0.1],
                     [0.2 , 0.8],
                     [0.1 , 0.4],
                     [0.7 , 0.2],
-                    [0.10 , 0.6],
+                    [1.0 , 0.6],
                     [0.5 , 0.9],
                     [0.6 , 0.3]])
     mpl_2 = ceil(origin_mpl_2*10)
     print mpl_2
 
     for r in range(10):
+        clear_cache()
+        q = multiprocessing.Queue()
+
         print mpl_2[r]
         # 两个并行的不相等得查询
         if mpl_2[r][0] == mpl_2[r][1]:
@@ -103,8 +106,7 @@ def mpl2():
         fp.close()
 
         # 清空队列
-        with q.mutex:
-            q.queue.clear()
+        q.close()
         #break
     
 def mpl3():
