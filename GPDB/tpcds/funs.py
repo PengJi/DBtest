@@ -49,9 +49,26 @@ def clear_cache():
     sshclient('node5',user,passwd,strcmd)
     #sshclient('node6',user,passwd,strcmd)
 
+# 查询单独执行
+# 查询：17、20、25、26、32、33、61、62、65、71
+def exec_isolation(query_sql):
+    clear_cache()
+    q = multiprocessing.Queue()
+    query_file = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/query"+str(query_sql)+".sql"
+    print query_file
+    p = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
+    p.start()
+    p.join()
+
+    # 保存结果
+    fp = open("res_queries/isolation/query"+str(query_sql)+".txt","a")
+    while not q.empty():
+        fp.write(q.get())
+    fp.close()
+    
+# 并发度为2
 def mpl2():
     print str_style("mpl2",fore="green")
-    #q = multiprocessing.Queue()
 
 	# 生成LHS
     #origin_mpl_2 = lhs(2,10)
@@ -100,7 +117,7 @@ def mpl2():
         p2.join()
         
         # 存入文件
-        fp = open("res_queries/"+"mix"+str(r)+".txt","a")
+        fp = open("res_queries/mpl2/"+"mix"+str(r)+".txt","a")
         while not q.empty():
             fp.write(q.get())
         fp.close()
@@ -168,5 +185,4 @@ def str_style(string, mode = '', fore = '', back = ''):
     return '%s%s%s' % (style, string, end)
 
 if __name__ == '__main__':
-    #clear_cache()
     mpl2()   
