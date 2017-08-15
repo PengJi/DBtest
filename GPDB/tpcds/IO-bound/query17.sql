@@ -1,5 +1,6 @@
 -- start query 17 in stream 0 using template query17.tpl 
-SELECT i_item_id, 
+set optimizer=off;
+explain analyze SELECT i_item_id, 
                i_item_desc, 
                s_state, 
                Count(ss_quantity)                                        AS 

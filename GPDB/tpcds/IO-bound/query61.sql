@@ -1,4 +1,6 @@
 -- start query 61 in stream 0 using template query61.tpl 
+set optimizer=off;
+explain analyze
 SELECT promotions, 
                total, 
                Cast(promotions AS DECIMAL(15, 4)) / 

@@ -1,4 +1,6 @@
 -- start query 71 in stream 0 using template query71.tpl 
+set optimizer=off;
+explain analyze
 SELECT i_brand_id     brand_id, 
        i_brand        brand, 
        t_hour, 

@@ -1,5 +1,6 @@
 -- start query 32 in stream 0 using template query32.tpl 
-SELECT 
+set optimizer=off;
+explain analyze SELECT
        Sum(cs_ext_discount_amt) AS "excess discount amount"
 FROM   catalog_sales , 
        item , 

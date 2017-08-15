@@ -1,5 +1,6 @@
--- start query 25 in stream 0 using template query25.tpl 
-SELECT i_item_id, 
+-- start query 25 in stream 0 using template query25.tpl
+set optimizer=off;
+explain analyze SELECT i_item_id, 
                i_item_desc, 
                s_store_id, 
                s_store_name, 

@@ -1,4 +1,6 @@
 -- start query 65 in stream 0 using template query65.tpl 
+set optimizer=off;
+explain analyze
 SELECT s_store_name, 
                i_item_desc, 
                sc.revenue, 
