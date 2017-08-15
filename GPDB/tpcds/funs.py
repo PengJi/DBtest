@@ -16,6 +16,7 @@ from tran import *
 user = 'tenant'
 database = 'testDB'
 host = '192.168.100.78'
+query_file_path = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/"
 
 # 查询映射
 query_dict = {
@@ -54,7 +55,7 @@ def clear_cache():
 def exec_isolation(query_sql):
     clear_cache()
     q = multiprocessing.Queue()
-    query_file = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/query"+str(query_sql)+".sql"
+    query_file = query_file_path + "query"  + str(query_sql)+".sql"
     print query_file
     p = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
     p.start()
@@ -66,7 +67,7 @@ def exec_isolation(query_sql):
         fp.write(q.get())
     fp.close()
     
-# 并发度为2
+# 查询并发度为2
 def mpl2():
     print str_style("mpl2",fore="green")
 
@@ -98,7 +99,7 @@ def mpl2():
 
         # primary query
         query_file = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
-        query_file = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/"+query_file
+        query_file = query_file_path + query_file
         print query_file
         #p1 = TranClass(q, user,database,host,query_file)
         p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
@@ -106,7 +107,7 @@ def mpl2():
 
         # concurrent query
         query_file = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
-        query_file = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/"+query_file
+        query_file = query_file_path + query_file
         print query_file
         #p2 = TranClass(q, user,database,host,query_file)
         p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
@@ -125,7 +126,8 @@ def mpl2():
         # 清空队列
         q.close()
         #break
-    
+
+# 查询并发度为3
 def mpl3():
     print str_style("mpl3",fore="green")
 
@@ -144,6 +146,7 @@ def mpl3():
     mpl_3 = ceil(origin_mpl_2*10)
     print mpl_3
 
+# 查询并发度为4
 def mpl4():
     print str_style("mpl2",fore="green")
 
@@ -162,7 +165,7 @@ def mpl4():
     mpl_4 = ceil(origin_mpl_2*10)
     print mpl_4
 
-
+# 查询并发度为5
 def mpl5():
     print str_style("mpl5",fore="green")
 
