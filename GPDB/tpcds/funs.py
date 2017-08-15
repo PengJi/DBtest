@@ -129,11 +129,57 @@ def mpl2():
 def mpl3():
     print str_style("mpl3",fore="green")
 
+	# 生成LHS
+    #origin_mpl_3 = lhs(3,10)
+    origin_mpl_3 = array([[0.3 , 0.5],
+                    [0.9 , 0.7],
+                    [0.4 , 1.0],
+                    [0.8 , 0.1],
+                    [0.2 , 0.8],
+                    [0.1 , 0.4],
+                    [0.7 , 0.2],
+                    [1.0 , 0.6],
+                    [0.5 , 0.9],
+                    [0.6 , 0.3]])
+    mpl_3 = ceil(origin_mpl_2*10)
+    print mpl_3
+
 def mpl4():
-    print str_style("mpl4",fore="green")
+    print str_style("mpl2",fore="green")
+
+	# 生成LHS
+    #origin_mpl_4 = lhs(4,10)
+    origin_mpl_4 = array([[0.3 , 0.5],
+                    [0.9 , 0.7],
+                    [0.4 , 1.0],
+                    [0.8 , 0.1],
+                    [0.2 , 0.8],
+                    [0.1 , 0.4],
+                    [0.7 , 0.2],
+                    [1.0 , 0.6],
+                    [0.5 , 0.9],
+                    [0.6 , 0.3]])
+    mpl_4 = ceil(origin_mpl_2*10)
+    print mpl_4
+
 
 def mpl5():
     print str_style("mpl5",fore="green")
+
+	# 生成LHS
+    #origin_mpl_5 = lhs(5,10)
+    origin_mpl_5 = array([[0.3 , 0.5],
+                    [0.9 , 0.7],
+                    [0.4 , 1.0],
+                    [0.8 , 0.1],
+                    [0.2 , 0.8],
+                    [0.1 , 0.4],
+                    [0.7 , 0.2],
+                    [1.0 , 0.6],
+                    [0.5 , 0.9],
+                    [0.6 , 0.3]])
+    mpl_5 = ceil(origin_mpl_2*10)
+    print mpl_5
 
 def str_style(string, mode = '', fore = '', back = ''):
     STYLE = { 
@@ -185,4 +231,4 @@ def str_style(string, mode = '', fore = '', back = ''):
     return '%s%s%s' % (style, string, end)
 
 if __name__ == '__main__':
-    mpl2()   
+    print "funs.py"   
