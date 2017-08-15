@@ -1,5 +1,6 @@
 #coding: utf-8
 
+import multiprocessing
 import subprocess
 import os
 import paramiko
@@ -50,7 +51,7 @@ def clear_cache():
 
 def mpl2():
     print str_style("mpl2",fore="green")
-    queue = Queue.Queue()
+    q = Queue.Queue()
 
 	# 生成LHS
     #origin_mpl_2 = lhs(2,10)
@@ -66,24 +67,45 @@ def mpl2():
                     [0.6 , 0.3]])
     mpl_2 = ceil(origin_mpl_2*10)
     print mpl_2
-    #'''
+
     for r in range(10):
         print mpl_2[r]
-        # 两个并行查询不等
+        # 两个并行的不相等得查询
         if mpl_2[r][0] == mpl_2[r][1]:
             continue
-        for c in range(2):
-            #print int(mpl_2[r][c])
-            #print query_dict[int(mpl_2[r][c])]
-            query_file = "query"+str(query_dict[int(mpl_2[r][c])])+".sql"
-            query_file = "/home/gpdba/DBtest/tpcds/"+query_file
-            print query_file
-             
-            p1 = TranClass(queue, user,database,host,query_file)
-            p1.start()
-            p1.join()
+        #print int(mpl_2[r][c])
+        #print query_dict[int(mpl_2[r][c])]
+
+        # primary query
+        query_file = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
+        query_file = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/"+query_file
+        print query_file
+        #p1 = TranClass(q, user,database,host,query_file)
+        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
+        p1.start()
+
+        # concurrent query
+        query_file = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
+        query_file = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/"+query_file
+        print query_file
+        #p2 = TranClass(q, user,database,host,query_file)
+        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
+        p2.start()
+
+        # 并行执行
+        p1.join()
+        p2.join()
+        
+        # 存入文件
+        fp = open("res_queries/"+"mix"+str(r)+".txt","a")
+        while not q.empty():
+            fp.write(q.get())
+        fp.close()
+
+        # 清空队列
+        with q.mutex:
+            q.queue.clear()
         #break
-    #'''
     
 def mpl3():
     print str_style("mpl3",fore="green")
@@ -144,5 +166,5 @@ def str_style(string, mode = '', fore = '', back = ''):
     return '%s%s%s' % (style, string, end)
 
 if __name__ == '__main__':
-    clear_cache()
+    #clear_cache()
     mpl2()   

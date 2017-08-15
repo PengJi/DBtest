@@ -1,5 +1,6 @@
 #coding: utf-8
 
+import multiprocessing
 import threading
 import Queue
 import time
@@ -41,3 +42,8 @@ class TranClassComd(threading.Thread):
         self.res_queue.put(self.str_query)
         self.res_queue.put(res)
 
+# 多进程查询sql语句
+def exec_sql(q,user,database,host,str_sql):
+    res = subprocess.check_output(["psql","-U",user,"-d",database,"-h",host,"-f",str_sql])
+    q.put(str_sql)
+    q.put(res)
