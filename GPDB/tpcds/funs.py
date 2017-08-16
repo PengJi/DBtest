@@ -57,9 +57,18 @@ def exec_isolation(query_sql):
     q = multiprocessing.Queue()
     query_file = query_file_path + "query"  + str(query_sql)+".sql"
     print query_file
+
+    # 记录时间
+    print query_file,"isolation start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    start = time.time()
     p = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
     p.start()
     p.join()
+    print query_file,"isolation end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    end =time.time()
+    str_run = query_file+' query duration %0.2f seconds.' %(end - start)
+    print str_style(str_run,fore='red')
+    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
 
     # 保存结果
     fp = open("res_queries/isolation/query"+str(query_sql)+".txt","a")
