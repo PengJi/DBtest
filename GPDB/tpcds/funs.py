@@ -112,8 +112,6 @@ def mpl2():
         print query_file1
         #p1 = TranClass(q, user,database,host,query_file)
         p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
-        print query_file1,"concurrent start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-        start1 = time.time()
         p1.start()
 
         # concurrent query
@@ -122,27 +120,20 @@ def mpl2():
         print query_file2
         #p2 = TranClass(q, user,database,host,query_file)
         p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
-        print query_file2,"concurrent start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-        start2 = time.time()
         p2.start()
 
         # 并行执行
         p1.join()
-        print query_file1,"concurrent end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-        end1 =time.time()
-        str_run = query_file1+' query duration %0.2f seconds.' %(end1 - start1)
-        print str_style(str_run,fore='red')
-        subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
         p2.join()
-        print query_file2,"concurrent end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-        end2 =time.time()
-        str_run = query_file2+' query duration %0.2f seconds.' %(end2 - start2)
-        print str_style(str_run,fore='red')
-        subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
         
-        # 存入文件
+        # 把每个查询组合的结果存入文件
         fp = open("res_queries/mpl2/"+"mix"+str(r)+".txt","a")
+        cnt = 0;
         while not q.empty():
+            cnt = cnt+1
+            if cnt==1 or cnt==4:
+                subprocess.check_output(['echo ' + q.get() + ' >> run.log'],shell=True)
+                continue
             fp.write(q.get())
         fp.close()
 

@@ -44,6 +44,22 @@ class TranClassComd(threading.Thread):
 
 # 多进程查询sql语句
 def exec_sql(q,user,database,host,str_sql):
+    # 当前进程开始时间
+    start_time = time.time()
+    print str_sql,"start time",start_time
+
     res = subprocess.check_output(["psql","-U",user,"-d",database,"-h",host,"-f",str_sql])
+
+    # 当前进程结束时间
+    end_time = time.time()
+    print str_sql,"end time",end_time
+
+    query_time = str_sql +' duration %0.2f seconds.' %(end_time - start_time)
+
+    # 执行时间
+    q.put(query_time)
+    # 查询语句
     q.put(str_sql)
+    # 查询结果
     q.put(res)
+
