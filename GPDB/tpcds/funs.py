@@ -59,9 +59,9 @@ def exec_isolation(query_sql):
     print query_file
 
     # 记录时间
+    p = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
     print query_file,"isolation start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     start = time.time()
-    p = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
     p.start()
     p.join()
     print query_file,"isolation end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
@@ -107,24 +107,38 @@ def mpl2():
         #print query_dict[int(mpl_2[r][c])]
 
         # primary query
-        query_file = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
-        query_file = query_file_path + query_file
-        print query_file
+        query_file1 = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
+        query_file1 = query_file_path + query_file1
+        print query_file1
         #p1 = TranClass(q, user,database,host,query_file)
-        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
+        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        print query_file1,"concurrent start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+        start1 = time.time()
         p1.start()
 
         # concurrent query
-        query_file = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
-        query_file = query_file_path + query_file
-        print query_file
+        query_file2 = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
+        query_file2 = query_file_path + query_file2
+        print query_file2
         #p2 = TranClass(q, user,database,host,query_file)
-        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
+        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
+        print query_file2,"concurrent start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+        start2 = time.time()
         p2.start()
 
         # 并行执行
         p1.join()
+        print query_file1,"concurrent end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+        end1 =time.time()
+        str_run = query_file1+' query duration %0.2f seconds.' %(end1 - start1)
+        print str_style(str_run,fore='red')
+        subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
         p2.join()
+        print query_file2,"concurrent end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+        end2 =time.time()
+        str_run = query_file2+' query duration %0.2f seconds.' %(end2 - start2)
+        print str_style(str_run,fore='red')
+        subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
         
         # 存入文件
         fp = open("res_queries/mpl2/"+"mix"+str(r)+".txt","a")
