@@ -147,17 +147,22 @@ def mpl3():
 
 	# 生成LHS
     #origin_mpl_3 = lhs(3,10)
-    origin_mpl_3 = array([[0.3 , 0.5],
-                    [0.9 , 0.7],
-                    [0.4 , 1.0],
-                    [0.8 , 0.1],
-                    [0.2 , 0.8],
-                    [0.1 , 0.4],
-                    [0.7 , 0.2],
-                    [1.0 , 0.6],
-                    [0.5 , 0.9],
-                    [0.6 , 0.3]])
-    mpl_3 = ceil(origin_mpl_2*10)
+    #'''
+    origin_mpl_3 = array(
+        [[ 0.1, 1.0, 0.3],
+        [  0.6, 1.0, 0.2],
+        [  0.7, 0.6, 0.6],
+        [  0.4, 0.5, 1.0],
+        [  0.9, 0.7, 0.4],
+        [  0.2, 0.4, 0.9],
+        [  0.8, 0.8, 0.7],
+        [  1.0, 0.3, 0.1],
+        [  0.3, 0.2, 0.8],
+        [  0.5, 0.9, 0.5]]
+    )
+    #'''
+    #print origin_mpl_3
+    mpl_3 = ceil(origin_mpl_3*10)
     print mpl_3
 
 # 查询并发度为4
@@ -176,7 +181,7 @@ def mpl4():
                     [1.0 , 0.6],
                     [0.5 , 0.9],
                     [0.6 , 0.3]])
-    mpl_4 = ceil(origin_mpl_2*10)
+    mpl_4 = ceil(origin_mpl_4*10)
     print mpl_4
 
 # 查询并发度为5
@@ -195,7 +200,7 @@ def mpl5():
                     [1.0 , 0.6],
                     [0.5 , 0.9],
                     [0.6 , 0.3]])
-    mpl_5 = ceil(origin_mpl_2*10)
+    mpl_5 = ceil(origin_mpl_5*10)
     print mpl_5
 
 def str_style(string, mode = '', fore = '', back = ''):
@@ -248,4 +253,6 @@ def str_style(string, mode = '', fore = '', back = ''):
     return '%s%s%s' % (style, string, end)
 
 if __name__ == '__main__':
-    print "funs.py"   
+    print "funs.py"
+    
+    mpl3()
