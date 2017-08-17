@@ -31,6 +31,18 @@ def clear_cache():
     sshclient('node5',user,passwd,strcmd)
     sshclient('node6',user,passwd,strcmd)
 
+# 删除目录下所有文件
+def delete_file_folder(src):
+    if os.path.isfile(src):
+        try:
+            os.remove(src)
+        except:
+            pass
+    elif os.path.isdir(src):
+        for item in os.listdir(src):
+            itemsrc=os.path.join(src,item)
+            delete_file_folder(itemsrc)
+
 # 执行脚本
 def source_sh():
     user = 'root'
@@ -105,18 +117,6 @@ def create_schema(start,end):
     for k in xrange(0,len(threads)):
         threads[k].join()
     print str_style("creating schema complete",fore="green")
-
-# 删除目录下所有文件
-def delete_file_folder(src):
-    if os.path.isfile(src):
-        try:
-            os.remove(src)
-        except:
-            pass
-    elif os.path.isdir(src):
-        for item in os.listdir(src):
-            itemsrc=os.path.join(src,item)
-            delete_file_folder(itemsrc)
 
 def tenant(tenant_name,strsql1,strsql2,strsql3,fc='f'):
     user = tenant_name
@@ -263,7 +263,6 @@ def test_color( ):
     print str_style('紫红色', back = 'purple'),
     print str_style('青蓝色', back = 'cyan'),
     print str_style('白色',   back = 'white')
-
 
 def tenant1():
     print 'tenant1'
