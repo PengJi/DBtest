@@ -2,11 +2,11 @@
 
 import multiprocessing
 import subprocess
-import os
-import paramiko
 from pyDOE import *
 from numpy import *
+
 from tran import *
+from funs_shell import * 
 
 '''
 功能函数
@@ -24,55 +24,27 @@ query_dict = {
 6:61, 7:62, 8:65, 9:71, 10:20
 }
 
-# 执行shell root命令
-def sshclient(host,user,passwd,strcomd):
-    str_host = host
-    print str_style(str_host, fore = 'green')
-    # paramiko.util.log_to_file('paramiko.log')  
-    s = paramiko.SSHClient()
-    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    s.connect(hostname = host,username=user, password=passwd)
-    stdin, stdout, stderr = s.exec_command(strcomd)
-    print stdout.read()
-    s.close()
-
-# 清空集群中所有节点的缓存
-def clear_cache():
-    user = 'root'
-    passwd = 'jipeng1008'
-    strcmd = 'sync; echo 1 > /proc/sys/vm/drop_caches'
-    print str_style('clear caches', fore = 'green')
-    sshclient('JPDB2',user,passwd,strcmd)
-    sshclient('node1',user,passwd,strcmd)
-    sshclient('node2',user,passwd,strcmd)
-    sshclient('node3',user,passwd,strcmd)
-    #sshclient('node4',user,passwd,strcmd)
-    sshclient('node5',user,passwd,strcmd)
-    #sshclient('node6',user,passwd,strcmd)
-
 # 查询单独执行
 # 查询：17、20、25、26、32、33、61、62、65、71
 def exec_isolation(query_sql):
     clear_cache()
     q = multiprocessing.Queue()
     query_file = query_file_path + "query"  + str(query_sql)+".sql"
-    print query_file
+    #print query_file
 
     # 记录时间
     p = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
-    print query_file,"isolation start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    start = time.time()
     p.start()
     p.join()
-    print query_file,"isolation end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-    end =time.time()
-    str_run = query_file+' query duration %0.2f seconds.' %(end - start)
-    print str_style(str_run,fore='red')
-    subprocess.check_output(['echo ' + str_run + ' >> run.log'],shell=True)
 
     # 保存结果
     fp = open("res_queries/isolation/query"+str(query_sql)+".txt","a")
+    cnt = 0
     while not q.empty():
+        cnt = cnt+1
+        if cnt==1:
+            subprocess.check_output(['echo ' + q.get() + ' >> run.log'],shell=True)
+            continue
         fp.write(q.get())
     fp.close()
     
@@ -127,6 +99,7 @@ def mpl2():
         p2.join()
         
         # 把每个查询组合的结果存入文件
+        subprocess.check_output(['echo -------------------------- >> run.log'],shell=True)
         fp = open("res_queries/mpl2/"+"mix"+str(r)+".txt","a")
         cnt = 0;
         while not q.empty():
@@ -391,55 +364,6 @@ def mpl5():
         # 清空队列
         q.close()
         #break
-
-def str_style(string, mode = '', fore = '', back = ''):
-    STYLE = { 
-        'fore':
-        {   # 前景色
-            'black'    : 30,   #  黑色
-            'red'      : 31,   #  红色
-            'green'    : 32,   #  绿色
-            'yellow'   : 33,   #  黄色
-            'blue'     : 34,   #  蓝色
-            'purple'   : 35,   #  紫红色
-            'cyan'     : 36,   #  青蓝色
-            'white'    : 37,   #  白色
-        },  
-
-        'back' :
-        {   # 背景
-            'black'     : 40,  #  黑色
-            'red'       : 41,  #  红色
-            'green'     : 42,  #  绿色
-            'yellow'    : 43,  #  黄色
-            'blue'      : 44,  #  蓝色
-            'purple'    : 45,  #  紫红色
-            'cyan'      : 46,  #  青蓝色
-            'white'     : 47,  #  白色
-        },  
-
-        'mode' :
-        {   # 显示模式
-            'mormal'    : 0,   #  终端默认设置
-            'bold'      : 1,   #  高亮显示
-            'underline' : 4,   #  使用下划线
-            'blink'     : 5,   #  闪烁
-            'invert'    : 7,   #  反白显示
-            'hide'      : 8,   #  不可见
-        },  
-
-        'default' :
-        {   
-            'end' : 0,
-        },  
-    }   
-    mode  = '%s' % STYLE['mode'][mode] if STYLE['mode'].has_key(mode) else ''
-    fore  = '%s' % STYLE['fore'][fore] if STYLE['fore'].has_key(fore) else ''
-    back  = '%s' % STYLE['back'][back] if STYLE['back'].has_key(back) else ''
-    style = ';'.join([s for s in [mode, fore, back] if s]) 
-    style = '\033[%sm' % style if style else ''
-    end   = '\033[%sm' % STYLE['default']['end'] if style else ''
-    return '%s%s%s' % (style, string, end)
 
 if __name__ == '__main__':
     print "funs.py"

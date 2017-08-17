@@ -31,3 +31,6 @@ echo "host    all all 0.0.0.0/0   trust" >> /home/gpdba/gpdata/master/gpseg-1/pg
 
 # 测试网络性能
 gpcheckperf -f gpconfigs/seg_hosts_5 -d /home/gpdba/gpdata1 -d /home/gpdba/gpdata2 -r dsM --netperf
+
+# 监控网络和磁盘
+collectl -sDN --dskfilt ^dm --netfilt ens -oT -P -f test
