@@ -165,6 +165,61 @@ def mpl3():
     mpl_3 = ceil(origin_mpl_3*10)
     print mpl_3
 
+    for r in range(10):
+        clear_cache()
+        q = multiprocessing.Queue()
+
+        print mpl_3[r]
+        # 两个并行的不相等得查询
+        #if mpl_2[r][0] == mpl_2[r][1]:
+        #    continue
+        #print int(mpl_2[r][c])
+        #print query_dict[int(mpl_2[r][c])]
+
+        # primary query
+        query_file1 = "query"+str(query_dict[int(mpl_3[r][0])])+".sql"
+        query_file1 = query_file_path + query_file1
+        print query_file1
+        #p1 = TranClass(q, user,database,host,query_file)
+        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        p1.start()
+
+        # concurrent query
+        query_file2 = "query"+str(query_dict[int(mpl_3[r][1])])+".sql"
+        query_file2 = query_file_path + query_file2
+        print query_file2
+        #p2 = TranClass(q, user,database,host,query_file)
+        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
+        p2.start()
+
+        # concurrent query
+        query_file3 = "query"+str(query_dict[int(mpl_3[r][2])])+".sql"
+        query_file3 = query_file_path + query_file3
+        print query_file3
+        #p2 = TranClass(q, user,database,host,query_file)
+        p3 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file3))
+        p3.start()
+
+        # 并行执行
+        p1.join()
+        p2.join()
+        p3.join()
+        
+        # 把每个查询组合的结果存入文件
+        fp = open("res_queries/mpl3/"+"mix"+str(r)+".txt","a")
+        cnt = 0;
+        while not q.empty():
+            cnt = cnt+1
+            if cnt==1 or cnt==4 or cnt==7:
+                subprocess.check_output(['echo ' + q.get() + ' >> run.log'],shell=True)
+                continue
+            fp.write(q.get())
+        fp.close()
+
+        # 清空队列
+        q.close()
+        #break
+
 # 查询并发度为4
 def mpl4():
     print str_style("mpl2",fore="green")
@@ -184,12 +239,77 @@ def mpl4():
     mpl_4 = ceil(origin_mpl_4*10)
     print mpl_4
 
+    for r in range(10):
+        clear_cache()
+        q = multiprocessing.Queue()
+
+        print mpl_4[r]
+        # 两个并行的不相等得查询
+        #if mpl_2[r][0] == mpl_2[r][1]:
+        #    continue
+        #print int(mpl_2[r][c])
+        #print query_dict[int(mpl_2[r][c])]
+
+        # primary query
+        query_file1 = "query"+str(query_dict[int(mpl_4[r][0])])+".sql"
+        query_file1 = query_file_path + query_file1
+        print query_file1
+        #p1 = TranClass(q, user,database,host,query_file)
+        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        p1.start()
+
+        # concurrent query
+        query_file2 = "query"+str(query_dict[int(mpl_4[r][1])])+".sql"
+        query_file2 = query_file_path + query_file2
+        print query_file2
+        #p2 = TranClass(q, user,database,host,query_file)
+        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
+        p2.start()
+
+        # concurrent query
+        query_file3 = "query"+str(query_dict[int(mpl_4[r][2])])+".sql"
+        query_file3 = query_file_path + query_file3
+        print query_file3
+        #p2 = TranClass(q, user,database,host,query_file)
+        p3 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file3))
+        p3.start()
+
+        # concurrent query
+        query_file4 = "query"+str(query_dict[int(mpl_4[r][3])])+".sql"
+        query_file4 = query_file_path + query_file4
+        print query_file4
+        #p2 = TranClass(q, user,database,host,query_file)
+        p4 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file4))
+        p4.start()
+
+        # 并行执行
+        p1.join()
+        p2.join()
+        p3.join()
+        p4.join()
+        
+        # 把每个查询组合的结果存入文件
+        fp = open("res_queries/mpl4/"+"mix"+str(r)+".txt","a")
+        cnt = 0;
+        while not q.empty():
+            cnt = cnt+1
+            if cnt==1 or cnt==4 or cnt==7 or cnt == 10:
+                subprocess.check_output(['echo ' + q.get() + ' >> run.log'],shell=True)
+                continue
+            fp.write(q.get())
+        fp.close()
+
+        # 清空队列
+        q.close()
+        #break
+
 # 查询并发度为5
 def mpl5():
     print str_style("mpl5",fore="green")
 
 	# 生成LHS
-    #origin_mpl_5 = lhs(5,10)
+    origin_mpl_5 = lhs(5,10)
+    '''
     origin_mpl_5 = array([[0.3 , 0.5],
                     [0.9 , 0.7],
                     [0.4 , 1.0],
@@ -200,8 +320,77 @@ def mpl5():
                     [1.0 , 0.6],
                     [0.5 , 0.9],
                     [0.6 , 0.3]])
+    '''
     mpl_5 = ceil(origin_mpl_5*10)
     print mpl_5
+
+    for r in range(10):
+        clear_cache()
+        q = multiprocessing.Queue()
+
+        print mpl_5[r]
+        # 两个并行的不相等得查询
+        #if mpl_2[r][0] == mpl_2[r][1]:
+        #    continue
+        #print int(mpl_2[r][c])
+        #print query_dict[int(mpl_2[r][c])]
+
+        # primary query
+        query_file1 = "query"+str(query_dict[int(mpl_5[r][0])])+".sql"
+        query_file1 = query_file_path + query_file1
+        print query_file1
+        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        p1.start()
+
+        # concurrent query
+        query_file2 = "query"+str(query_dict[int(mpl_5[r][1])])+".sql"
+        query_file2 = query_file_path + query_file2
+        print query_file2
+        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
+        p2.start()
+
+        # concurrent query
+        query_file3 = "query"+str(query_dict[int(mpl_5[r][2])])+".sql"
+        query_file3 = query_file_path + query_file3
+        print query_file3
+        p3 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file3))
+        p3.start()
+
+        # concurrent query
+        query_file4 = "query"+str(query_dict[int(mpl_5[r][3])])+".sql"
+        query_file4 = query_file_path + query_file4
+        print query_file4
+        p4 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file4))
+        p4.start()
+
+        # concurrent query
+        query_file5 = "query"+str(query_dict[int(mpl_5[r][4])])+".sql"
+        query_file5 = query_file_path + query_file5
+        print query_file5
+        p5 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file5))
+        p5.start()
+
+        # 并行执行
+        p1.join()
+        p2.join()
+        p3.join()
+        p4.join()
+        p5.join()
+        
+        # 把每个查询组合的结果存入文件
+        fp = open("res_queries/mpl5/"+"mix"+str(r)+".txt","a")
+        cnt = 0;
+        while not q.empty():
+            cnt = cnt+1
+            if cnt==1 or cnt==4 or cnt==7 or cnt == 10 or cnt == 13:
+                subprocess.check_output(['echo ' + q.get() + ' >> run.log'],shell=True)
+                continue
+            fp.write(q.get())
+        fp.close()
+
+        # 清空队列
+        q.close()
+        #break
 
 def str_style(string, mode = '', fore = '', back = ''):
     STYLE = { 
