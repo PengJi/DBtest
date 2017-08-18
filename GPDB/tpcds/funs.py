@@ -16,7 +16,7 @@ from funs_shell import *
 user = 'tenant'
 database = 'testDB'
 host = '192.168.100.78'
-query_file_path = "/home/gpdba/DBtest/GPDB/tpcds/IO-bound/"
+query_file_path = "/home/gpdba/DBtest/GPDB/tpcds/queries/"
 
 # 查询映射
 query_dict = {
@@ -99,14 +99,16 @@ def mpl2():
         query_file1 = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        #p1 = TranClass(q, user,database,host,query_file)
         p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        #p2 = TranClass(q, user,database,host,query_file)
         p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
 
         p1.start()
