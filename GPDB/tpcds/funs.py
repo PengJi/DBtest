@@ -24,6 +24,23 @@ query_dict = {
 6:61, 7:62, 8:65, 9:71, 10:20
 }
 
+# 独立扫描表所用时间
+# 输入表名
+def scan_table(table_name):
+    #clear_cache()
+    q = multiprocessing.Queue()
+
+    query_sql = "set optimizer=off;explain analyze select * from " + table_name
+    p = multiprocessing.Process(target=scan_sql,args=(q,user,database,host,query_sql))
+    p.start()
+    p.join()
+
+    fp = open("res_queries/scan/"+ table_name +".txt","a")
+    while not q.empty():
+        fp.write(q.get())
+    fp.close()
+    
+
 # 查询单独执行
 # 查询：17、20、25、26、32、33、61、62、65、71
 def exec_isolation(query_sql):
@@ -84,7 +101,6 @@ def mpl2():
         print query_file1
         #p1 = TranClass(q, user,database,host,query_file)
         p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
-        p1.start()
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
@@ -92,9 +108,9 @@ def mpl2():
         print query_file2
         #p2 = TranClass(q, user,database,host,query_file)
         p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
-        p2.start()
 
-        # 并行执行
+        p1.start()
+        p2.start()
         p1.join()
         p2.join()
         
