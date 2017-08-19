@@ -96,13 +96,13 @@ def mpl2():
         query_file1 = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,r))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,2,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,r))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,2,r))
 
         p1.start()
         p2.start()
@@ -161,19 +161,19 @@ def mpl3():
         query_file1 = "query"+str(query_dict[int(mpl_3[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1,r))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,3,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_3[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2,r))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,3,r))
 
         # concurrent query
         query_file3 = "query"+str(query_dict[int(mpl_3[r][2])])+".sql"
         query_file3 = query_file_path + query_file3
         print query_file3
-        p3 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file3,r))
+        p3 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file3,3,r))
 
         # 并行执行
         p1.start()
@@ -182,6 +182,10 @@ def mpl3():
         p1.join()
         p2.join()
         p3.join()
+
+        # 在主进程中结束所有collectl
+        print "一个查询组合执行结束"
+        end_collectl()
 
 
 # 查询并发度为4
@@ -215,28 +219,28 @@ def mpl4():
         query_file1 = "query"+str(query_dict[int(mpl_4[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1,r))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,4,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_4[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
         #p2 = TranClass(q, user,database,host,query_file)
-        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2,r))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,4,r))
 
         # concurrent query
         query_file3 = "query"+str(query_dict[int(mpl_4[r][2])])+".sql"
         query_file3 = query_file_path + query_file3
         print query_file3
         #p2 = TranClass(q, user,database,host,query_file)
-        p3 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file3,r))
+        p3 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file3,4,r))
 
         # concurrent query
         query_file4 = "query"+str(query_dict[int(mpl_4[r][3])])+".sql"
         query_file4 = query_file_path + query_file4
         print query_file4
         #p2 = TranClass(q, user,database,host,query_file)
-        p4 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file4,r))
+        p4 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file4,4,r))
 
         # 并行执行
         p1.start()
@@ -247,6 +251,10 @@ def mpl4():
         p2.join()
         p3.join()
         p4.join()
+ 
+        # 在主进程中结束所有collectl
+        print "一个查询组合执行结束"
+        end_collectl()
         
 
 # 查询并发度为5
@@ -280,31 +288,31 @@ def mpl5():
         query_file1 = "query"+str(query_dict[int(mpl_5[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1,r))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,5,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_5[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2,r))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,5,r))
 
         # concurrent query
         query_file3 = "query"+str(query_dict[int(mpl_5[r][2])])+".sql"
         query_file3 = query_file_path + query_file3
         print query_file3
-        p3 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file3,r))
+        p3 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file3,5,r))
 
         # concurrent query
         query_file4 = "query"+str(query_dict[int(mpl_5[r][3])])+".sql"
         query_file4 = query_file_path + query_file4
         print query_file4
-        p4 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file4,r))
+        p4 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file4,5,r))
 
         # concurrent query
         query_file5 = "query"+str(query_dict[int(mpl_5[r][4])])+".sql"
         query_file5 = query_file_path + query_file5
         print query_file5
-        p5 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file5,r))
+        p5 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file5,5,r))
 
         # 并行执行
         p1.start()
@@ -317,6 +325,10 @@ def mpl5():
         p3.join()
         p4.join()
         p5.join()
+
+        # 在主进程中结束所有collectl
+        print "一个查询组合执行结束"
+        end_collectl()
         
 
 if __name__ == '__main__':
