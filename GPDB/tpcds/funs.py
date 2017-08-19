@@ -21,7 +21,10 @@ query_file_path = "/home/gpdba/DBtest/GPDB/tpcds/queries/"
 # 查询映射
 query_dict = {
 1:17, 2:25, 3:26, 4:32, 5:33,
-6:61, 7:62, 8:65, 9:71, 10:20
+6:61, 7:62, 8:65, 9:71, 10:20,
+11:8, 12:15, 13:18, 14:22, 15:27,
+16:40, 17:46, 18:56, 19:60, 20:66,
+21:70, 22:79, 23:82, 24:90
 }
 
 # 独立扫描表所用时间
@@ -79,6 +82,7 @@ def mpl2():
     mpl_2 = ceil(origin_mpl_2*10)
     print mpl_2
 
+    # 10个查询组合
     for r in range(10):
         clear_cache()
         q = multiprocessing.Queue()
@@ -87,41 +91,40 @@ def mpl2():
         # 两个并行的不相等得查询
         if mpl_2[r][0] == mpl_2[r][1]:
             continue
-        #print int(mpl_2[r][c])
-        #print query_dict[int(mpl_2[r][c])]
 
         # primary query
         query_file1 = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,r))
 
         p1.start()
         p2.start()
         p1.join()
         p2.join()
-        
+
+        # 在主进程中结束所有collectl
+        print "一个查询组合执行结束"
+        end_collectl()
+ 
+        '''
+        # 由于容量的限制，下面代码移动到了exec_concurrent
         # 把每个查询组合的结果存入文件
         subprocess.check_output(['echo -------------------------- >> run.log'],shell=True)
         fp = open("res_queries/mpl2/"+"mix"+str(r)+".txt","a")
-        cnt = 0;
         while not q.empty():
-            cnt = cnt+1
-            if cnt==1 or cnt==4:
-                subprocess.check_output(['echo ' + q.get() + ' >> run.log'],shell=True)
-                continue
             fp.write(q.get())
         fp.close()
 
         # 清空队列
         q.close()
-        #break
+        '''
 
 # 查询并发度为3
 def mpl3():

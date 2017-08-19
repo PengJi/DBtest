@@ -73,13 +73,14 @@ def exec_isolation(q,user,database,host,str_sql):
     end_collectl()
 
 # 多进程查询sql语句
-def exec_concurrent(q,user,database,host,str_sql):
+def exec_concurrent(q,user,database,host,str_sql,r):
     # 启动collectl
     query_str = str_sql
     start_collectl(query_str)
 
     # 每个查询执行5次
     for i in xrange(1,6):
+        print str_sql,"第",i,"次开始"
         # 当前进程开始时间
         start_time = time.time()
         print str_sql,"start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
@@ -90,6 +91,7 @@ def exec_concurrent(q,user,database,host,str_sql):
         end_time = time.time()
         print str_sql,"end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
         query_time = str_sql +' duration %0.2f seconds.' %(end_time - start_time)
+        print str_sql,"第",i,"次结束"
 
         # 执行时间
         q.put(query_time)
@@ -97,10 +99,50 @@ def exec_concurrent(q,user,database,host,str_sql):
         q.put(str_sql)
         # 查询结果
         q.put(res)
+    	
+    print "exec_concurrent",str_sql,"执行结束"
+
+    # 把每个查询组合的结果存入文件
+    fp = open("res_queries/mpl2/"+"mix"+str(r)+".txt","a")
+    while not q.empty():
+        fp.write(q.get())
+    fp.close()
+
+    # 清空队列
+    q.close()
     
     # 结束collectl进程
-    end_collectl()
+    #end_collectl()
 
+# 多进程查询sql语句
+def exec_concurrent_once(q,user,database,host,str_sql):
+    # 启动collectl
+    query_str = str_sql
+    start_collectl(query_str)
+
+    # 每个查询执行5次
+    # 当前进程开始时间
+    start_time = time.time()
+    print str_sql,"start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+
+    res = subprocess.check_output(["psql","-U",user,"-d",database,"-h",host,"-f",str_sql])
+
+    # 当前进程结束时间
+    end_time = time.time()
+    print str_sql,"end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+    query_time = str_sql +' duration %0.2f seconds.' %(end_time - start_time)
+
+    # 执行时间
+    q.put(query_time)
+    # 查询语句
+    q.put(str_sql)
+    # 查询结果
+    q.put(res)
+
+    print "exec_concurrent",str_sql,"执行结束"
+
+    # 结束collectl进程
+    #end_collectl()
 
 # 扫描表进程,不需要 collectl 
 def scan_sql(q,user,database,host,str_sql):
