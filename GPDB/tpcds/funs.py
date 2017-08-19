@@ -38,8 +38,7 @@ def scan_table(table_name):
     fp = open("res_queries/scan/"+ table_name +".txt","a")
     while not q.empty():
         fp.write(q.get())
-    fp.close()
-    
+    fp.close()   
 
 # 查询单独执行
 # 查询：17、20、25、26、32、33、61、62、65、71
@@ -50,20 +49,16 @@ def exec_isolation(query_sql):
     #print query_file
 
     # 记录时间
-    p = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file))
+    p = multiprocessing.Process(target=exec_isolation,args=(q,user,database,host,query_file))
     p.start()
     p.join()
 
     # 保存结果
     fp = open("res_queries/isolation/query"+str(query_sql)+".txt","a")
-    cnt = 0
     while not q.empty():
-        cnt = cnt+1
-        if cnt==1:
-            subprocess.check_output(['echo ' + q.get() + ' >> run.log'],shell=True)
-            continue
         fp.write(q.get())
     fp.close()
+    q.close()
     
 # 查询并发度为2
 def mpl2():
@@ -99,17 +94,13 @@ def mpl2():
         query_file1 = "query"+str(query_dict[int(mpl_2[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
-        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
-        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
-        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
-        #p1 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file1))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_2[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        p2 = multiprocessing.Process(target=exec_sql,args=(q,user,database,host,query_file2))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2))
 
         p1.start()
         p2.start()

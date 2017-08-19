@@ -44,32 +44,63 @@ class TranClassComd(threading.Thread):
         self.res_queue.put(res)
 
 # 多进程查询sql语句
-def exec_sql(q,user,database,host,str_sql):
+def exec_isolation(q,user,database,host,str_sql):
     # 启动collectl
-    res_path = "/home/gpdba/res_queries/"  # 暂时没用到
     query_str = str_sql
-    start_collectl(query_str,res_path)
+    start_collectl(query_str)
+    # 使系统达到稳定状态
+    time.sleep(2)
 
     # 当前进程开始时间
     start_time = time.time()
     print str_sql,"start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
-
     res = subprocess.check_output(["psql","-U",user,"-d",database,"-h",host,"-f",str_sql])
-
     # 当前进程结束时间
     end_time = time.time()
     print str_sql,"end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
     query_time = str_sql +' duration %0.2f seconds.' %(end_time - start_time)
-
-    # 结束collectl进程
-    end_collectl()
 
     # 执行时间
     q.put(query_time)
     # 查询语句
     q.put(str_sql)
     # 查询结果
-    q.put(res)
+    q.put(res)    
+
+    # 使系统达到稳定状态
+    time.sleep(2)
+    # 结束collectl进程
+    end_collectl()
+
+# 多进程查询sql语句
+def exec_concurrent(q,user,database,host,str_sql):
+    # 启动collectl
+    query_str = str_sql
+    start_collectl(query_str)
+
+    # 每个查询执行5次
+    for i in xrange(1,6):
+        # 当前进程开始时间
+        start_time = time.time()
+        print str_sql,"start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+
+        res = subprocess.check_output(["psql","-U",user,"-d",database,"-h",host,"-f",str_sql])
+
+        # 当前进程结束时间
+        end_time = time.time()
+        print str_sql,"end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+        query_time = str_sql +' duration %0.2f seconds.' %(end_time - start_time)
+
+        # 执行时间
+        q.put(query_time)
+        # 查询语句
+        q.put(str_sql)
+        # 查询结果
+        q.put(res)
+    
+    # 结束collectl进程
+    end_collectl()
+
 
 # 扫描表进程,不需要 collectl 
 def scan_sql(q,user,database,host,str_sql):

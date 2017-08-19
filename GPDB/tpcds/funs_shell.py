@@ -15,7 +15,7 @@ def sshclient(host,user,passwd,strcomd):
     s.close()
 
 # 启动collectl
-def start_collectl(query_str,res_path):
+def start_collectl(query_str):
     user = "gpdba"
     passwd = "gpdba"
     query = "collectl -sDN --dskfilt ^dm --netfilt ens -oT -P >>" + query_str + ".txt &"
