@@ -73,7 +73,7 @@ def exec_isolation(q,user,database,host,str_sql):
     end_collectl()
 
 # 多进程查询sql语句
-def exec_concurrent(q,user,database,host,str_sql,r):
+def exec_concurrent(q,user,database,host,str_sql,m,r):
     # 启动collectl
     query_str = str_sql
     start_collectl(query_str)
@@ -103,7 +103,8 @@ def exec_concurrent(q,user,database,host,str_sql,r):
     print "exec_concurrent",str_sql,"执行结束"
 
     # 把每个查询组合的结果存入文件
-    fp = open("res_queries/mpl2/"+"mix"+str(r)+".txt","a")
+    pre_path = "res_queries/mpl" + m + "/"
+    fp = open(pre_path+"mix"+str(r)+".txt","a")
     while not q.empty():
         fp.write(q.get())
     fp.close()
