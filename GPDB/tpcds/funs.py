@@ -131,15 +131,15 @@ def mpl3():
     print str_style("mpl3",fore="green")
 
 	# 生成LHS
-    origin_mpl_3 = lhs(3,10)
-    print origin_mpl_3
+    #origin_mpl_3 = lhs(3,10)
+    #print origin_mpl_3
     #'''
     origin_mpl_3 = array([
-        [ 0.97204296, 0.68445724, 0.16964192],
+        [ 0.97204296, 0.48445724, 0.16964192],
         [ 0.19993678, 0.34576865, 0.03754116],
         [ 0.09928598, 0.83103739, 0.45021525],
         [ 0.2701089,  0.79823359, 0.91254628],
-        [ 0.42133176, 0.48151869, 0.57389982],
+        [ 0.42133176, 0.68151869, 0.57389982],
         [ 0.88131961, 0.97602772, 0.61408149],
         [ 0.75544795, 0.13762058, 0.30629768],
         [ 0.614892,   0.5498087,  0.85912425],
@@ -153,7 +153,7 @@ def mpl3():
 
     for r in range(10):
         clear_cache()
-        q = multiprocessing.Queue()
+        #q = multiprocessing.Queue()
 
         print mpl_3[r]
 
@@ -161,19 +161,19 @@ def mpl3():
         query_file1 = "query"+str(query_dict[int(mpl_3[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,3,r))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file1,3,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_3[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,3,r))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file2,3,r))
 
         # concurrent query
         query_file3 = "query"+str(query_dict[int(mpl_3[r][2])])+".sql"
         query_file3 = query_file_path + query_file3
         print query_file3
-        p3 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file3,3,r))
+        p3 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file3,3,r))
 
         # 并行执行
         p1.start()
@@ -211,7 +211,7 @@ def mpl4():
 
     for r in range(10):
         clear_cache()
-        q = multiprocessing.Queue()
+        #q = multiprocessing.Queue()
 
         print mpl_4[r]
 
@@ -219,28 +219,25 @@ def mpl4():
         query_file1 = "query"+str(query_dict[int(mpl_4[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,4,r))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file1,4,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_4[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        #p2 = TranClass(q, user,database,host,query_file)
-        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,4,r))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file2,4,r))
 
         # concurrent query
         query_file3 = "query"+str(query_dict[int(mpl_4[r][2])])+".sql"
         query_file3 = query_file_path + query_file3
         print query_file3
-        #p2 = TranClass(q, user,database,host,query_file)
-        p3 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file3,4,r))
+        p3 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file3,4,r))
 
         # concurrent query
         query_file4 = "query"+str(query_dict[int(mpl_4[r][3])])+".sql"
         query_file4 = query_file_path + query_file4
         print query_file4
-        #p2 = TranClass(q, user,database,host,query_file)
-        p4 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file4,4,r))
+        p4 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file4,4,r))
 
         # 并行执行
         p1.start()
@@ -288,31 +285,31 @@ def mpl5():
         query_file1 = "query"+str(query_dict[int(mpl_5[r][0])])+".sql"
         query_file1 = query_file_path + query_file1
         print query_file1
-        p1 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file1,5,r))
+        p1 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file1,5,r))
 
         # concurrent query
         query_file2 = "query"+str(query_dict[int(mpl_5[r][1])])+".sql"
         query_file2 = query_file_path + query_file2
         print query_file2
-        p2 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file2,5,r))
+        p2 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file2,5,r))
 
         # concurrent query
         query_file3 = "query"+str(query_dict[int(mpl_5[r][2])])+".sql"
         query_file3 = query_file_path + query_file3
         print query_file3
-        p3 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file3,5,r))
+        p3 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file3,5,r))
 
         # concurrent query
         query_file4 = "query"+str(query_dict[int(mpl_5[r][3])])+".sql"
         query_file4 = query_file_path + query_file4
         print query_file4
-        p4 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file4,5,r))
+        p4 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file4,5,r))
 
         # concurrent query
         query_file5 = "query"+str(query_dict[int(mpl_5[r][4])])+".sql"
         query_file5 = query_file_path + query_file5
         print query_file5
-        p5 = multiprocessing.Process(target=exec_concurrent,args=(q,user,database,host,query_file5,5,r))
+        p5 = multiprocessing.Process(target=exec_concurrent,args=(user,database,host,query_file5,5,r))
 
         # 并行执行
         p1.start()
