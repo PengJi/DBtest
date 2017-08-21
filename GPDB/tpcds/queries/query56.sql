@@ -1,5 +1,5 @@
 -- start query 56 in stream 0 using template query56.tpl 
-set optimizer=off;
+set optimizer=on;
 explain analyze
 WITH ss 
      AS (SELECT i_item_id, 
