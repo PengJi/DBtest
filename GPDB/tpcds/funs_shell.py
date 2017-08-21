@@ -15,10 +15,11 @@ def sshclient(host,user,passwd,strcomd):
     s.close()
 
 # 启动collectl
-def start_collectl(query_str):
+# m 并发度，0:扫描表；1:单独执行查询；2,3,4,5:并发度为2,3,4,5
+def start_collectl(query_str,m,tm):
     user = "gpdba"
     passwd = "gpdba"
-    query = "collectl -sDN --dskfilt ^dm --netfilt ens -oT -P >>" + query_str + ".txt &"
+    query = "collectl -sDN --dskfilt ^dm --netfilt ens -oT -P >>" + query_str + "." + str(m) + str(tm)  +".txt &"
 
     sshclient('JPDB2',user,passwd,query)
     sshclient('node1',user,passwd,query)
