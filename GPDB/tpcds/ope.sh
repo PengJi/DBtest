@@ -14,7 +14,7 @@ sed -i '/||/d' customer.dat
 sed -i "1d" xxx.csv-f 
 
 # 转换编码
-conv -f latin1 -t UTF-8 customer.dat -o customer1.dat   
+iconv -f latin1 -t UTF-8 customer.dat -o customer1.dat   
 
 # 空格转为comma
 #windows
@@ -34,3 +34,6 @@ gpcheckperf -f gpconfigs/seg_hosts_5 -d /home/gpdba/gpdata1 -d /home/gpdba/gpdat
 
 # 监控网络和磁盘
 collectl -sDN --dskfilt ^dm --netfilt ens -oT -P -f test
+
+# 压缩文件
+zip -r isolation.zip isolation/*

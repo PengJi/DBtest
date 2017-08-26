@@ -5,7 +5,7 @@ from funs import *
 if __name__ == '__main__':
     print str_style("[main start]",fore="yellow")
 
-    for i in xrange(2,11):
+    for i in xrange(1,11):
         # 扫描表
         #'''
         scan_table('date_dim',i)
