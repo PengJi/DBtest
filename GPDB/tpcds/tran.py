@@ -74,8 +74,7 @@ def scan_sql(q,user,database,host,str_sql,tm):
     # 结束collectl进程
     end_collectl()
 
-
-# 多进程查询sql语句
+# 单独执行sql
 def func_isolation(q,user,database,host,str_sql,tm):
     # 启动collectl
     start_collectl(str_sql,1,tm)
@@ -101,6 +100,52 @@ def func_isolation(q,user,database,host,str_sql,tm):
 
     # 使系统达到稳定状态
     time.sleep(1)
+    # 关闭collectl
+	end_collectl()
+    
+
+# 单独执行sql
+# 每个sql执行5
+# str_sql 要执行的sql语句(带路径)
+# res_file 存储结果文件
+# tm 迭代的次数
+def func_isolation_rep(user,database,host,str_sql,res_file,tm):
+    # 启动collectl
+    start_collectl(str_sql,1,tm)
+
+    q = multiprocessing.Queue()
+    # 使系统达到稳定状态
+    time.sleep(1)
+
+    for i in xrange(1,6):
+        # 当前进程开始时间
+        start_time = time.time()
+        print str_sql,"start time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+
+        # 查询执行
+        res = subprocess.check_output(["psql","-U",user,"-d",database,"-h",host,"-f",str_sql])
+
+        # 当前进程结束时间
+        end_time = time.time()
+        print str_sql,"end time is:", time.strftime("%a %b %d %Y %H:%M:%S", time.localtime())
+        query_time = str_sql +' duration %0.2f seconds.' %(end_time - start_time)
+
+        # 执行时间
+        q.put(query_time)
+        # 查询语句
+        q.put(str_sql)
+        # 查询结果
+        q.put(res)    
+
+    time.sleep(0.2) # Just enough to let the Queue finish
+
+    # 保存结果
+    fp = open(res_file,"a")
+    while not q.empty():
+        fp.write(q.get())
+    fp.close()
+    q.close() #清空队列
+
     # 结束collectl进程
     end_collectl()
 

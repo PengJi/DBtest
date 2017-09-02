@@ -47,26 +47,28 @@ def scan_table(table_name,tm):
     fp.close()   
 
 # 查询单独执行
-# 查询：17、20、25、26、32、33、61、62、65、71
-# query_sql 查询语句
+# query_sql 要查询的语句，参数为: 17、20、25、26、32、33、61、62、65、71
 # tm 迭代次数
 def exec_isolation(query_sql,tm):
     # 清空缓存
     clear_cache()
 
-    q = multiprocessing.Queue()
-    query_file = query_file_path + "query"  + str(query_sql)+".sql"
+    #q = multiprocessing.Queue()
+    str_sql = query_file_path + "query"  + str(query_sql)+".sql"
+    res_file = isolation_path + "query"  + str(query_sql)+ "."+ str(tm) + "." +"txt"
 
-    p = multiprocessing.Process(target=func_isolation,args=(q,user,database,host,query_file,tm))
+    p = multiprocessing.Process(target=func_isolation_rep,args=(user,database,host,str_sql,res_file,tm))
     p.start()
     p.join()
-
+    
+    '''
     # 保存结果
     fp = open(isolation_path + "query"+str(query_sql)+".txt","a")
     while not q.empty():
         fp.write(q.get())
     fp.close()
     q.close()
+    '''
     
 # 查询并发度为2
 # tm 第几次
