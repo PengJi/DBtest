@@ -10,7 +10,7 @@ GPLOAD:
       - 192.168.100.78
      PORT: 8081
      FILE:
-      - /home/gpdba/tpcds_data/csv/item.csv
+      - /home/gpdba/tpcds_data/csv/ship_mode.csv
   - FORMAT: text
   - DELIMITER: '|'
   - NULL_AS: ''
@@ -19,7 +19,7 @@ GPLOAD:
  PRELOAD:
   - REUSE_TABLES: true
  OUTPUT:
-  - TABLE: item
+  - TABLE: ship_mode
   - MODE: insert
  PRELOAD:
   - TRUNCATE: true

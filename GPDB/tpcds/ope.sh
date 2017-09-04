@@ -35,5 +35,11 @@ gpcheckperf -f gpconfigs/seg_hosts_5 -d /home/gpdba/gpdata1 -d /home/gpdba/gpdat
 # 监控网络和磁盘
 collectl -sDN --dskfilt ^dm --netfilt ens -oT -P -f test
 
+# 关闭collectl程序
+pgrep collectl | xargs kill -9
+
 # 压缩文件
 zip -r isolation.zip isolation/*
+
+# nohup使用，输出重定向
+nohup [command] >> myout.file 2>&1 &

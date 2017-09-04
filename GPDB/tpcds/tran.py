@@ -101,7 +101,7 @@ def func_isolation(q,user,database,host,str_sql,tm):
     # 使系统达到稳定状态
     time.sleep(1)
     # 关闭collectl
-	end_collectl()
+    end_collectl()
     
 
 # 单独执行sql

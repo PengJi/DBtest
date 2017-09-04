@@ -1,5 +1,5 @@
 :<<doc
-delend   删除行尾|
+delend   删除原始行尾，生成要导入的文件
 loaddata 导入数据
 doc
 
