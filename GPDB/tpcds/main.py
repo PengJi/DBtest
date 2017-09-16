@@ -5,7 +5,7 @@ from funs import *
 if __name__ == '__main__':
     print str_style("[main start]",fore="yellow")
 
-    for i in xrange(1,11):
+    for i in xrange(1,6):
         # 扫描表
         #'''
         scan_table('date_dim',i)
@@ -23,6 +23,7 @@ if __name__ == '__main__':
         scan_table('promotion',i)
         scan_table('warehouse',i)
 	    #'''
+
         '''
         scan_table('inventory')
         scan_table('catalog_returns')
@@ -64,6 +65,7 @@ if __name__ == '__main__':
         exec_isolation(90)
         '''
 
+        #'''
         mpl2(i)
 
         mpl3(i)
@@ -71,5 +73,6 @@ if __name__ == '__main__':
         mpl4(i)
 
         mpl5(i)
+        #'''
 
     print str_style("[main end]",fore="yellow")
