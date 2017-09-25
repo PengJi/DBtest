@@ -1,1 +1,1 @@
-[创建示例数据库](http://www.jpblog.cn/mysql%E6%95%A3%E8%AE%B0.html)
+[创建示例数据库](https://launchpad.net/test-db/+milestone/1.0.6)
