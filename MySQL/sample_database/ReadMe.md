@@ -3,8 +3,10 @@
 2. 进入文件夹`employees-db`
 
 `employees.sql` 创建表并导入数据
+`employees_partitioned.sql` 创建分区表
+`employees_partitioned2.sql` 创建分区表
+`employees_partitioned3.sql` 创建分区表
 `object.sql` 创建函数、视图、存储过程
 `test_employees_md5.sql` 测试文件
 `test_employees_sha.sql` 测试文件
 `*.dump` 数据文件
-
