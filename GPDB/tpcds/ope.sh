@@ -32,6 +32,11 @@ echo "host    all all 0.0.0.0/0   trust" >> /home/gpdba/gpdata/master/gpseg-1/pg
 # greenplum脚本测试网络性能
 gpcheckperf -f gpconfigs/seg_hosts_5 -d /home/gpdba/gpdata1 -d /home/gpdba/gpdata2 -r dsM --netperf
 
+# 测试IO,显示详细结果
+# -D (display per-host results)
+# -v (verbose) | -V (very verbose)
+gpcheckperf -f gpconfigs/seg_hosts_5 -d /home/gpdba/gpcheckperf -r d -D -v
+
 # 监控网络和磁盘
 collectl -sDN --dskfilt ^dm --netfilt ens -oT -P -f test
 
