@@ -152,7 +152,7 @@ def func_isolation_rep(user,database,host,str_sql,res_file,tm):
 # 多进程查询sql语句
 # m 并发度：2,3,4,5
 # r 在一定并发度下，循环次数的第几次，当前设置为5
-# tm 第几次实验，当前重复进行10次实验
+# tm 第几次实验
 def func_concurrent(user,database,host,str_sql,m,r,tm):
     # 启动collectl
     start_collectl(str_sql,m,tm)
