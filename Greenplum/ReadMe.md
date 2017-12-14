@@ -7,3 +7,7 @@
 6. `generate_series`利用GP函数`generate_series`生成测试测试；
 
 [Greenplum测试](http://www.jpblog.cn/greenplum%E6%B5%8B%E8%AF%95.html)
+
+# 维护者
+[季朋](www.jipeng.me)  
+jipeng92@gmail.com
