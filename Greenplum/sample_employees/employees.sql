@@ -38,7 +38,7 @@ CREATE TABLE employees (
     gender      SEX  NOT NULL,
     hire_date   DATE            NOT NULL,
     PRIMARY KEY (emp_no)
-)distributed by(emp_no);
+);
  
 CREATE TABLE departments (
     dept_no     CHAR(4)         NOT NULL,
