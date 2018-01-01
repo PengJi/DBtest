@@ -13,7 +13,7 @@
 3. 创建表并导入数据
 `source /home/mydb/employees_db/employees.sql`
 
-#练习
+#联系
 [季朋](www.jipeng.me)
 jipeng92@gmail.com
 
