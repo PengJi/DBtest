@@ -134,7 +134,7 @@ def run_photoobjall():
 # size 数据的大小，1、10、20、50、100
 def test_queries(num,size):
     # 允许同时运行的进程个数
-    pool = multiprocessing.Pool(processes = 30)
+    pool = multiprocessing.Pool(processes = 40)
 
     # 清空缓存
     clear_cache()
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     test_queries(100,10)
     test_queries(100,20)
     test_queries(100,50)
-
+    '''
     # 200个进程，分别查询10G、20G、50G数据 
     test_queries(200,10)
     test_queries(200,20)
@@ -227,4 +227,4 @@ if __name__ == "__main__":
     test_queries(500,10)
     test_queries(500,20)
     test_queries(500,50)
-
+    '''
