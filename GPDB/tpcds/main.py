@@ -7,7 +7,7 @@ if __name__ == '__main__':
 
     for i in xrange(1,6):
         # 扫描表
-        #'''
+        '''
         scan_table('date_dim',i)
         scan_table('item',i)
         scan_table('ship_mode',i)
@@ -22,12 +22,12 @@ if __name__ == '__main__':
         scan_table('customer_address',i)
         scan_table('promotion',i)
         scan_table('warehouse',i)
-	    #'''
+        scan_table('time_dim')
+	    '''
 
         '''
         scan_table('inventory')
         scan_table('catalog_returns')
-        scan_table('time_dim')
         scan_table('household_demographics')
         scan_table('web_page')
         '''
@@ -65,14 +65,18 @@ if __name__ == '__main__':
         exec_isolation(90)
         '''
 
-        #'''
+        '''
+        #并行度为2
         mpl2(i)
 
+        #并行度为3
         mpl3(i)
 
+        #并行度为4
         mpl4(i)
 
+        #并行度为5
         mpl5(i)
-        #'''
+        '''
 
     print str_style("[main end]",fore="yellow")

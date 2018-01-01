@@ -55,7 +55,7 @@ def exec_isolation(query_sql,tm):
 
     #q = multiprocessing.Queue()
     str_sql = query_file_path + "query"  + str(query_sql)+".sql"
-    res_file = isolation_path + "query"  + str(query_sql)+ "."+ str(tm) + "." +"txt"
+    res_file = isolation_path + "query"  + str(query_sql)+ "."+ str(tm) + "." +"np"
 
     p = multiprocessing.Process(target=func_isolation_rep,args=(user,database,host,str_sql,res_file,tm))
     p.start()
