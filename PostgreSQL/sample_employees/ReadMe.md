@@ -2,7 +2,7 @@
 1. 创建示例数据库
 `createdb testDB`
 2. dump文件解压
-`tar jxvf ../../MySQL/sample_database/employees_db-full-1.0.6.tar.bz2`
+`tar jxvf /home/gpdba/DBtest/MySQL/sample_employees/employees_db-full-1.0.6.tar.bz2`
 3. 执行脚本创建表和导入数据
 `source create_load.sh`  
 
