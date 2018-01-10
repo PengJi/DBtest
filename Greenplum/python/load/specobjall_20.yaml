@@ -1,0 +1,24 @@
+VERSION: 1.0.0.1
+DATABASE: testDB
+USER: gpadmin
+HOST: 192.168.100.78
+PORT: 5432
+GPLOAD:
+ INPUT:
+  - SOURCE:
+     LOCAL_HOSTNAME:
+      - 192.168.100.78
+     PORT: 8081
+     FILE:
+      - /home/gpadmin/astronomy_data/20G/SpecObjAll_20.csv
+  - FORMAT: text
+  - DELIMITER: ','
+  - ERROR_LIMIT: 25
+  - LOG_ERRORS: true
+  - MAX_LINE_LENGTH: 655350 
+ OUTPUT:
+  - TABLE: specobjall_20
+  - MODE: insert
+ SQL:
+  - BEFORE: "insert into runtime values('specobjall_20_start',now(),NULL)"
+  - AFTER: "insert into runtime values('specobjall_20_end',NULL,now())"

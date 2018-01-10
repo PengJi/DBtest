@@ -6,7 +6,7 @@
 15个session，每个session有300个事务，有5个线程  
 
 # 维护者
-季朋  
+[季朋](www.jipeng.me)  
 jipeng92@gmail.com
 
 
