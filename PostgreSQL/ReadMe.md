@@ -7,7 +7,7 @@
 
 # 维护者
 [季朋](www.jipeng.me)  
-jipeng92@gmail.com
+jipengpro@gmail.com
 
 
 

@@ -3,4 +3,4 @@
 
 # 维护者
 [季朋](http://jipeng.me/)  
-jipeng92@gmail.com
+jipengpro@gmail.com
