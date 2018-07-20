@@ -11,7 +11,10 @@
 `test_employees_sha.sql` 测试文件  
 `*.dump` 为数据文件  
 3. 创建表并导入数据
-`source /home/mydb/employees_db/employees.sql`
+`source /DBtest/MySQL/sample_employees/employees.sql`  
+`source /DBtest/MySQL/sample_employees/object.sql`  
+`source /DBtest/MySQL/sample_employees/object.sql/test_employees_md5.sql`  
+`source /DBtest/MySQL/sample_employees/object.sql/test_employees_sha.sql`  
 
 # 联系
 [季朋](www.jipeng.me)  
